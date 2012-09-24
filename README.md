@@ -23,11 +23,31 @@ To use this Maven skin, include it in your `site.xml` file:
 </project>
 ```
 
-Note that the skin is not available in the central repository yet, neither has it been
-released, so you need to use the `-SNAPSHOT` version.
+Note that the skin has not been released yet, so you need to use the `-SNAPSHOT` version.
+Add the snapshot repository to your POM file until the skin is released (both as `repository`
+and `pluginRepository`):
+
+```xml
+<repositories>
+  <repository>
+    <id>snapshots-repo</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    <releases><enabled>false</enabled></releases>
+    <snapshots><enabled>true</enabled></snapshots>
+  </repository>
+</repositories>
+<pluginRepositories>
+  <pluginRepository>
+    <id>snapshots-plugin-repo</id>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    <releases><enabled>false</enabled></releases>
+    <snapshots><enabled>true</enabled></snapshots>
+  </pluginRepository>
+</pluginRepositories>
+```
 
 The skin requires custom Velocity tools (`reflow-velocity-tools`) to be available when
-generating Maven site. The tools are available in this repository and need to be
+generating Maven site. The tools are available from the snapshots repository and need to be
 included as dependency to `maven-site-plugin` in your POM file:
 
 ```xml
