@@ -921,6 +921,46 @@
 
 --------------------------------------------------*###
 #**
+ * Displays a 'Last published' date message.
+ *###
+#macro ( publishDate )#*
+
+	*##if ( $decoration.publishDate.format )#*
+		*##set ( $format = $decoration.publishDate.format )#*
+	*##else#*
+		*##set ( $format = "yyyy-MM-dd" )#*
+	*##end#*
+	
+	*#$dateFormat.applyPattern( $format )#*
+	
+	*##if ( $publishDate )#*
+		*##set ( $dateValue = $dateFormat.format( $publishDate ) )#*
+	*##elseif ( $config.publishDate )#*
+		*##set ( $dateValue = $config.publishDate.getValue() )#*
+	*##else#*
+		*##set ( $dateValue = $dateFormat.format( $currentDate ) )#*
+	*##end#*
+	
+	// render with internationalization support
+	*#$i18n.getString( "site-renderer", $locale, "template.lastpublished" ): $dateValue##
+#end#* /publishDate
+
+
+
+--------------------------------------------------*###
+#**
+ * Displays a site version message.
+ *###
+#macro ( version )#*
+
+	// render with internationalization support
+	*#$i18n.getString( "site-renderer", $locale, "template.version" ): ${project.version}##
+#end#* /version
+
+
+
+--------------------------------------------------*###
+#**
  * Outputs XML DOM objects as html elements into the rendered document.
  * Taken from maven-fluido-skin.
  *###
@@ -1004,6 +1044,25 @@
 		*##set ( $defaultProjectName = $project.name )#*
 	*##else#*
 		*##set ( $defaultProjectName = $project.artifactId )#*
+	*##end#*
+	
+	// resolve date position, or set the default otherwise (bottom)
+	// Note, that currently we do not support "navigation-top" position for either publishDate or version.
+	*##set ( $datePosition = "bottom" )#*
+	*##if ( $decoration.publishDate.position )#*
+		*##set ( $datePosition = $decoration.publishDate.position )#*
+	*##end#*
+	
+	// resolve version position, or set the default otherwise (bottom)
+	*##set ( $versionPosition = "bottom" )#*
+	*##if ( $decoration.version.position )#*
+		*##set ( $versionPosition = $decoration.version.position )#*
+	*##end#*
+	 
+	*##if ( $decoration.publishDate.position )#*
+		*##set ( $datePosition = $decoration.publishDate.position )#*
+	*##else#*
+		*##set ( $datePosition = "bottom" )#*
 	*##end#*
 
 	// Check if <toc> is set on the page or globally, then display Table of Contents
@@ -1268,10 +1327,48 @@
 #*	*##end#*
 
 
-	*##if ( !$config.not( "breadcrumbs" ) && $decoration.body.breadcrumbs && $decoration.body.breadcrumbs.size() > 0 )##
+	// add a 'breadcrumbs' bar for breadcrumbs, version and publish date (left/right) option
+	*##if ( !$config.not( "breadcrumbs" ) 
+			&& (( $decoration.body.breadcrumbs && $decoration.body.breadcrumbs.size() > 0)
+				|| $datePosition == "left" || $versionPosition == "left"
+				|| $datePosition == "right" || $versionPosition == "right") )##
 		<div>
 			<ul class="breadcrumb">
-#*				*##breadcrumbs ( $decoration.body.breadcrumbs )
+#*		
+		// left side version/date 
+		*##set ( $addedBefore = false )#*
+		*##if ( $versionPosition == "left" )##
+				<li class="projectVersion version-date">#version ()</li>
+#*			*##set ( $addedBefore = true )#*
+		*##end#*
+		*##if ( $datePosition == "left" )#*
+			*##if ( $addedBefore )##
+				<li class="divider">|</li>
+#*			*##end##
+				<li class="publishDate version-date">#publishDate ()</li>
+#*			*##set ( $addedBefore = true )#*
+		*##end#*
+		
+		// breadcrumbs
+		*##if ( !$config.not( "breadcrumbs" ) && $decoration.body.breadcrumbs && $decoration.body.breadcrumbs.size() > 0 )#*
+			*##if ( $addedBefore )##
+				<li class="divider">|</li>
+#*			*##end#*
+				*##breadcrumbs ( $decoration.body.breadcrumbs )
+#*		*##end#*
+
+		// right side version/date
+		*##set ( $addedBefore = false )#*
+		*##if ( $datePosition == "right" )##
+				<li class="publishDate version-date pull-right">#publishDate ()</li>
+#*			*##set ( $addedBefore = true )#*
+		*##end#*
+		*##if ( $versionPosition == "right" )#*
+			*##if ( $addedBefore )##
+				<li class="divider pull-right">|</li>
+#*			*##end##
+				<li class="projectVersion version-date pull-right">#version ()</li>
+#*		*##end##
 			</ul>
 		</div>
 #*	*##end#*
@@ -1344,6 +1441,24 @@
 					$config.bottomDescription.getValue()
 #*		*##else##
 					<blockquote>$config.bottomDescription.getValue()</blockquote>
+#*		*##end#*
+
+		// add version and publish date if the position is "navigation-bottom"
+		// (note that 'bottomDescription' needs to be enabled)
+		*##if ( $datePosition == "navigation-bottom" || $versionPosition == "navigation-bottom" )##
+					<blockquote class="version-date">#*
+			*##if ( $versionPosition == "navigation-bottom" )#*
+						*#<span class="projectVersion">#version ()</span>#*
+				// add a line break if date is also displayed here
+				*##if ( $datePosition == "navigation-bottom" )#*
+						*#<br/>#*
+				*##end#*
+			*##end#*
+		
+			// now add the date
+			*##if ( $datePosition == "navigation-bottom" )#*
+						*#<span class="publishDate">#publishDate ()</span>#*
+			*##end</blockquote>
 #*		*##end##
 				</div>
 #*	*##end#*
@@ -1357,7 +1472,14 @@
 		<div class="row">
 			<div class="span12">
 				<p class="pull-right"><a href="#">Back to top</a></p>
-				<p>Copyright &copy;#copyright (). All Rights Reserved.</p>###publishDate ( "bottom" $decoration.publishDate $decoration.version )</p>
+				<p class="copyright">Copyright &copy;#copyright (). All Rights Reserved.</p>
+#*	*##if ( $datePosition == "bottom" || $versionPosition == "bottom" )##
+				<p class="version-date">#*
+					*##if ( $versionPosition == "bottom" )<span class="projectVersion">#version (). </span>#end#*
+				 	*##if ( $datePosition == "bottom" )<span class="publishDate">#publishDate (). </span>#end#*
+				*#</p>
+#*	*##end#*
+
 #*	*##if ( !$config.not("skinAttribution") )##
 				<p><a href="http://github.com/andriusvelykis/reflow-maven-skin" title="Reflow Maven skin">Reflow Maven skin</a> by <a href="http://andrius.velykis.lt" target="_blank" title="Andrius Velykis">Andrius Velykis</a>.</p>
 #*	*##end#*
