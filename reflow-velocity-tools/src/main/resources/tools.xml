@@ -6,5 +6,7 @@
           class="lt.velykis.maven.skins.reflow.SkinConfigTool"/>
     <tool key="htmlTool"
           class="lt.velykis.maven.skins.reflow.HtmlTool"/>
+    <tool key="uriTool"
+          class="lt.velykis.maven.skins.reflow.URITool"/>
   </toolbox>
 </tools>
