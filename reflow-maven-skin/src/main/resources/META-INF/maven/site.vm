@@ -89,6 +89,23 @@
 
 --------------------------------------------------*###
 #**
+ * Makes the link relative to the project URL, if one is set.
+ *###
+#macro ( projectRelativeLink $href )#*
+
+	*##if ( $project.url && $project.url != '' )#*
+		// if project URL is available, relativize the link using it as a base dir
+		*##set ( $projectRelativeLink = $uriTool.relativizeLink( $project.url, $href ) )#*
+	*##else#*
+		// otherwise just keep the original link
+		*##set ( $projectRelativeLink = $href )#*
+	*##end##
+#end#* /projectRelativeLink
+
+
+
+--------------------------------------------------*###
+#**
  * Checks if the given link is the currently active one
  *###
 #macro ( activeLink $href )#*
@@ -1271,8 +1288,8 @@
 		*##end#*
 
 		*##if ( $config.brand.getChild( 'href' ) )#*
-			*##relativeExtLink ( $config.brand.getChild( 'href' ).getValue() )##
-					<a class="brand" href="$relativeExtLink">$brandName</a>
+			*##projectRelativeLink ( $config.brand.getChild( 'href' ).getValue() )##
+					<a class="brand" href="$projectRelativeLink">$brandName</a>
 #*		*##else##
 					<div class="brand">$brandName</div>
 #*		*##end#*
