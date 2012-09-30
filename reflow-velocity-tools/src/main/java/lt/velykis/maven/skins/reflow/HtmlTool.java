@@ -25,6 +25,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Stack;
 import java.util.regex.Pattern;
@@ -595,6 +597,71 @@ public class HtmlTool {
 				element.remove();
 			}
 			
+			return body.html();
+		} else {
+			// nothing changed
+			return content;
+		}
+	}
+	
+	/**
+	 * Replaces elements in HTML.
+	 * 
+	 * @param content
+	 *            HTML content to modify
+	 * @param selector
+	 *            CSS selector for elements to replace
+	 * @param replacement
+	 *            HTML replacement (must parse to a single element)
+	 * @return HTML content with replaced elements. If no elements are found, the original content is
+	 *         returned.
+	 * @since 1.0
+	 */
+	public static String replace(String content, String selector, String replacement) {
+		return replaceAll(content, Collections.singletonMap(selector, replacement));
+	}
+	
+	/**
+	 * Replaces elements in HTML.
+	 * 
+	 * @param content
+	 *            HTML content to modify
+	 * @param replacements
+	 *            Map of CSS selectors to their replacement HTML texts. CSS selectors find elements
+	 *            to be replaced with the HTML in the mapping. The HTML must parse to a single
+	 *            element.
+	 * @return HTML content with replaced elements. If no elements are found, the original content
+	 *         is returned.
+	 * @since 1.0
+	 */
+	public static String replaceAll(String content, Map<String, String> replacements) {
+
+		Document doc = Jsoup.parseBodyFragment(content);
+		Element body = doc.body();
+		
+		boolean modified = false;
+		for (Entry<String, String> replacementEntry : replacements.entrySet()) {
+			String selector = replacementEntry.getKey();
+			String replacement = replacementEntry.getValue();
+			
+			List<Element> elements = body.select(selector);
+			if (elements.size() > 0) {
+				
+				Document replacementDoc = Jsoup.parseBodyFragment(replacement);
+				// take the first child
+				Element replacementElem = replacementDoc.body().child(0);
+				
+				if (replacementElem != null) {
+					for (Element element : elements) {
+						element.replaceWith(replacementElem.clone());
+					}
+					
+					modified = true;
+				}
+			}
+		}
+		
+		if (modified) {
 			return body.html();
 		} else {
 			// nothing changed
