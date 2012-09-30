@@ -991,12 +991,8 @@
 		*##else#*
 			*##set ( $itemHtml = $StringUtils.replace( $foot.toString(), $documentHeader, "" ) )#*
 		*##end#*
-		// Workaround for http://jira.codehaus.org/browse/MSITE-135
-		// Use StringUtils until http://jira.codehaus.org/browse/DOXIASITETOOLS-67 is fixed
-		// #eval macro not supported yet, that is a silly turnaround to allow ASF projects adopt fluido
-		*##set ( $itemHtml = $StringUtils.replace( $itemHtml, '@project.name@', ${project.name} ) )#*
-		*##set ( $itemHtml = $StringUtils.replace( $head, '@relativePath@', ${relativePath} ) )#*
-		*#$itemHtml#*
+		// eval the HTML - this will allow users to specify Velocity variables
+		*##evaluate ( $itemHtml )#*
 	*##end##
 #end#* /htmlContent
 
