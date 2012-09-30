@@ -1207,12 +1207,20 @@
 		*##set ( $protocol = "http:" )#*
 	*##end#*
 	
+	// Use config option <absoluteResourceURL>http://mysite.com/</absoluteResourceURL>
+	*##if ( $config.absoluteResourceURL && $config.absoluteResourceURL.getValue() != '' )#*
+		*##projectRelativeLink ( $config.absoluteResourceURL.getValue() ) #*
+		*##set ( $resourcePath = $projectRelativeLink )#*
+	*##else#*
+		*##set ( $resourcePath = $relativePath )#*
+	*##end#*
+	
 	// for 'site' theme, use local CSS/Javascript. This allows users to use their own Bootstrap configs.
 	// Otherwise, load the default or Bootswatch themes from BootstrapCDN	
 	*##if ( $config.theme && "site" == $config.theme.getValue() )#*
-		*##set ( $bootstrapCssPath = "$relativePath/css" )#*
+		*##set ( $bootstrapCssPath = "$resourcePath/css" )#*
 		*##set ( $bootstrapCssResponsivePath = $bootstrapCssPath )#*
-		*##set ( $bootstrapJsPath = "$relativePath/js" )#*
+		*##set ( $bootstrapJsPath = "$resourcePath/js" )#*
 	*##else#*
 		// use Bootstrap theme from BootstrapCDN (loaded over network)
 		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
@@ -1229,16 +1237,16 @@
 
 		<link href="$bootstrapCssPath/bootstrap.min.css" rel="stylesheet" />
 		<link href="$bootstrapCssResponsivePath/bootstrap-responsive.min.css" rel="stylesheet" />
-		<link href="$relativePath/css/docs.css" rel="stylesheet" />
-		<link href="$relativePath/css/reflow-skin.css" rel="stylesheet" />
+		<link href="$resourcePath/css/docs.css" rel="stylesheet" />
+		<link href="$resourcePath/css/reflow-skin.css" rel="stylesheet" />
 		
 #*	*##if ( !$config.not( "imgLightbox" ) )#*
 		// if not disabled, include lightbox for showing images	*###
-		<link href="$relativePath/css/lightbox.css" rel="stylesheet" />
+		<link href="$resourcePath/css/lightbox.css" rel="stylesheet" />
 #*	*##end##
 		
-		<link href="$relativePath/css/site.css" rel="stylesheet" />
-		<link href="$relativePath/css/print.css" rel="stylesheet" media="print" />
+		<link href="$resourcePath/css/site.css" rel="stylesheet" />
+		<link href="$resourcePath/css/print.css" rel="stylesheet" media="print" />
 		
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
@@ -1523,7 +1531,7 @@
 	<script type="text/javascript">
 		if (typeof jQuery == 'undefined')
 		{
-			document.write(unescape("%3Cscript src='$relativePath/js/jquery-${jQueryVersion}.min.js' type='text/javascript'%3E%3C/script%3E"));
+			document.write(unescape("%3Cscript src='$resourcePath/js/jquery-${jQueryVersion}.min.js' type='text/javascript'%3E%3C/script%3E"));
 		}
 	</script>
 	
@@ -1531,17 +1539,17 @@
 #*
 	*##if ( !$config.not( "imgLightbox" ) )#*
 		// if not disabled, include lightbox for showing images	*###
-	<script src="$relativePath/js/lightbox.js"></script>
+	<script src="$resourcePath/js/lightbox.js"></script>
 #*	*##end#*
 
 	*##if ( !$config.not( "smoothScroll" ) )#*
 		// if not disabled, include smooth scrolling *###
-	<script src="$relativePath/js/jquery.smooth-scroll.min.js"></script>
+	<script src="$resourcePath/js/jquery.smooth-scroll.min.js"></script>
 	<!-- back button support for smooth scroll -->
-	<script src="$relativePath/js/jquery.ba-bbq.min.js"></script>
+	<script src="$resourcePath/js/jquery.ba-bbq.min.js"></script>
 #*	*##end##
 
-	<script src="$relativePath/js/reflow-skin.js"></script>
+	<script src="$resourcePath/js/reflow-skin.js"></script>
 	
 	</body>
 </html>
