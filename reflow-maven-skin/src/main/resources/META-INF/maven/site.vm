@@ -1122,7 +1122,7 @@
 										'img[src=images/icon_success_sml.gif]' : '<i class="icon-ok"></i>',
 										'img[src=images/icon_warning_sml.gif]' : '<i class="icon-warning-sign"></i>',
 										'img[src=images/icon_error_sml.gif]' : '<i class="icon-exclamation-sign"></i>',
-										'img[src=images/icon_info_sml.gif]' : '<i class="icon-info-sign"></i>' } ) )#*
+										'img[src=images/icon_info_sml.gif]' : '<i class="icon-info-sign"></i>' } )#*
 		*##set ( $bodyContent = $htmlTool.replaceAll( $bodyContent, $iconReplacements ) )#*
 	*##end#*
 	
