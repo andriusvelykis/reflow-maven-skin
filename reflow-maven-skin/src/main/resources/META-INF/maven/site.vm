@@ -1020,7 +1020,7 @@
 
 --------------------------------------------------*###
 #**
- * Strips empty paragraphs <p></p> from the content and outputs the result
+ * Adds Google analytics tracker with the given account ID
  *###
 #macro ( googleAnalytics $accountId )#*
 
