@@ -1107,6 +1107,20 @@
 		*##set ( $bodyContent = $htmlTool.fixTableHeads( $bodyContent ) )#*
 	*##end#*
 	
+	*##if ( !$config.not( "bootstrapIcons" ) )#*
+		// Bootstrap Icons are enabled by default, so check for false and negate
+		*##set ( $iconReplacements = { 'img[src=images/add.gif]' : '<i class="icon-plus"></i>',
+										'img[src=images/remove.gif]' : '<i class="icon-remove"></i>',
+										'img[src=images/fix.gif]' : '<i class="icon-wrench"></i>',
+										'img[src=images/update.gif]' : '<i class="icon-refresh"></i>',
+										'img[src=images/icon_help_sml.gif]' : '<i class="icon-question-sign"></i>',
+										'img[src=images/icon_success_sml.gif]' : '<i class="icon-ok"></i>',
+										'img[src=images/icon_warning_sml.gif]' : '<i class="icon-warning-sign"></i>',
+										'img[src=images/icon_error_sml.gif]' : '<i class="icon-exclamation-sign"></i>',
+										'img[src=images/icon_info_sml.gif]' : '<i class="icon-info-sign"></i>' } ) )#*
+		*##set ( $bodyContent = $htmlTool.replaceAll( $bodyContent, $iconReplacements ) )#*
+	*##end#*
+	
 	*##if ( $tocTop || $tocSidebar )#*
 		// Ensure IDs on all headings to refer to them in TOC
 		*##set ( $bodyContent = $htmlTool.ensureHeadingIds( $bodyContent, "_" ) )#*
