@@ -533,16 +533,23 @@ public class HtmlTool {
 	 *            CSS selector for elements to add classes to
 	 * @param classNames
 	 *            Names of classes to add to the selected elements
+	 * @param amount
+	 *            Maximum number of elements to modify
 	 * @return HTML content with modified elements. If no elements are found, the original content
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String addClass(String content, String selector, List<String> classNames) {
+	public static String addClass(String content, String selector, List<String> classNames, int amount) {
 
 		Document doc = Jsoup.parseBodyFragment(content);
 		Element body = doc.body();
 		
 		List<Element> elements = body.select(selector);
+		if (amount >= 0) {
+			// limit to the indicated amount
+			elements = elements.subList(0, Math.min(amount, elements.size()));
+		}
+		
 		if (elements.size() > 0) {
 			
 			for (Element element : elements) {
@@ -556,6 +563,23 @@ public class HtmlTool {
 			// nothing to update
 			return content;
 		}
+	}
+	
+	/**
+	 * Adds given class names to the elements in HTML.
+	 * 
+	 * @param content
+	 *            HTML content to modify
+	 * @param selector
+	 *            CSS selector for elements to add classes to
+	 * @param classNames
+	 *            Names of classes to add to the selected elements
+	 * @return HTML content with modified elements. If no elements are found, the original content
+	 *         is returned.
+	 * @since 1.0
+	 */
+	public static String addClass(String content, String selector, List<String> classNames) {
+		return addClass(content, selector, classNames, -1);
 	}
 	
 	/**
