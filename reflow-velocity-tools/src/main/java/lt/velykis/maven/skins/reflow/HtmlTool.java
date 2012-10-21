@@ -525,6 +525,36 @@ public class HtmlTool {
 	}
 	
 	/**
+	 * Retrieves attribute value on elements in HTML. Will return all attribute values for the
+	 * selector, since there can be more than one element.
+	 * 
+	 * @param content
+	 *            HTML content to read attributes from
+	 * @param selector
+	 *            CSS selector for elements to find
+	 * @param attributeKey
+	 *            Attribute name
+	 * @return Attribute values for all matching elements. If no elements are found, empty list is
+	 *         returned.
+	 * @since 1.0
+	 */
+	public static List<String> getAttr(String content, String selector, String attributeKey) {
+
+		Document doc = Jsoup.parseBodyFragment(content);
+		Element body = doc.body();
+		
+		List<Element> elements = body.select(selector);
+		List<String> attrs = new ArrayList<String>();
+		
+		for (Element element : elements) {
+			String attrValue = element.attr(attributeKey);
+			attrs.add(attrValue);
+		}
+		
+		return attrs;
+	}
+	
+	/**
 	 * Adds given class names to the elements in HTML.
 	 * 
 	 * @param content
