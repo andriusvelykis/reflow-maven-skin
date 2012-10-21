@@ -1068,7 +1068,7 @@
 			*##set ( $replBefore = '<button title="Information" class="btn btn-link btn-small" type="button" data-toggle="collapse" data-target="#' )#*
 			*##set ( $replAfter = '"><i class="icon-info-sign"></i></button>' )#*
 			*##call ( $iconReplacements.put("#$imgId", "$replBefore$divId$replAfter") )#*
-			*##set ( $collapseSelector = "${collapseSelector}, #$divId") )#*
+			*##set ( $collapseSelector = "${collapseSelector}, #$divId" )#*
 		*##end#*
 	*##end#*
 	*##if ( $iconReplacements.size() > 0 )#*
