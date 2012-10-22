@@ -258,10 +258,9 @@
  *###
 #macro ( topToc $topItems )#*
 
-	// read the max attribute on <toc> to get the number of items to show
-	*##if ( $config.toc.getAttribute( "max" ) )#*
-		*##set ( $tocMaxStr = $config.toc.getAttribute( "max" ) )#*
-		*##set ( $tocMax = $convert.toNumber($tocMaxStr) )#*
+	// read the top ToC max config to get the number of items to show
+	*##if ( $config.tocTopMax )#*
+		*##set ( $tocMax = $convert.toNumber($config.tocTopMax.getValue()) )#*
 	*##else#*
 		*##set ( $tocMax = -1 )#*
 	*##end#*
