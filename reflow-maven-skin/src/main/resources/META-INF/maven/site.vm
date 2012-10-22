@@ -266,6 +266,19 @@
 		*##set ( $tocMax = -1 )#*
 	*##end#*
 	
+	// check if we flatten the first 2 levels of ToC:
+	*##set ( $flattenConfig = $config.tocTopFlatten )#*
+	*##if ( !$flattenConfig )#*
+		// flatten config not available - calculate if need flattening:
+		// only flatten if the top level has not more than 2 elements
+		*##set ( $topItemsCount = $topItems.size() )#*
+		*##set ( $flattenLevel2 = $topItemsCount <= 2 )#*
+	*##elseif ( "true" == $flattenConfig.getValue() )#*
+		*##set ( $flattenLevel2 = true )#*
+	*##else#*
+		*##set ( $flattenLevel2 = false )#*
+	*##end#*
+	
 	// count items at top and the next level that will be displayed in the ToC bar
 	*##set ( $tocBarItems = [] )#*
 	*##set ( $tocBarMaxItems = [] )#*
@@ -283,18 +296,22 @@
 		*##end#*
 		
 		*##set ( $tocCount = $tocCount + 1 )#*
-	
-		*##foreach ( $item in $topItem.items )#*
 		
-			*##if ( ($tocCount < $tocMax) || ($tocMax < 0) )#*
-				// only add subitems if not after the maximum
-				*##call ( $tocBarItems.add( $item ) )#*
-			*##elseif ( !$topInMax )#*
-				// top is not in the max - so add these directly to the max
-				*##call ( $tocBarMaxItems.add( $item ) )#*
-			*##end#*
-			*##set ( $tocCount = $tocCount + 1 )#*
-		*##end#* /foreach $item
+		// if level 2 is flattened, traverse for subitems
+		*##if ( $flattenLevel2 )#*
+	
+			*##foreach ( $item in $topItem.items )#*
+			
+				*##if ( ($tocCount < $tocMax) || ($tocMax < 0) )#*
+					// only add subitems if not after the maximum
+					*##call ( $tocBarItems.add( $item ) )#*
+				*##elseif ( !$topInMax )#*
+					// top is not in the max - so add these directly to the max
+					*##call ( $tocBarMaxItems.add( $item ) )#*
+				*##end#*
+				*##set ( $tocCount = $tocCount + 1 )#*
+			*##end#* /foreach $item
+		*##end#*
 	*##end#* /foreach $topItem
 
 	// count items at top and the next level that will be displayed in the ToC bar
@@ -302,13 +319,13 @@
 	*##set ( $tocDivider = false )#*
 
 	*##foreach ( $topItem in $tocBarItems )#*
-		*##if ( $topItems.contains( $topItem ) )#*
-			// top level item, put it as a link, because its children are also in top bar
-			*##if ( $tocDivider )## 
+		*##if ( $topItems.contains( $topItem ) && $tocDivider )##
 						<li class="divider-vertical"></li>
-#*			*##end##
+#*		*##end#*
+		*##if ( $topItem.items.isEmpty() )##
 						<li class="toplevel"><a href="#$topItem.id" title="$topItem.text">$topItem.text</a></li>
-#*		*##elseif ( $topItem.items.isEmpty() )##
+#*		*##elseif ( $topItems.contains( $topItem ) && $flattenLevel2 )#*
+			// top level item, but flattened: put it as a link, because its children are also in top bar *###
 						<li class="toplevel"><a href="#$topItem.id" title="$topItem.text">$topItem.text</a></li>
 #*		*##else##
 						<li class="dropdown">
