@@ -28,7 +28,7 @@
   <scm>
     <connection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</connection>
     <developerConnection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</developerConnection>
-    <url>git@github.com:andriusvelykis/reflow-maven-skin.git</url>
+    <url>http://github.com/andriusvelykis/reflow-maven-skin/tree/master</url>
   </scm>
   <issueManagement>
     <system>GitHub Issues</system>
