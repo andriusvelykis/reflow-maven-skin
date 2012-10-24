@@ -83,7 +83,7 @@
   <body>
   
     <links>
-      <item name="Download" href="index.html#download" />
+      <item name="Download" href="skin/index.html#Usage" />
       <item name="GitHub Project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
     </links>
 
@@ -98,7 +98,7 @@
       <item ref="modules" />
     </menu>
     <menu name="Download" inherit="top">
-      <item name="Download" href="index.html#download" />
+      <item name="Download" href="skin/index.html#Usage" />
     </menu>
     <menu name="Documentation" inherit="bottom">
       <item name="Usage" href="usage.html" />
