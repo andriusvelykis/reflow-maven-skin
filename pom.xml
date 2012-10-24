@@ -43,6 +43,11 @@
     </license>
   </licenses>
 
+  <organization>
+    <name>Andrius Velykis</name>
+    <url>http://andrius.velykis.lt</url>
+  </organization>
+
   <developers>
     <developer>
       <id>andriusvelykis</id>
