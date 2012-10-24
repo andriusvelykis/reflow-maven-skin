@@ -18,4 +18,12 @@
     It allows various structural and stylistic customizations to create
     a modern-looking Maven-generated website. Requires Reflow Velocity Tools.</description>
 
+  <distributionManagement>
+    <site>
+      <id>${site.deploy.id}</id>
+      <!-- Nest the actual skin plug-in under `skin` -->
+      <url>${site.deploy.url}/skin</url>
+    </site>
+  </distributionManagement>
+
 </project>
