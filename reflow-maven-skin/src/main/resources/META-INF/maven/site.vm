@@ -1303,6 +1303,17 @@
 		<link href="$resourcePath/css/docs.css" rel="stylesheet" />
 		<link href="$resourcePath/css/reflow-skin.css" rel="stylesheet" />
 		
+#*	*##if ( $config.is( "highlightJs" ) )#*
+		// get the configured theme, or use default if not explicitly specified
+		*##if ( $config.highlightJsTheme )#*
+			*##set ( $highlightJsTheme = $config.highlightJsTheme.getValue() )#*
+		*##else#*
+			*##set ( $highlightJsTheme = 'default' )#*
+		*##end#*
+		// use a hosted version of highlight.js for syntax highlighting	*###
+		<link href="$protocol//yandex.st/highlightjs/7.3/styles/${highlightJsTheme}.min.css" rel="stylesheet" />
+#*	*##end##
+		
 #*	*##if ( !$config.not( "imgLightbox" ) )#*
 		// if not disabled, include lightbox for showing images	*###
 		<link href="$resourcePath/css/lightbox.css" rel="stylesheet" />
@@ -1610,6 +1621,11 @@
 	<script src="$resourcePath/js/jquery.smooth-scroll.min.js"></script>
 	<!-- back button support for smooth scroll -->
 	<script src="$resourcePath/js/jquery.ba-bbq.min.js"></script>
+#*	*##end#*
+
+	*##if ( $config.is( "highlightJs" ) )#*
+		// use a hosted version of highlight.js for syntax highlighting	*###
+	<script src="$protocol//yandex.st/highlightjs/7.3/highlight.min.js"></script>
 #*	*##end##
 
 	<script src="$resourcePath/js/reflow-skin.js"></script>
