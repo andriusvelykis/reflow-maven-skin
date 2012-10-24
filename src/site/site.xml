@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Reflow Maven Skin"
+  xmlns="http://maven.apache.org/DECORATION/1.3.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd">
+
+  <bannerLeft>
+    <!-- Reflow Maven Skin, but with "Reflow" highlighted -->
+    <name><![CDATA[
+      <span class="color-highlight">Reflow</span> Maven Skin
+      ]]>
+    </name>
+    <href>http://andriusvelykis.github.com/reflow-maven-skin</href>
+  </bannerLeft>
+  
+  <publishDate position="bottom" format="yyyy-MM-dd" />
+  <version position="bottom" />
+
+  <skin>
+    <groupId>lt.velykis.maven.skins</groupId>
+    <artifactId>reflow-maven-skin</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </skin>
+  <custom>
+    <reflowSkin>
+      <!-- Make this to 'false' for local development, i.e. file:// URLs -->
+      <protocolRelativeURLs>false</protocolRelativeURLs>
+      <smoothScroll>true</smoothScroll>
+      <theme>default</theme>
+      <highlightJs>true</highlightJs>
+      <highlightJsTheme>github</highlightJsTheme>
+      <absoluteResourceURL>http://andriusvelykis.github.com/reflow-maven-skin/</absoluteResourceURL>
+      <brand>
+        <!-- Brand text in top-left part of the site -->
+        <name>
+          <![CDATA[
+          <span class="color-highlight">Reflow</span> Maven Skin
+          ]]>
+        </name>
+        <href>http://andriusvelykis.github.com/reflow-maven-skin</href>
+      </brand>
+      <slogan>Apache Maven skin to reflow the standard Maven website with a modern feel</slogan>
+      <titleTemplate>%2$s | %1$s</titleTemplate>
+      <!-- Use Table of Contents at the top of the page (max 6 elements) -->
+      <toc>top</toc>
+      <tocTopMax>6</tocTopMax>
+      <!-- Include the documentation and modules in the top navigation (in addition to links) -->
+      <topNav>Documentation|modules</topNav>
+      <!-- Split menus in the bottom navigation -->
+      <bottomNav maxSpan="9" >
+        <column>Main|Download|parent</column>
+        <column>Documentation</column>
+        <column>reports</column>
+      </bottomNav>
+      <bottomDescription>
+        <![CDATA[
+          <span class="color-highlight">Reflow</span> is an Apache Maven site skin built on 
+          <a href="http://twitter.github.com/bootstrap/" title="Twitter Bootstrap">Twitter Bootstrap</a>.
+          It allows various structural and stylistic customizations to create a
+          modern-looking Maven-generated website.
+        ]]>
+      </bottomDescription>
+      <pages>
+        <index project="reflow-parent">
+          <!-- Override the title -->
+          <titleTemplate>Reflow Maven Skin</titleTemplate>
+          <!-- no breadcrumbs on the main index page -->
+          <breadcrumbs>false</breadcrumbs>
+          <!-- no ToC on the main index page -->
+          <toc>false</toc>
+          <!-- <sections>
+            <carousel />
+            <thumbs>2</thumbs>
+            <body />
+            <sidebar />
+            <columns>3</columns>
+          </sections> -->
+        </index>
+      </pages>
+    </reflowSkin>
+  </custom>
+
+  <body>
+  
+    <links>
+      <item name="Download" href="index.html#download" />
+      <item name="GitHub Project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
+    </links>
+
+    <breadcrumbs>
+      <item name="Reflow" href="index.html" />
+    </breadcrumbs>
+  
+    <menu name="Main" inherit="top">
+      <item name="Home" href="index.html" />
+      <item name="GitHub Project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
+      <item name="Blog" href="http://andrius.velykis.lt/tag/reflow-maven-skin" />
+      <item ref="modules" />
+    </menu>
+    <menu name="Download" inherit="top">
+      <item name="Download" href="index.html#download" />
+    </menu>
+    <menu name="Documentation" inherit="bottom">
+      <item name="Usage" href="usage.html" />
+      <item name="Advanced Configuration" href="advanced.html" />
+    </menu>
+    <menu ref="modules" inherit="bottom" />
+    <menu ref="reports" inherit="bottom" />
+    <menu ref="parent" inherit="bottom" />
+  </body>
+</project>
