@@ -25,6 +25,11 @@
     <module>reflow-maven-skin</module>
   </modules>
 
+  <properties>
+    <site.deploy.id>gh-pages</site.deploy.id>
+    <site.deploy.url>http://github.com/andriusvelykis/reflow-maven-skin/tree/gh-pages</site.deploy.url>
+  </properties>
+
   <scm>
     <connection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</connection>
     <developerConnection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</developerConnection>
@@ -124,5 +129,13 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <distributionManagement>
+    <site>
+      <id>${site.deploy.id}</id>
+      <name>Deployment through GitHub's site deployment plugin</name>
+      <url>${site.deploy.url}</url>
+    </site>
+  </distributionManagement>
 
 </project>
