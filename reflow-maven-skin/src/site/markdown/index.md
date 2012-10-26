@@ -8,7 +8,9 @@ and stylistic customizations to create a modern-looking Maven-generated website.
 
 ## Usage
 
-To use this Maven skin, include it in your `site.xml` file:
+To use this Maven skin, include it in your [`site.xml` site descriptor][site-xml] file:
+
+[site-xml]: http://maven.apache.org/doxia/doxia-sitetools/doxia-decoration-model/decoration.html
 
 ```xml
 <project>
@@ -72,7 +74,7 @@ Note that _Velocity 1.7_ is also required by the template.
 ---
 
 
-### Configuration
+## Configuration
 
 The skin is configurable using the `<custom>` element in your `site.xml` file. The avaliable options
 are described in the documentation. A sample configuration file is below:
