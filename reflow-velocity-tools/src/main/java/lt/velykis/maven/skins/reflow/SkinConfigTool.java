@@ -150,7 +150,7 @@ public class SkinConfigTool extends SafeConfig {
 			// for page properites, retrieve the file name and drop the `.html`
 			// extension - this will be used, i.e. `index` instead of `index.html`
 			Xpp3Dom pagesNode = getChild(skinNode, "pages");
-			Object alignedFileObj = ctxt.get("alignedFileName");
+			Object alignedFileObj = ctxt.get("currentFileName");
 			if (pagesNode != null && (alignedFileObj instanceof String)) {
 
 				String alignedFile = (String) alignedFileObj;
@@ -160,6 +160,9 @@ public class SkinConfigTool extends SafeConfig {
 				if (lastDot >= 0) {
 					alignedFile = alignedFile.substring(0, lastDot);
 				}
+				
+				// replace nested paths (not allowed in XML) with "-"
+				alignedFile = alignedFile.replace("/", "-");
 
 				String artifactId = null;
 				Object projectObj = ctxt.get("project");
