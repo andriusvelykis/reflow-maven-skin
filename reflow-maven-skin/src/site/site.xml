@@ -17,6 +17,31 @@
             <body />
           </sections>
         </index>
+        <config>
+          <sections>
+            <body />
+            <thumbs>3</thumbs>
+            <body />
+          </sections>
+        </config>
+        <themes-bootswatch-amelia>
+          <theme>bootswatch-amelia</theme>
+        </themes-bootswatch-amelia>
+        <themes-bootswatch-cerulean>
+          <theme>bootswatch-cerulean</theme>
+        </themes-bootswatch-cerulean>
+        <themes-bootswatch-readable>
+          <theme>bootswatch-readable</theme>
+        </themes-bootswatch-readable>
+        <themes-bootswatch-spacelab>
+          <theme>bootswatch-spacelab</theme>
+        </themes-bootswatch-spacelab>
+        <themes-bootswatch-spruce>
+          <theme>bootswatch-spruce</theme>
+        </themes-bootswatch-spruce>
+        <themes-bootswatch-united>
+          <theme>bootswatch-united</theme>
+        </themes-bootswatch-united>
       </pages>
     </reflowSkin>
   </custom>
