@@ -176,8 +176,8 @@ public class SkinConfigTool extends SafeConfig {
 				// configs in children modules
 				if (page != null && artifactId != null) {
 					String pageProject = page.getAttribute("project");
-					if (!artifactId.equals(pageProject)) {
-						// project ID is different - do not use the config
+					if (pageProject != null && !artifactId.equals(pageProject)) {
+						// project ID indicated, and is different - do not use the config
 						page = null;
 					}
 				}
