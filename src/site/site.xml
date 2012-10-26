@@ -39,7 +39,7 @@
         </name>
         <href>http://andriusvelykis.github.com/reflow-maven-skin</href>
       </brand>
-      <slogan>Apache Maven skin to reflow the standard Maven website with a modern feel</slogan>
+      <slogan>Responsive Apache Maven skin to reflow the standard Maven site with a modern feel</slogan>
       <titleTemplate>%2$s | %1$s</titleTemplate>
       <!-- Use Table of Contents at the top of the page (max 6 elements) -->
       <toc>top</toc>
