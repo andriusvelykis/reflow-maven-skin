@@ -1033,8 +1033,9 @@
  * Strips empty paragraphs <p></p> from the content and outputs the result
  *###
 #macro ( stripEmptyP $content )#*
-	// use CSS selector for paragraphs that have no text content, neither nested elements
-	*#$htmlTool.remove($content, "p:matchesOwn(^${esc.backslash}w*$):not(*:has(*))")
+	// use CSS selector for paragraphs that have no text content (only whitespace - \s),
+	// neither nested elements
+	*#$htmlTool.remove($content, "p:matchesOwn(^${esc.backslash}s*$):not(*:has(*))")
 #end#* /stripEmptyP
 
 
