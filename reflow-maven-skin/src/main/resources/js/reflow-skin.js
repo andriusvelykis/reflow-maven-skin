@@ -26,7 +26,7 @@
 		// Support for smooth scrolling and back button while scrolling
 		// Note: only run if smoothScroll is enabled
 		if (typeof($.smoothScroll) == typeof(Function)) {
-			$('a[href*="#"]:not([href^="#carousel"])').live('click', function() {
+			$('a[href^="#"]:not([href^="#carousel"])').live('click', function() {
 				var slashedHash = '#/' + this.hash.slice(1);
 				if ( this.hash ) {
 
