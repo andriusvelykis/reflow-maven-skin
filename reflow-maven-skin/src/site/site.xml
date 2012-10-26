@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+  xmlns="http://maven.apache.org/DECORATION/1.3.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/DECORATION/1.3.0 http://maven.apache.org/xsd/decoration-1.3.0.xsd">
+
+  <custom>
+    <reflowSkin>
+      <pages>
+        <index project="reflow-maven-skin">
+          <breadcrumbs>true</breadcrumbs>
+          <!-- no ToC on the main index page -->
+          <toc>false</toc>
+          <sections>
+            <body />
+            <columns>2</columns>
+            <body />
+          </sections>
+        </index>
+      </pages>
+    </reflowSkin>
+  </custom>
+
+  <body>
+  
+  </body>
+</project>
