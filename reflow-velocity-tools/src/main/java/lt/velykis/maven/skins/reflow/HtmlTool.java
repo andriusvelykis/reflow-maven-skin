@@ -327,6 +327,28 @@ public class HtmlTool {
 	 * @since 1.0
 	 */
 	public static String reorderToTop(String content, String selector, int amount) {
+		return reorderToTop(content, selector, amount, null);
+	}
+	
+	/**
+	 * Reorders elements in HTML content so that selected elements are found at the top of the
+	 * content. Can be limited to a certain amount, e.g. to bring just the first of selected
+	 * elements to the top.
+	 * 
+	 * @param content
+	 *            HTML content to reorder
+	 * @param selector
+	 *            CSS selector for elements to bring to top of the content
+	 * @param amount
+	 *            Maximum number of elements to reorder
+	 * @param wrapRemaining
+	 *            HTML to wrap the remaining (non-reordered) part
+	 * @return HTML content with reordered elements, or the original content if no such elements
+	 *         found.
+	 * @since 1.0
+	 */
+	public static String reorderToTop(String content, String selector, int amount,
+			String wrapRemaining) {
 
 		// extract the elements and then prepend them to the remaining body
 		List<Element> extracted = extractElements(content, selector, amount);
@@ -334,6 +356,11 @@ public class HtmlTool {
 		if (extracted.size() > 1) {
 
 			Element body = extracted.get(0);
+			
+			if (wrapRemaining != null) {
+				wrapInner(body, wrapRemaining);
+			}
+			
 			List<Element> elements = extracted.subList(1, extracted.size());
 
 			// now prepend extracted elements to the body (in backwards to preserve original order)
@@ -346,6 +373,28 @@ public class HtmlTool {
 			// nothing to reorder
 			return content;
 		}
+	}
+	
+	private static Element wrapInner(Element element, String html) {
+
+		// wrap everything into an additional <div> for wrapping
+		// otherwise there may be problems, e.g. with <body> element
+		Element topDiv = new Element(Tag.valueOf("div"), "");
+		for (Element topElem : element.children()) {
+			// add all elements in the body to the `topDiv`
+			topElem.remove();
+			topDiv.appendChild(topElem);
+		}
+
+		// add topDiv to the body
+		element.appendChild(topDiv);
+
+		// wrap topDiv
+		topDiv.wrap(html);
+		// now unwrap topDiv - will remove it from the hierarchy
+		topDiv.unwrap();
+		
+		return element;
 	}
 	
 	/**
