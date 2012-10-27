@@ -679,6 +679,45 @@ public class HtmlTool {
 	}
 	
 	/**
+	 * Wraps elements in HTML with the given HTML.
+	 * 
+	 * @param content
+	 *            HTML content to modify
+	 * @param selector
+	 *            CSS selector for elements to wrap
+	 * @param wrapHtml
+	 *            HTML to use for wrapping the selected elements
+	 * @param amount
+	 *            Maximum number of elements to modify
+	 * @return HTML content with modified elements. If no elements are found, the original content
+	 *         is returned.
+	 * @since 1.0
+	 */
+	public static String wrap(String content, String selector, String wrapHtml, int amount) {
+
+		Document doc = Jsoup.parseBodyFragment(content);
+		Element body = doc.body();
+		
+		List<Element> elements = body.select(selector);
+		if (amount >= 0) {
+			// limit to the indicated amount
+			elements = elements.subList(0, Math.min(amount, elements.size()));
+		}
+		
+		if (elements.size() > 0) {
+			
+			for (Element element : elements) {
+				element.wrap(wrapHtml);
+			} 
+			
+			return body.html();
+		} else {
+			// nothing to update
+			return content;
+		}
+	}
+	
+	/**
 	 * Removes elements from HTML.
 	 * 
 	 * @param content
