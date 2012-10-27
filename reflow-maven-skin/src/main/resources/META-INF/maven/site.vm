@@ -1348,7 +1348,7 @@
 	</head>
 
 ##	// put page and project slugs as classes to the <body>. This allows page-specific CSS customizations.
-	<body class="page-$config.fileId project-$config.projectId" data-spy="scroll" data-target="${esc.h}toc-scroll-target">
+	<body class="page-$config.fileId project-$config.projectId" data-spy="scroll" data-offset="60" data-target="${esc.h}toc-scroll-target">
 
 		<div class="navbar navbar-fixed-top#if ( $config.is( "navbarInverse" ) ) navbar-inverse#end">
 			<div class="navbar-inner">
