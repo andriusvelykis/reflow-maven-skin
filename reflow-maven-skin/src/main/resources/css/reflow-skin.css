@@ -1,7 +1,7 @@
 /* Add padding to the body to accommodate fixed navbar */
 body {
   position: relative;
-  padding-top: 50px;
+  padding-top: 40px;
 }
 
 /* Jumps to in-page links (e.g. page.html#foo) do not honor fixed navbar.
