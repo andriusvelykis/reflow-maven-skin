@@ -15,6 +15,8 @@
  */
 package lt.velykis.maven.skins.reflow;
 
+import java.net.URI;
+
 import org.apache.maven.doxia.site.decoration.inheritance.URIPathDescriptor;
 import org.apache.velocity.tools.config.DefaultKey;
 
@@ -60,5 +62,9 @@ public class URITool {
 		} catch (IllegalArgumentException e) {
 			return link;
 		}
+	}
+	
+	public static URI toURI(final String uri) {
+		return URI.create(uri);
 	}
 }
