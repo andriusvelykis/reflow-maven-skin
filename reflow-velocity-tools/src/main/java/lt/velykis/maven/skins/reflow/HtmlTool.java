@@ -176,8 +176,7 @@ public class HtmlTool {
 	public static List<String> split(String content, String separatorCssSelector,
 			JoinSeparator separatorStrategy) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 
 		List<Element> separators = body.select(separatorCssSelector);
 		if (separators.size() > 0) {
@@ -408,8 +407,7 @@ public class HtmlTool {
 	 */
 	private static List<Element> extractElements(String content, String selector, int amount) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 
 		List<Element> elements = body.select(selector);
 		if (elements.size() > 0) {
@@ -556,8 +554,7 @@ public class HtmlTool {
 	 */
 	public static String setAttr(String content, String selector, String attributeKey, String value) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		if (elements.size() > 0) {
@@ -571,6 +568,17 @@ public class HtmlTool {
 			// nothing to update
 			return content;
 		}
+	}
+
+	/**
+	 * Parses body fragment to the {@code <body>} element.
+	 * 
+	 * @param content
+	 * @return the {@code body} element of the parsed content
+	 */
+	private static Element parseContent(String content) {
+		Document doc = Jsoup.parseBodyFragment(content);
+		return doc.body();
 	}
 	
 	/**
@@ -589,8 +597,7 @@ public class HtmlTool {
 	 */
 	public static List<String> getAttr(String content, String selector, String attributeKey) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		List<String> attrs = new ArrayList<String>();
@@ -620,8 +627,7 @@ public class HtmlTool {
 	 */
 	public static String addClass(String content, String selector, List<String> classNames, int amount) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		if (amount >= 0) {
@@ -695,8 +701,7 @@ public class HtmlTool {
 	 */
 	public static String wrap(String content, String selector, String wrapHtml, int amount) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		if (amount >= 0) {
@@ -730,8 +735,7 @@ public class HtmlTool {
 	 */
 	public static String remove(String content, String selector) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		if (elements.size() > 0) {
@@ -778,8 +782,7 @@ public class HtmlTool {
 	 */
 	public static String replaceAll(String content, Map<String, String> replacements) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		boolean modified = false;
 		for (Entry<String, String> replacementEntry : replacements.entrySet()) {
@@ -789,9 +792,8 @@ public class HtmlTool {
 			List<Element> elements = body.select(selector);
 			if (elements.size() > 0) {
 				
-				Document replacementDoc = Jsoup.parseBodyFragment(replacement);
 				// take the first child
-				Element replacementElem = replacementDoc.body().child(0);
+				Element replacementElem = parseContent(replacement).child(0);
 				
 				if (replacementElem != null) {
 					for (Element element : elements) {
@@ -824,8 +826,7 @@ public class HtmlTool {
 	 */
 	public static List<String> text(String content, String selector) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		List<String> texts = new ArrayList<String>();
@@ -858,8 +859,7 @@ public class HtmlTool {
 	 */
 	public static String headingAnchorToId(String content) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		// selectors for headings without IDs
 		List<String> headNoIds = concat(HEADINGS, ":not([id])", true);
@@ -982,8 +982,7 @@ public class HtmlTool {
 	 */
 	public static String ensureHeadingIds(String content, String idSeparator) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		// first find all existing IDs (to avoid generating duplicates)
 		List<Element> idElems = body.select("*[id]");
@@ -1057,8 +1056,7 @@ public class HtmlTool {
 	 */
 	public static String fixTableHeads(String content) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		// select rows with <th> tags within <tbody>
 		List<Element> tableHeadRows = body.select("table > tbody > tr:has(th)");
@@ -1150,8 +1148,7 @@ public class HtmlTool {
 	 */
 	public static List<? extends IdElement> headingTree(String content) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 
 		List<String> headIds = concat(HEADINGS, "[id]", true);
 
