@@ -5,3 +5,11 @@
 body {
 	background-image:url(../images/bg.png);
 }
+
+body[class*="page-themesbootswatch"] {
+	background-image: none;
+}
+
+body[class*="page-themesbootswatch"] .color-highlight {
+	color: inherit;
+}

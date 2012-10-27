@@ -15,6 +15,8 @@
  */
 package lt.velykis.maven.skins.reflow;
 
+import lt.velykis.maven.skins.reflow.HtmlTool;
+
 import org.apache.maven.doxia.site.decoration.DecorationModel;
 import org.apache.maven.project.MavenProject;
 import org.apache.velocity.tools.ToolContext;
@@ -83,6 +85,10 @@ public class SkinConfigTool extends SafeConfig {
 	private Xpp3Dom globalProperties = new Xpp3Dom("");
 	private Xpp3Dom pageProperties = new Xpp3Dom("");
 	private String namespace = "";
+	
+	private String projectId = null;
+	private String fileId = null;
+//	private String fileShortId = null;
 
 	/**
 	 * {@inheritDoc}
@@ -110,6 +116,36 @@ public class SkinConfigTool extends SafeConfig {
 		}
 
 		ToolContext ctxt = (ToolContext) velocityContext;
+		
+		Object projectObj = ctxt.get("project");
+		if (projectObj instanceof MavenProject) {
+			MavenProject project = (MavenProject) projectObj;
+			String artifactId = project.getArtifactId();
+			// use artifactId "sluggified" as the projectId
+			projectId = HtmlTool.slug(artifactId);
+		}
+		
+		// calculate the page ID from the current file name
+		Object currentFileObj = ctxt.get("currentFileName");
+		if (currentFileObj instanceof String) {
+
+			String currentFile = (String) currentFileObj;
+
+			// drop the extension
+			int lastDot = currentFile.lastIndexOf(".");
+			if (lastDot >= 0) {
+				currentFile = currentFile.substring(0, lastDot);
+			}
+			
+			// get the short ID (in case of nested files)
+//			String fileName = new File(currentFile).getName();
+//			fileShortId = HtmlTool.slug(fileName);
+			
+			// full file ID includes the nested dirs
+			// replace nesting "/" with "-"
+			fileId = HtmlTool.slug(currentFile.replace("/", "-").replace("\\", "-"));
+		}
+		
 		Object decorationObj = ctxt.get("decoration");
 
 		if (!(decorationObj instanceof DecorationModel)) {
@@ -150,36 +186,18 @@ public class SkinConfigTool extends SafeConfig {
 			// for page properties, retrieve the file name and drop the `.html`
 			// extension - this will be used, i.e. `index` instead of `index.html`
 			Xpp3Dom pagesNode = getChild(skinNode, "pages");
-			Object alignedFileObj = ctxt.get("currentFileName");
-			if (pagesNode != null && (alignedFileObj instanceof String)) {
-
-				String alignedFile = (String) alignedFileObj;
-
-				// drop the extension
-				int lastDot = alignedFile.lastIndexOf(".");
-				if (lastDot >= 0) {
-					alignedFile = alignedFile.substring(0, lastDot);
-				}
-				
-				// replace nested paths (not allowed in XML) with "-"
-				alignedFile = alignedFile.replace("/", "-");
-
-				String artifactId = null;
-				Object projectObj = ctxt.get("project");
-				if (projectObj instanceof MavenProject) {
-					MavenProject project = (MavenProject) projectObj;
-					artifactId = project.getArtifactId();
-				}
+			if (pagesNode != null) {
 
 				// Get the page for the file
-				Xpp3Dom page = getChild(pagesNode, alignedFile);
+				// TODO try fileShortId as well?
+				Xpp3Dom page = getChild(pagesNode, fileId);
 
 				// Now check if the project artifact ID is set, and if so, if it matches the
 				// current project. This allows preventing accidental reuse of parent page
 				// configs in children modules
-				if (page != null && artifactId != null) {
+				if (page != null && projectId != null) {
 					String pageProject = page.getAttribute("project");
-					if (pageProject != null && !artifactId.equals(pageProject)) {
+					if (pageProject != null && !projectId.equals(pageProject)) {
 						// project ID indicated, and is different - do not use the config
 						page = null;
 					}
@@ -322,6 +340,14 @@ public class SkinConfigTool extends SafeConfig {
 	 */
 	public boolean isValue(String property, String value) {
 		return value != null && value.equals(value(property));
+	}
+	
+	public String getProjectId() {
+		return projectId;
+	}
+	
+	public String getFileId() {
+		return fileId;
 	}
 
 }

@@ -1184,18 +1184,6 @@
 	*##end#*
 	
 	
-	// Calculate page slug (and project-page slug)
-	*##set ( $lastDot = $alignedFileName.lastIndexOf(".") )#*
-	*##if ( $lastDot >= 0 )#*
-		// drop the extension
-		*##set ( $alignedFile = $alignedFileName.substring( 0, $lastDot ) )#*
-	*##else#*
-		*##set ( $alignedFile = $alignedFileName )#*
-	*##end#*
-	
-	*##set ( $alignedFileSlug = $htmlTool.slug( $alignedFile ) )#*
-	*##set ( $projectSlug = $htmlTool.slug( $project.artifactId ) )#*
-	
 	// generate a short title if one does not exist or is specified explicitly
 	// if specified explicitly, use that
 	*##set ( $shortTitleGenerated = false )#*
@@ -1351,7 +1339,7 @@
 	</head>
 
 ##	// put page and project slugs as classes to the <body>. This allows page-specific CSS customizations.
-	<body class="page-$alignedFileSlug project-$projectSlug" data-spy="scroll" data-target="${esc.h}toc-scroll-target">
+	<body class="page-$config.fileId project-$config.projectId" data-spy="scroll" data-target="${esc.h}toc-scroll-target">
 
 		<div class="navbar navbar-fixed-top#if ( $config.is( "navbarInverse" ) ) navbar-inverse#end">
 			<div class="navbar-inner">
