@@ -497,6 +497,8 @@
 
 	// flag to indicate that last section was a main body section (needs closing for non-body sections)
 	*##set ( $lastBody = false )#*
+	// flag to indicate that a body section has already been found (to avoid multiple page-headers)
+	*##set ( $bodyFound = false )#*
 
 	*##set ( $sectIndex = 0 )#*
 	*##foreach ($section in $sections)#*
@@ -583,8 +585,14 @@
 #* 			*##end#*
 	
 			// set the contents
-			*##foreach ( $subsection in $subsections )##
+			*##foreach ( $subsection in $subsections )#*
+				// if first body section, output with page-header
+				*##if ( !$bodyFound )##
 				#bodyWithHeader ( $subsection )
+#* 				*##else##
+				$subsection
+#* 				*##end#*
+				*##set ( $bodyFound = true )#*
 #* 			*##end#*
 
 			*##set ( $lastBody = true )#*
