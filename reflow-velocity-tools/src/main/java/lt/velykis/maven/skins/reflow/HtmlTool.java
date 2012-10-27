@@ -87,7 +87,7 @@ public class HtmlTool {
 	 * @since 1.0
 	 * @see #split(String, String, JoinSeparator)
 	 */
-	public static List<String> split(String content, String separatorCssSelector) {
+	public List<String> split(String content, String separatorCssSelector) {
 		return split(content, separatorCssSelector, JoinSeparator.NO);
 	}
 
@@ -108,7 +108,7 @@ public class HtmlTool {
 	 * @since 1.0
 	 * @see #split(String, String, JoinSeparator)
 	 */
-	public static List<String> splitOnStarts(String content, String separatorCssSelector) {
+	public List<String> splitOnStarts(String content, String separatorCssSelector) {
 
 		List<String> result = split(content, separatorCssSelector, JoinSeparator.AFTER);
 
@@ -138,7 +138,7 @@ public class HtmlTool {
 	 * @since 1.0
 	 * @see #split(String, String, JoinSeparator)
 	 */
-	public static List<String> split(String content, String separatorCssSelector,
+	public List<String> split(String content, String separatorCssSelector,
 			String separatorStrategy) {
 
 		JoinSeparator sepStrategy;
@@ -173,7 +173,7 @@ public class HtmlTool {
 	 *         returns the original content as the single element of the list
 	 * @since 1.0
 	 */
-	public static List<String> split(String content, String separatorCssSelector,
+	public List<String> split(String content, String separatorCssSelector,
 			JoinSeparator separatorStrategy) {
 
 		Element body = parseContent(content);
@@ -325,7 +325,7 @@ public class HtmlTool {
 	 *         found.
 	 * @since 1.0
 	 */
-	public static String reorderToTop(String content, String selector, int amount) {
+	public String reorderToTop(String content, String selector, int amount) {
 		return reorderToTop(content, selector, amount, null);
 	}
 	
@@ -346,7 +346,7 @@ public class HtmlTool {
 	 *         found.
 	 * @since 1.0
 	 */
-	public static String reorderToTop(String content, String selector, int amount,
+	public String reorderToTop(String content, String selector, int amount,
 			String wrapRemaining) {
 
 		// extract the elements and then prepend them to the remaining body
@@ -405,7 +405,7 @@ public class HtmlTool {
 	 * @return the remainder and a list of extracted elements. The main body (remainder after
 	 *         extraction) is always returned as the first element of the list.
 	 */
-	private static List<Element> extractElements(String content, String selector, int amount) {
+	private List<Element> extractElements(String content, String selector, int amount) {
 
 		Element body = parseContent(content);
 
@@ -469,7 +469,7 @@ public class HtmlTool {
 	 *         content. If no elements are found, the remainder contains the original content.
 	 * @since 1.0
 	 */
-	public static ExtractResult extract(String content, String selector, int amount) {
+	public ExtractResult extract(String content, String selector, int amount) {
 
 		List<Element> extracted = extractElements(content, selector, amount);
 
@@ -552,7 +552,7 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String setAttr(String content, String selector, String attributeKey, String value) {
+	public String setAttr(String content, String selector, String attributeKey, String value) {
 
 		Element body = parseContent(content);
 		
@@ -576,7 +576,7 @@ public class HtmlTool {
 	 * @param content
 	 * @return the {@code body} element of the parsed content
 	 */
-	private static Element parseContent(String content) {
+	private Element parseContent(String content) {
 		Document doc = Jsoup.parseBodyFragment(content);
 		return doc.body();
 	}
@@ -595,7 +595,7 @@ public class HtmlTool {
 	 *         returned.
 	 * @since 1.0
 	 */
-	public static List<String> getAttr(String content, String selector, String attributeKey) {
+	public List<String> getAttr(String content, String selector, String attributeKey) {
 
 		Element body = parseContent(content);
 		
@@ -625,7 +625,7 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String addClass(String content, String selector, List<String> classNames, int amount) {
+	public String addClass(String content, String selector, List<String> classNames, int amount) {
 
 		Element body = parseContent(content);
 		
@@ -663,7 +663,7 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String addClass(String content, String selector, List<String> classNames) {
+	public String addClass(String content, String selector, List<String> classNames) {
 		return addClass(content, selector, classNames, -1);
 	}
 	
@@ -680,7 +680,7 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String addClass(String content, String selector, String className) {
+	public String addClass(String content, String selector, String className) {
 		return addClass(content, selector, Collections.singletonList(className));
 	}
 	
@@ -699,7 +699,7 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String wrap(String content, String selector, String wrapHtml, int amount) {
+	public String wrap(String content, String selector, String wrapHtml, int amount) {
 
 		Element body = parseContent(content);
 		
@@ -733,7 +733,7 @@ public class HtmlTool {
 	 *         returned.
 	 * @since 1.0
 	 */
-	public static String remove(String content, String selector) {
+	public String remove(String content, String selector) {
 
 		Element body = parseContent(content);
 		
@@ -763,7 +763,7 @@ public class HtmlTool {
 	 *         returned.
 	 * @since 1.0
 	 */
-	public static String replace(String content, String selector, String replacement) {
+	public String replace(String content, String selector, String replacement) {
 		return replaceAll(content, Collections.singletonMap(selector, replacement));
 	}
 	
@@ -780,7 +780,7 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String replaceAll(String content, Map<String, String> replacements) {
+	public String replaceAll(String content, Map<String, String> replacements) {
 
 		Element body = parseContent(content);
 		
@@ -824,7 +824,7 @@ public class HtmlTool {
 	 * @return A list of element texts as rendered to display. Empty list if no elements are found.
 	 * @since 1.0
 	 */
-	public static List<String> text(String content, String selector) {
+	public List<String> text(String content, String selector) {
 
 		Element body = parseContent(content);
 		
@@ -857,7 +857,7 @@ public class HtmlTool {
 	 *         anchor tags are removed. If no elements are found, the original content is returned.
 	 * @since 1.0
 	 */
-	public static String headingAnchorToId(String content) {
+	public String headingAnchorToId(String content) {
 
 		Element body = parseContent(content);
 		
@@ -980,7 +980,7 @@ public class HtmlTool {
 	 *         were with IDs already, the original content is returned.
 	 * @since 1.0
 	 */
-	public static String ensureHeadingIds(String content, String idSeparator) {
+	public String ensureHeadingIds(String content, String idSeparator) {
 
 		Element body = parseContent(content);
 		
@@ -1054,7 +1054,7 @@ public class HtmlTool {
 	 *         content is returned.
 	 * @since 1.0
 	 */
-	public static String fixTableHeads(String content) {
+	public String fixTableHeads(String content) {
 
 		Element body = parseContent(content);
 		
@@ -1146,7 +1146,7 @@ public class HtmlTool {
 	 *         nested within these top-level items. Empty list if no headings are in the content.
 	 * @since 1.0
 	 */
-	public static List<? extends IdElement> headingTree(String content) {
+	public List<? extends IdElement> headingTree(String content) {
 
 		Element body = parseContent(content);
 
