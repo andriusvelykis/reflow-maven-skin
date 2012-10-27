@@ -31,7 +31,10 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
+import org.apache.velocity.tools.ToolContext;
 import org.apache.velocity.tools.config.DefaultKey;
+import org.apache.velocity.tools.generic.SafeConfig;
+import org.apache.velocity.tools.generic.ValueParser;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
@@ -52,7 +55,7 @@ import org.jsoup.parser.Tag;
  * @see <a href="http://jsoup.org/cookbook/extracting-data/selector-syntax">jsoup CSS selectors</a>
  */
 @DefaultKey("htmlTool")
-public class HtmlTool {
+public class HtmlTool extends SafeConfig {
 	
 	/** A list of all HTML heading classes (h1-6) */
 	private static List<String> HEADINGS = Collections.unmodifiableList(
@@ -74,6 +77,32 @@ public class HtmlTool {
 		/** Drop separators altogether. */
 		NO
 	}
+	
+	private String outputEncoding = "UTF-8";
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see SafeConfig#configure(ValueParser)
+	 */
+	@Override
+	protected void configure(ValueParser values) {
+
+		// retrieve the Velocity context for output encoding
+		Object velocityContext = values.get("velocityContext");
+
+		if (!(velocityContext instanceof ToolContext)) {
+			return;
+		}
+
+		ToolContext ctxt = (ToolContext) velocityContext;
+		
+		// get the output encoding
+		Object outputEncodingObj = ctxt.get("outputEncoding");
+		if (outputEncodingObj instanceof String) {
+			this.outputEncoding = (String) outputEncodingObj;
+		}
+	}
 
 	/**
 	 * Splits the given HTML content into partitions based on the given separator selector. The
@@ -87,7 +116,7 @@ public class HtmlTool {
 	 * @since 1.0
 	 * @see #split(String, String, JoinSeparator)
 	 */
-	public static List<String> split(String content, String separatorCssSelector) {
+	public List<String> split(String content, String separatorCssSelector) {
 		return split(content, separatorCssSelector, JoinSeparator.NO);
 	}
 
@@ -108,7 +137,7 @@ public class HtmlTool {
 	 * @since 1.0
 	 * @see #split(String, String, JoinSeparator)
 	 */
-	public static List<String> splitOnStarts(String content, String separatorCssSelector) {
+	public List<String> splitOnStarts(String content, String separatorCssSelector) {
 
 		List<String> result = split(content, separatorCssSelector, JoinSeparator.AFTER);
 
@@ -138,7 +167,7 @@ public class HtmlTool {
 	 * @since 1.0
 	 * @see #split(String, String, JoinSeparator)
 	 */
-	public static List<String> split(String content, String separatorCssSelector,
+	public List<String> split(String content, String separatorCssSelector,
 			String separatorStrategy) {
 
 		JoinSeparator sepStrategy;
@@ -173,11 +202,10 @@ public class HtmlTool {
 	 *         returns the original content as the single element of the list
 	 * @since 1.0
 	 */
-	public static List<String> split(String content, String separatorCssSelector,
+	public List<String> split(String content, String separatorCssSelector,
 			JoinSeparator separatorStrategy) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 
 		List<Element> separators = body.select(separatorCssSelector);
 		if (separators.size() > 0) {
@@ -326,7 +354,7 @@ public class HtmlTool {
 	 *         found.
 	 * @since 1.0
 	 */
-	public static String reorderToTop(String content, String selector, int amount) {
+	public String reorderToTop(String content, String selector, int amount) {
 		return reorderToTop(content, selector, amount, null);
 	}
 	
@@ -347,7 +375,7 @@ public class HtmlTool {
 	 *         found.
 	 * @since 1.0
 	 */
-	public static String reorderToTop(String content, String selector, int amount,
+	public String reorderToTop(String content, String selector, int amount,
 			String wrapRemaining) {
 
 		// extract the elements and then prepend them to the remaining body
@@ -406,10 +434,9 @@ public class HtmlTool {
 	 * @return the remainder and a list of extracted elements. The main body (remainder after
 	 *         extraction) is always returned as the first element of the list.
 	 */
-	private static List<Element> extractElements(String content, String selector, int amount) {
+	private List<Element> extractElements(String content, String selector, int amount) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 
 		List<Element> elements = body.select(selector);
 		if (elements.size() > 0) {
@@ -471,7 +498,7 @@ public class HtmlTool {
 	 *         content. If no elements are found, the remainder contains the original content.
 	 * @since 1.0
 	 */
-	public static ExtractResult extract(String content, String selector, int amount) {
+	public ExtractResult extract(String content, String selector, int amount) {
 
 		List<Element> extracted = extractElements(content, selector, amount);
 
@@ -554,10 +581,9 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String setAttr(String content, String selector, String attributeKey, String value) {
+	public String setAttr(String content, String selector, String attributeKey, String value) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		if (elements.size() > 0) {
@@ -571,6 +597,18 @@ public class HtmlTool {
 			// nothing to update
 			return content;
 		}
+	}
+
+	/**
+	 * Parses body fragment to the {@code <body>} element.
+	 * 
+	 * @param content
+	 * @return the {@code body} element of the parsed content
+	 */
+	private Element parseContent(String content) {
+		Document doc = Jsoup.parseBodyFragment(content);
+		doc.outputSettings().charset(outputEncoding);
+		return doc.body();
 	}
 	
 	/**
@@ -587,10 +625,9 @@ public class HtmlTool {
 	 *         returned.
 	 * @since 1.0
 	 */
-	public static List<String> getAttr(String content, String selector, String attributeKey) {
+	public List<String> getAttr(String content, String selector, String attributeKey) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		List<String> attrs = new ArrayList<String>();
@@ -618,10 +655,9 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String addClass(String content, String selector, List<String> classNames, int amount) {
+	public String addClass(String content, String selector, List<String> classNames, int amount) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		if (amount >= 0) {
@@ -657,7 +693,7 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String addClass(String content, String selector, List<String> classNames) {
+	public String addClass(String content, String selector, List<String> classNames) {
 		return addClass(content, selector, classNames, -1);
 	}
 	
@@ -674,7 +710,7 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String addClass(String content, String selector, String className) {
+	public String addClass(String content, String selector, String className) {
 		return addClass(content, selector, Collections.singletonList(className));
 	}
 	
@@ -693,10 +729,9 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String wrap(String content, String selector, String wrapHtml, int amount) {
+	public String wrap(String content, String selector, String wrapHtml, int amount) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		if (amount >= 0) {
@@ -728,10 +763,9 @@ public class HtmlTool {
 	 *         returned.
 	 * @since 1.0
 	 */
-	public static String remove(String content, String selector) {
+	public String remove(String content, String selector) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		if (elements.size() > 0) {
@@ -759,7 +793,7 @@ public class HtmlTool {
 	 *         returned.
 	 * @since 1.0
 	 */
-	public static String replace(String content, String selector, String replacement) {
+	public String replace(String content, String selector, String replacement) {
 		return replaceAll(content, Collections.singletonMap(selector, replacement));
 	}
 	
@@ -776,10 +810,9 @@ public class HtmlTool {
 	 *         is returned.
 	 * @since 1.0
 	 */
-	public static String replaceAll(String content, Map<String, String> replacements) {
+	public String replaceAll(String content, Map<String, String> replacements) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		boolean modified = false;
 		for (Entry<String, String> replacementEntry : replacements.entrySet()) {
@@ -789,9 +822,8 @@ public class HtmlTool {
 			List<Element> elements = body.select(selector);
 			if (elements.size() > 0) {
 				
-				Document replacementDoc = Jsoup.parseBodyFragment(replacement);
 				// take the first child
-				Element replacementElem = replacementDoc.body().child(0);
+				Element replacementElem = parseContent(replacement).child(0);
 				
 				if (replacementElem != null) {
 					for (Element element : elements) {
@@ -822,10 +854,9 @@ public class HtmlTool {
 	 * @return A list of element texts as rendered to display. Empty list if no elements are found.
 	 * @since 1.0
 	 */
-	public static List<String> text(String content, String selector) {
+	public List<String> text(String content, String selector) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		List<Element> elements = body.select(selector);
 		List<String> texts = new ArrayList<String>();
@@ -856,10 +887,9 @@ public class HtmlTool {
 	 *         anchor tags are removed. If no elements are found, the original content is returned.
 	 * @since 1.0
 	 */
-	public static String headingAnchorToId(String content) {
+	public String headingAnchorToId(String content) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		// selectors for headings without IDs
 		List<String> headNoIds = concat(HEADINGS, ":not([id])", true);
@@ -980,10 +1010,9 @@ public class HtmlTool {
 	 *         were with IDs already, the original content is returned.
 	 * @since 1.0
 	 */
-	public static String ensureHeadingIds(String content, String idSeparator) {
+	public String ensureHeadingIds(String content, String idSeparator) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		// first find all existing IDs (to avoid generating duplicates)
 		List<Element> idElems = body.select("*[id]");
@@ -1055,10 +1084,9 @@ public class HtmlTool {
 	 *         content is returned.
 	 * @since 1.0
 	 */
-	public static String fixTableHeads(String content) {
+	public String fixTableHeads(String content) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 		
 		// select rows with <th> tags within <tbody>
 		List<Element> tableHeadRows = body.select("table > tbody > tr:has(th)");
@@ -1148,10 +1176,9 @@ public class HtmlTool {
 	 *         nested within these top-level items. Empty list if no headings are in the content.
 	 * @since 1.0
 	 */
-	public static List<? extends IdElement> headingTree(String content) {
+	public List<? extends IdElement> headingTree(String content) {
 
-		Document doc = Jsoup.parseBodyFragment(content);
-		Element body = doc.body();
+		Element body = parseContent(content);
 
 		List<String> headIds = concat(HEADINGS, "[id]", true);
 
