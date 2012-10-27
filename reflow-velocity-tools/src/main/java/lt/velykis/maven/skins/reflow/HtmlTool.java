@@ -31,7 +31,10 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.regex.Pattern;
 
+import org.apache.velocity.tools.ToolContext;
 import org.apache.velocity.tools.config.DefaultKey;
+import org.apache.velocity.tools.generic.SafeConfig;
+import org.apache.velocity.tools.generic.ValueParser;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
@@ -52,7 +55,7 @@ import org.jsoup.parser.Tag;
  * @see <a href="http://jsoup.org/cookbook/extracting-data/selector-syntax">jsoup CSS selectors</a>
  */
 @DefaultKey("htmlTool")
-public class HtmlTool {
+public class HtmlTool extends SafeConfig {
 	
 	/** A list of all HTML heading classes (h1-6) */
 	private static List<String> HEADINGS = Collections.unmodifiableList(
@@ -73,6 +76,32 @@ public class HtmlTool {
 		BEFORE,
 		/** Drop separators altogether. */
 		NO
+	}
+	
+	private String outputEncoding = "UTF-8";
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see SafeConfig#configure(ValueParser)
+	 */
+	@Override
+	protected void configure(ValueParser values) {
+
+		// retrieve the Velocity context for output encoding
+		Object velocityContext = values.get("velocityContext");
+
+		if (!(velocityContext instanceof ToolContext)) {
+			return;
+		}
+
+		ToolContext ctxt = (ToolContext) velocityContext;
+		
+		// get the output encoding
+		Object outputEncodingObj = ctxt.get("outputEncoding");
+		if (outputEncodingObj instanceof String) {
+			this.outputEncoding = (String) outputEncodingObj;
+		}
 	}
 
 	/**
@@ -578,6 +607,7 @@ public class HtmlTool {
 	 */
 	private Element parseContent(String content) {
 		Document doc = Jsoup.parseBodyFragment(content);
+		doc.outputSettings().charset(outputEncoding);
 		return doc.body();
 	}
 	
