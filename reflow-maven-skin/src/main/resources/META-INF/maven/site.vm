@@ -1025,13 +1025,14 @@
 
 --------------------------------------------------*###
 #**
- * Marks the first header inside the content with `page-header` class
+ * Marks the first header inside the content as page header, by wrapping it into
+ * a div with `page-header` class
  *###
 #macro ( bodyWithHeader $content )#*
-	*##set ( $bodyWithHeader = $htmlTool.addClass($content, "h1", ["page-header"], 1) )#*
+	*##set ( $bodyWithHeader = $htmlTool.wrap($content, "h1", '<div class="page-header"></div>', 1) )#*
 	*##if ( $bodyWithHeader == $content )#*
 		// nothing's changed - try with h2
-		*##set ( $bodyWithHeader = $htmlTool.addClass($content, "h2", ["page-header"], 1) )#*
+		*##set ( $bodyWithHeader = $htmlTool.wrap($content, "h2", '<div class="page-header"></div>', 1) )#*
 	*##end#*
 	*#$bodyWithHeader
 #end#* /bodyWithHeader
