@@ -6,10 +6,10 @@ body {
 	background-image:url(../images/bg.png);
 }
 
-body[class*="page-themesbootswatch"] {
+body[class*="page-themes-bootswatch"] {
 	background-image: none;
 }
 
-body[class*="page-themesbootswatch"] .color-highlight {
+body[class*="page-themes-bootswatch"] .color-highlight {
 	color: inherit;
 }
