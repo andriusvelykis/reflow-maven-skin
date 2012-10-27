@@ -457,7 +457,7 @@
 #*		*##end#*
 
 		// add slogan to correct position
-		*##if ( $config.slogan )#*
+		*##if ( $config.slogan && $config.slogan != '' )#*
 			// read slogan position - if not set, use 'bannerLeft' as default
 			*##if ( $config.slogan.getAttribute("position") )#*
 				*##set ( $sloganPos = $config.slogan.getAttribute("position") )#*
