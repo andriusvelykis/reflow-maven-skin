@@ -91,16 +91,18 @@
 #**
  * Makes the link relative to the project URL, if one is set.
  *###
-#macro ( projectRelativeLink $href )#*
+#macro ( currentFileRelativeLink $href )#*
 
-	*##if ( $project.url && $project.url != '' )#*
+	*##if ( $project.url && $project.url != '' && $currentFileName )#*
 		// if project URL is available, relativize the link using it as a base dir
-		*##set ( $projectRelativeLink = $uriTool.relativizeLink( $project.url, $href ) )#*
+		// note that the current file can be nested under project URL, so take that into account
+		*##set ( $currentFileDir = $uriTool.toURI( "$project.url/" ).resolve( "$currentFileName" ).resolve(".").toString() )#*
+		*##set ( $currentFileRelativeLink = $uriTool.relativizeLink( $currentFileDir, $href ) )#*
 	*##else#*
 		// otherwise just keep the original link
-		*##set ( $projectRelativeLink = $href )#*
+		*##set ( $currentFileRelativeLink = $href )#*
 	*##end##
-#end#* /projectRelativeLink
+#end#* /currentFileRelativeLink
 
 
 
@@ -1273,8 +1275,8 @@
 	
 	// Use config option <absoluteResourceURL>http://mysite.com/</absoluteResourceURL>
 	*##if ( $config.absoluteResourceURL && $config.absoluteResourceURL.getValue() != '' )#*
-		*##projectRelativeLink ( $config.absoluteResourceURL.getValue() ) #*
-		*##set ( $resourcePath = $projectRelativeLink )#*
+		*##currentFileRelativeLink ( $config.absoluteResourceURL.getValue() ) #*
+		*##set ( $resourcePath = $currentFileRelativeLink )#*
 	*##else#*
 		*##set ( $resourcePath = $relativePath )#*
 	*##end#*
@@ -1371,8 +1373,8 @@
 		*##end#*
 
 		*##if ( $config.brand.getChild( 'href' ) )#*
-			*##projectRelativeLink ( $config.brand.getChild( 'href' ).getValue() )##
-					<a class="brand" href="$projectRelativeLink">$brandName</a>
+			*##currentFileRelativeLink ( $config.brand.getChild( 'href' ).getValue() )##
+					<a class="brand" href="$currentFileRelativeLink">$brandName</a>
 #*		*##else##
 					<div class="brand">$brandName</div>
 #*		*##end#*
