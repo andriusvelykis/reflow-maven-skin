@@ -147,7 +147,7 @@ public class SkinConfigTool extends SafeConfig {
 				namespace = skinNode.getName().substring(0, skinNode.getName().length() - namespaceKey.length() + 1);
 			}
 
-			// for page properites, retrieve the file name and drop the `.html`
+			// for page properties, retrieve the file name and drop the `.html`
 			// extension - this will be used, i.e. `index` instead of `index.html`
 			Xpp3Dom pagesNode = getChild(skinNode, "pages");
 			Object alignedFileObj = ctxt.get("currentFileName");
