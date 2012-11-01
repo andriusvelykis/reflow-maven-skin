@@ -13,3 +13,7 @@ body[class*="page-themes-bootswatch"] {
 body[class*="page-themes-bootswatch"] .color-highlight {
 	color: inherit;
 }
+
+.thumbnail-row {
+	margin-top: 10px;
+}
