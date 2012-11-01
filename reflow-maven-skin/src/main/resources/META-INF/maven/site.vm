@@ -622,22 +622,25 @@
 #**
  * Outputs subsections as thumbnail grid. Also rearranges the images to come on top.
  *###
-#macro ( thumbs $colCount $subsections )#*
-
-	*##set ( $colCount = $convert.toNumber($colCount) )##
-	<ul class="thumbnails">
+#macro ( thumbs $colCount $subsections )##
+	<div class="row thumbnail-row">
+		<div class="span12">
+#*	*##set ( $colCount = $convert.toNumber($colCount) )##
+			<ul class="thumbnails">
 #*	*##set ( $colSpan = 12 / $colCount )#*
 	*##foreach ( $subsection in $subsections )##
-		<li class="span$colSpan">
-			<div class="thumbnail">
+				<li class="span$colSpan">
+					<div class="thumbnail">
 #* 		// bring the first image (possibly with a link) to the top of the subsection
 		// (to have a thumbnail with leading image)
 		*##set ( $thumbnailContent = $htmlTool.reorderToTop( $subsection, "a:has(img), img", 1, '<div class="caption"></div>' ) )##
-				#stripEmptyP ( $thumbnailContent )
-			</div>
-		</li>
+						#stripEmptyP ( $thumbnailContent )
+					</div>
+				</li>
 #*	*##end## /foreach $subsection
-	</ul>
+			</ul>
+		</div>
+	</div>
 #end#* /thumbs
 
 
