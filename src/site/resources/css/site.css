@@ -17,3 +17,11 @@ body[class*="page-themes-bootswatch"] .color-highlight {
 .thumbnail-row {
 	margin-top: 10px;
 }
+
+/*h1, */h2 {
+  margin-top: 30px;
+}
+
+h3, h4, h5, h6 {
+  margin-top: 20px;
+}
