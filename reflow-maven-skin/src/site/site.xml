@@ -42,6 +42,16 @@
         <themes-bootswatch-united>
           <theme>bootswatch-united</theme>
         </themes-bootswatch-united>
+        <advanced>
+          <sections>
+            <body />
+            <columns>2</columns>
+            <body />
+          </sections>
+        </advanced>
+        <toc-sidebar>
+          <toc>sidebar</toc>
+        </toc-sidebar>
       </pages>
     </reflowSkin>
   </custom>
