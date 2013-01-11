@@ -30,7 +30,7 @@ import org.apache.velocity.tools.config.DefaultKey;
 public class URITool {
 	
 	/**
-	 * Resolves the link as relative to the base URI.
+	 * Resolves the link as relative to the base dir URI.
 	 * <p>
 	 * Relativizes only absolute links, if the link has the same scheme, host and port as
 	 * the base, it is made into a relative link as viewed from the base.
@@ -39,24 +39,24 @@ public class URITool {
 	 * This is the same method that's used to relativize project links in Maven site.
 	 * </p>
 	 * 
-	 * @param baseUri
+	 * @param baseDirUri
 	 *            URI that will serve as the base to calculate the relative one
 	 * @param link
 	 *            The link to relativize (make it relative to the base URI if possible)
 	 * @return the relative link, if calculated, or the original link if not.
 	 * @since 1.0
 	 */
-	public static String relativizeLink(final String baseUri, final String link) {
+	public static String relativizeLink(final String baseDirUri, final String link) {
 		// taken from org.apache.maven.doxia.site.decoration.inheritance.DecorationModelInheritanceAssembler
 
-		if (link == null || baseUri == null) {
+		if (link == null || baseDirUri == null) {
 			return link;
 		}
 
 		// this shouldn't be necessary, just to swallow malformed hrefs
 		try {
 			
-			final URIPathDescriptor path = new URIPathDescriptor(baseUri, link);
+			final URIPathDescriptor path = new URIPathDescriptor(baseDirUri, link);
 			return path.relativizeLink().toString();
 			
 		} catch (IllegalArgumentException e) {
