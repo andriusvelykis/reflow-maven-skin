@@ -67,8 +67,13 @@
 
 	// Also normalise from the view of $projectSiteLoc
 	*##set ( $absoluteLink = $uriTool.toURI( "$currentFileLoc" ).resolve( "$relativeLink" ).normalize().toString() )#*
-	*##set ( $currentFileDir = $PathTool.getDirectoryComponent( $currentFileLoc ) )#*
-	*##set ( $relativeLink = $uriTool.relativizeLink( $currentFileDir, $absoluteLink ) )##
+	*##if ( $currentFileLoc == $absoluteLink )#*
+		// for matching link, use empty relative link
+		*##set ( $relativeLink = '' )#*
+	*##else#*
+		*##set ( $currentFileDir = $PathTool.getDirectoryComponent( $currentFileLoc ) )#*
+		*##set ( $relativeLink = $uriTool.relativizeLink( $currentFileDir, $absoluteLink ) )#*
+	*##end##
 #end#* /relativeLink
 
 
@@ -118,7 +123,7 @@
 #macro ( activeLink $href )#*
 
 	*##relativeLink ( $href )#*
-	*##if ( $alignedFileName == $relativeLink || '' == $relativeLink )#*
+	*##if ( '' == $relativeLink )#*
 		*##set ( $activeLink = true )#*
 	*##else#*
 		*##set ( $activeLink = false )#*
