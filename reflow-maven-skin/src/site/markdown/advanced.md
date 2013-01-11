@@ -249,29 +249,18 @@ default but can be disabled using `<imgLightbox>` flag:
 
 ### Code highlight
 
-Code highlighting is provided for source code sections in pages using
+Code highlighting can be provided for source code sections in pages using
 [highlight.js][highlight-js]. It detects the language automatically and provides code
-highlighting functionality. It is not enabled by default can be disabled using `<highlightJs>` flag:
+highlighting functionality. To enable it, use `<highlightJs>` flag:
   
 ```xml
 <highlightJs>true|false</highlightJs>
 ```
 
-Source code sections in pages are enhanced Code highlight/formatting is provided 
-Reflow skin enables CSS pop-ups for image links on the website using [Lightbox 2][lightbox].
-See one in action by opening [this link to an image][lightbox-test]. The previews are enabled by
-default but can be disabled using `<imgLightbox>` flag:
-
-```xml
-<imgLightbox>true|false</imgLightbox>
-```
-
--   **true (default)** - when image link is opened in the website, opens a lightweight CSS pop-up
-    with the image over the page
--   **false** - disable lightbox, image link will open the image itself
+-   **true** - Source code is higlighted (syntax colouring) - requires JavaScript
+-   **false (default)** - Source code is displayed in fixed font without syntax colouring
 
 [highlight-js]: http://softwaremaniacs.org/soft/highlight/en/
-[lightbox-test]: img/snowdon.jpg "Lightbox example - climbing Snowdon in Wales, UK"
 
 
 ## Page title
