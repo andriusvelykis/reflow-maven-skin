@@ -17,13 +17,13 @@
             <body />
           </sections>
         </index>
-        <config>
+        <themes-index>
+          <toc>false</toc>
           <sections>
             <body />
             <thumbs>3</thumbs>
-            <body />
           </sections>
-        </config>
+        </themes-index>
         <themes-bootswatch-amelia>
           <theme>bootswatch-amelia</theme>
         </themes-bootswatch-amelia>
