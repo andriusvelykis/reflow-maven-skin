@@ -63,7 +63,12 @@
 	*##set ( $relativeLink = $relativeLink.replaceAll( '\\', '/' ) )#*
 	*##if ( ( $relativeLink == '' ) )#*
 		*##set ( $relativeLink = './' )#*
-	*##end##
+	*##end#*
+
+	// Also normalise from the view of $projectSiteLoc
+	*##set ( $absoluteLink = $uriTool.toURI( "$currentFileLoc" ).resolve( "$relativeLink" ).normalize().toString() )#*
+	*##set ( $currentFileDir = $PathTool.getDirectoryComponent( $currentFileLoc ) )#*
+	*##set ( $relativeLink = $uriTool.relativizeLink( $currentFileDir, $absoluteLink ) )##
 #end#* /relativeLink
 
 
@@ -113,7 +118,7 @@
 #macro ( activeLink $href )#*
 
 	*##relativeLink ( $href )#*
-	*##if ( $alignedFileName == $relativeLink )#*
+	*##if ( $alignedFileName == $relativeLink || '' == $relativeLink )#*
 		*##set ( $activeLink = true )#*
 	*##else#*
 		*##set ( $activeLink = false )#*
@@ -1144,6 +1149,23 @@
 	*##else#*
 		*##set ( $datePosition = "bottom" )#*
 	*##end#*
+
+	// Try resolving site distribution location from the POM.
+	// This can help with resolution of relative links
+	*##if ( $project.distributionManagement.site.url )#*
+		*##set ( $projectSiteLoc = $project.distributionManagement.site.url )#*
+		*##if ( $projectSiteLoc == '' )#*
+			// for undefined site loc, assume root
+			*##set ( $projectSiteLoc = '/' )#*
+		*##end#*
+		*##if ( !$projectSiteLoc.endsWith("/") )#*
+			// ensure that the directory is uniform
+			*##set ( $projectSiteLoc = "$projectSiteLoc/" )#*
+		*##end#*
+	*##end#*
+
+	// absolute location of the current file
+	*##set ( $currentFileLoc = $uriTool.toURI( "$projectSiteLoc" ).resolve( "$currentFileName" ).toString() )#*
 
 	// Check if <toc> is set on the page or globally, then display Table of Contents
 	*##if ( $config.isValue( "toc", "top" ) )#*
