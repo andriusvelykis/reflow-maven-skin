@@ -17,6 +17,9 @@
             <body />
           </sections>
         </index>
+        <layout>
+          <tocTopMax>-1</tocTopMax>
+        </layout>
         <themes-index>
           <toc>false</toc>
           <sections>
