@@ -1155,10 +1155,10 @@
 		*##set ( $datePosition = "bottom" )#*
 	*##end#*
 
-	// Try resolving site distribution location from the POM.
+	// Try resolving site URL from the POM.
 	// This can help with resolution of relative links
-	*##if ( $project.distributionManagement.site.url )#*
-		*##set ( $projectSiteLoc = $project.distributionManagement.site.url )#*
+	*##if ( $project.url )#*
+		*##set ( $projectSiteLoc = $project.url )#*
 		*##if ( $projectSiteLoc == '' )#*
 			// for undefined site loc, assume root
 			*##set ( $projectSiteLoc = '/' )#*
