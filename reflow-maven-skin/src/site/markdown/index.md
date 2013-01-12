@@ -185,3 +185,14 @@ _index.html_ in the child project.
 Sometimes this is undesirable, so one can use `project` attribute to indicate the project
 that the page applies to. For child pages, the project will be different from indicated
 and thus the configuration will not apply. The project is identified using its `artifactId`.
+
+
+## Learn by example
+
+This website itself is generated using Reflow Maven skin and is written in Markdown.
+The source code is [available on GitHub][reflow-src].
+
+Look for the site configuration and web page sources in `/src/site` of each module;
+and for plug-in configuration in respective POM files.
+
+[reflow-src]: http://github.com/andriusvelykis/reflow-maven-skin "Reflow Maven skin source code"

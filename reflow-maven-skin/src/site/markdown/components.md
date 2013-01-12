@@ -1,4 +1,4 @@
-# Page components
+# Components
 
 
 ## Table of contents
@@ -82,7 +82,71 @@ scrolling, but scrolls with the whole page. See it in action in the [sample page
 [toc-sidebar]: toc-sidebar.html
 
 
-## Slogan
+## Header
+
+Standard Maven site allows customising the website _banner_. Reflow skin adds further components to
+the site header: _brand_ and _slogan_.
+
+### Banner
+
+The banner (big _Reflow Maven Skin_ text on this website) is defined using 
+[standard `<bannerLeft>` or `<bannerRight>` elements][mvn-site-banner] in `site.xml` site
+descriptor instead of using `<custom><reflowSkin>`:
+
+```xml
+<project ...>
+...
+  <bannerLeft>
+    <!-- Reflow Maven Skin, but with "Reflow" highlighted -->
+    <name><![CDATA[
+      <span class="color-highlight">Reflow</span> Maven Skin
+      ]]>
+    </name>
+    <href>http://andriusvelykis.github.com/reflow-maven-skin</href>
+  </bannerLeft>
+  ...
+</project>
+```xml
+
+Note that `<name>` element can have `CDATA` element as its contents, allowing custom HTML content
+in the banner.
+
+[mvn-site-banner]: http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html#Banner
+
+### Brand
+
+The brand text (or image) appearing in the left of the top navigation bar can be customised using
+`<brand>` element. You can set both the contents and the link.
+
+```xml
+<brand>
+  <name>text</name>
+  <href>link</href>
+</brand>
+```
+
+-   **name** element sets the text of the top-left brand
+-   **href** element sets the link to open when the brand text is clicked
+
+Note that the `<name>` element can be used to embed custom HTML content. To do that, use `CDATA`
+element as the contents of `<name>` (writing HTML without `CDATA` will not work):
+
+```xml
+<brand>
+  <name>
+    <![CDATA[
+    <span class="color-highlight">Reflow</span> Maven Skin
+    ]]>
+  </name>
+  ..
+</brand>
+```
+
+The above example is taken from this website, in order to have the _Reflow_ part in different
+colour. Images could also be added there in a similar manner.
+
+
+### Slogan
 
 The skin allows setting a website slogan in the banner. It would appear underneath the website
 title, either on the left or the right side.
@@ -101,15 +165,18 @@ The `position` attribute indicates where to place the slogan:
 
 
 
-## Filter menus
+## Menus
 
 Menus in Reflow skin can be placed both at the top navigation bar and at the bottom navigation
-columns. The menus themselves are defined as normally in Maven site, using `<project><body><menu>`
-XML items. The skin allows customizing where which menu items are placed in the website.
+columns. The menus themselves are defined as normally in Maven site, 
+[using `<project><body><menu>` XML items][mvn-site-menus]. The skin allows customizing where which
+menu items are placed in the website.
 
 Both top and bottom navigation allows specifying regular expressions that filter the menus
 to be displayed in the particular place. The regular expressions can match both the name of the
 menu item and its `ref` value, e.g. to match `<menu ref="modules" inherit="bottom" />`.
+
+[mvn-site-menus]: http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html#Including_Generated_Content
 
 
 ### Top navigation
@@ -125,6 +192,15 @@ are displayed there:
 -   **RegEx** - applies the regular expression to menu names and `ref` attributes. If the regular
     expression matches, adds the menu to the top navigation.
 -   **no `<topNav>` element (default)** - list all menus
+
+
+### Links
+
+All links from defined in [`<body><links>` element][mvn-site-links] of `site.xml` site descriptor
+are placed in the top navigation bar. This allows having top-level links in navigation (menus are
+always drop-down).
+
+[mvn-site-links]: http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html#Links
 
 
 ### Bottom navigation
@@ -193,5 +269,77 @@ setting own page title, e.g. to allow for titles such as "_My Page | My Super We
 [java-format]: http://docs.oracle.com/javase/7/docs/api/java/util/Formatter.html
 
 
-### Brand
+## Bottom description
 
+The bottom navigation provides space for site description, logo or other content. It is placed on
+the right of the bottom navigation area. Site description takes up space remaining after the bottom
+navigation (controlled via [`maxSpan` attribute](#Bottom_navigation), site description occupies
+`12 - maxSpan` then). The bottom description is set using `<bottomDescription>` element:
+
+```xml
+<bottomDescription quote="true|false">description</bottomDescription>
+```
+
+The `quote` attribute wraps the text into a `<blockquote>` element:
+
+-   **true (default)** - Text is wrapped into a `<blockquote>` element
+-   **false** - Text is printed as-is
+
+The **description** can be plain text or a `CDATA` element and thus wrap the text with HTML formatting.
+
+Alternatively, `<bottomDescription>` can contain HTML elements directly, which will be embedded
+in the bottom description area.
+
+Note that the bottom description must be enabled if Maven site
+[date or version are set to position **navigation-bottom**](#Date_and_version).
+
+
+## Breadcrumbs
+
+Breadcrumbs are defined using standard Maven site element
+[`<body><breadcrumbs>`][mvn-site-breadcrumbs] in `site.xml`.
+Reflow skin provides a `<breadcrumbs>` flag to enable/disable them:
+
+```xml
+<breadcrumbs>true|false</breadcrumbs>
+```
+
+-   **true (default)** - Breadcrumb trail is displayed below the banner
+-   **false** - Do not display breadcrumbs
+
+Note that the breadcrumbs bar must be enabled if Maven site
+[date or version are set to position **left** or **right**](#Date_and_version).
+
+[mvn-site-breadcrumbs]: http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html#Breadcrumbs
+
+
+## Date and version
+
+Reflow skin supports displaying Maven site publish date and version. They are defined using
+standard Maven site elements [`<publishDate>`][mvn-site-date] and [`<version>`][mvn-site-version].
+
+Reflow skin supports the following values for `position` of these components:
+
+-   **left** - Left in breadcrumbs bar (requires [`<breadcrumbs>` flag](#Breadcrumbs)
+    to be enabled)
+-   **right** - Right in breadcrumbs bar (requires [`<breadcrumbs>` flag](#Breadcrumbs)
+    to be enabled)
+-   **navigation-bottom** - Bottom right in the bottom navigation (requires 
+    [`<bottomDescription>`](#Bottom_description) to be enabled)
+-   **bottom (default)** - Subfooter (the last part of the page, as in this website)
+-   **none** - Date or version are disabled
+
+Note that **navigation-top** position is not supported by Reflow skin.
+
+[mvn-site-date]: http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html#Publish_Date
+[mvn-site-version]: http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html#Version
+
+
+### Override publish date
+
+The website publish date can be indicated explicitly in the configuration by using `<publishDate>`
+element:
+
+```xml
+<publishDate>2013-01-08</publishDate>
+```

@@ -12,20 +12,62 @@ using the `<custom><reflowSkin>` element.
 [basic]: config.html
 
 
-## Override publish date
+## JavaScript goodies
 
-The website publish date can be indicated explicitly in the configuration by using `<publishDate>`
-element:
+### Code highlight
+
+Code highlighting can be provided for source code sections in pages using
+[highlight.js][highlight-js]. It detects the language automatically and provides code
+highlighting functionality. To enable it, use `<highlightJs>` flag:
 
 ```xml
-<publishDate>2013-01-08</publishDate>
+<highlightJs>true|false</highlightJs>
 ```
 
+-   **true** - Source code is highlighted (syntax colouring) - requires JavaScript
+-   **false (default)** - Source code is displayed in fixed font without syntax colouring
 
-## Modern website
+[highlight-js]: http://softwaremaniacs.org/soft/highlight/en/
 
-The skin performs several website modernisation actions by default, such as update CSS or use
-matching icons and other bells and whistles. The flags to disable them are described below.
+
+### Image previews (lightbox)
+
+Reflow skin enables CSS pop-ups for image links on the website using [Lightbox 2][lightbox].
+See one in action by opening [this link to an image][lightbox-test]. The previews are enabled by
+default but can be disabled using `<imgLightbox>` flag:
+
+```xml
+<imgLightbox>true|false</imgLightbox>
+```
+
+-   **true (default)** - when image link is opened in the website, opens a lightweight CSS pop-up
+    with the image over the page
+-   **false** - disable lightbox, image link will open the image itself
+
+[lightbox]: http://lokeshdhakar.com/projects/lightbox2/
+[lightbox-test]: img/snowdon.jpg "Lightbox example - climbing Snowdon in Wales, UK"
+
+
+### Smooth scroll
+
+Reflow skin enables smooth scrolling for in-page navigation (e.g. for table of contents links)
+using [jQuery Smooth Scroll][jquery-sscroll]. Smooth scrolling can be disabled using
+`<smoothScroll>` flag:
+
+```xml
+<smoothScroll>true|false</smoothScroll>
+```
+
+-   **true (default)** - smooth scrolling for in-page navigation (requires JavaScript)
+-   **false** - default in-page jumps
+
+[jquery-sscroll]: https://github.com/kswedberg/jquery-smooth-scroll
+
+
+## Bootstrap
+
+The generated Maven site code is updated by default, e.g. update CSS of generated tables, use
+Bootstrap icons and other goodies. The flags to disable these updates are described below.
 
 
 ### Bootstrap CSS
@@ -80,39 +122,59 @@ to HTML5 equivalents where applicable by default. Disable with `html5Anchor` fla
 -   **false** - keep the original anchors
 
 
-### Image previews (lightbox)
+## Navbar colour
 
-Reflow skin enables CSS pop-ups for image links on the website using [Lightbox 2][lightbox].
-See one in action by opening [this link to an image][lightbox-test]. The previews are enabled by
-default but can be disabled using `<imgLightbox>` flag:
+Bootstrap themes provide an [alternative colour for top navigation bar][navbar-inverse].
+To use the inverse navigation bar colour, add the `<navbarInverse>` flag:
 
 ```xml
-<imgLightbox>true|false</imgLightbox>
+<navbarInverse>true|false</navbarInverse>
 ```
 
--   **true (default)** - when image link is opened in the website, opens a lightweight CSS pop-up
-    with the image over the page
--   **false** - disable lightbox, image link will open the image itself
+-   **true** - Inverted navigation bar colour is used
+-   **false (default)** - Default Bootstrap theme colour is used for navigation bar
 
-[lightbox]: http://lokeshdhakar.com/projects/lightbox2/
-[lightbox-test]: img/snowdon.jpg "Lightbox example - climbing Snowdon in Wales, UK"
+[navbar-inverse]: http://twitter.github.com/bootstrap/components.html#navbar
 
 
-### Code highlight
+## Protocol-relative URLs
 
-Code highlighting can be provided for source code sections in pages using
-[highlight.js][highlight-js]. It detects the language automatically and provides code
-highlighting functionality. To enable it, use `<highlightJs>` flag:
-  
+By default, a number of core resources are loaded from the cloud. Bootstrap, JQuery,
+Bootstrap themes and other components are not local to the website, but loaded from
+corresponding Content Delivery Networks. This reduces the load on the server and improves
+latency for users, who may have these resources already cached.
+
+To support both `http://` and `https://` websites, these resources can be referenced
+using [protocol-relative URLs][protocol-url], starting with `//`. However, this is not supported
+when building the website locally, for `file://` URLs. 
+
+For this reason, the protocol-relative URLs are disabled by default. Enable them using
+`<protocolRelativeURLs>` flag:
+
 ```xml
-<highlightJs>true|false</highlightJs>
+<protocolRelativeURLs>true|false</protocolRelativeURLs>
 ```
 
--   **true** - Source code is higlighted (syntax colouring) - requires JavaScript
--   **false (default)** - Source code is displayed in fixed font without syntax colouring
+-   **true** - Bootstrap CSS, JS and other resources are referenced using protocol-relative
+    URLs: `//`
+-   **false (default)** - Resources are referenced using `http://` protocol
 
-[highlight-js]: http://softwaremaniacs.org/soft/highlight/en/
+[protocol-url]: http://paulirish.com/2010/the-protocol-relative-url/
 
 
-#### Invert top navigation colour
+## Skin attribution
+
+The Reflow skin is released under the [Apache license][apache-license] and thus can be used freely.
+By default, a link to the skin website and the author homepage is added at the bottom of the skin:
+_Reflow Maven skin by Andrius Velykis_. I would appreciate if you kept the link - it will help with
+the popularity of the skin. If you want, it can be disabled using `<skinAttribution>` flag:
+
+```xml
+<skinAttribution>true|false</skinAttribution>
+```
+
+-   **true (default)** - Include links to Reflow skin homepage and author's website
+-   **false** - Remove skin attribution text and links
+
+[apache-license]: http://www.apache.org/licenses/LICENSE-2.0.html
 
