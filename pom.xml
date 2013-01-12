@@ -17,7 +17,6 @@
 
   <name>Reflow Maven Skin Parent</name>
   <description>Reflow Maven skin and supporting libraries parent.</description>
-  <url>http://andriusvelykis.github.com/reflow-maven-skin</url>
   <inceptionYear>2012</inceptionYear>
   
   <modules>
@@ -26,9 +25,12 @@
   </modules>
 
   <properties>
+    <site.url>http://andriusvelykis.github.com/reflow-maven-skin</site.url>
     <site.deploy.id>gh-pages</site.deploy.id>
     <site.deploy.url>http://github.com/andriusvelykis/reflow-maven-skin/tree/gh-pages</site.deploy.url>
   </properties>
+
+  <url>${site.url}</url>
 
   <scm>
     <connection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</connection>
