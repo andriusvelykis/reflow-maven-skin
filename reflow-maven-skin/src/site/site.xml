@@ -17,6 +17,9 @@
             <body />
           </sections>
         </index>
+        <config>
+          <toc>false</toc>
+        </config>
         <layout>
           <tocTopMax>-1</tocTopMax>
         </layout>
