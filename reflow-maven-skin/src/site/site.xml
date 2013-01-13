@@ -7,7 +7,8 @@
   <custom>
     <reflowSkin>
       <pages>
-        <index project="reflow-maven-skin">
+        <index project="reflow-maven-skin" combine.self="override">
+          <shortTitle>Usage</shortTitle>
           <breadcrumbs>true</breadcrumbs>
           <!-- no ToC on the main index page -->
           <toc>false</toc>
@@ -63,6 +64,10 @@
   </custom>
 
   <body>
-  
+
+    <breadcrumbs>
+      <item name="Maven skin" href="/" />
+    </breadcrumbs>
+
   </body>
 </project>

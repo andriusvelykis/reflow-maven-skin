@@ -84,16 +84,16 @@
   
     <links>
       <item name="Download" href="skin/index.html#Usage" />
-      <item name="GitHub Project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
+      <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
     </links>
 
     <breadcrumbs>
-      <item name="Reflow" href="index.html" />
+      <item name="Reflow" href="/" />
     </breadcrumbs>
   
     <menu name="Main" inherit="top">
       <item name="Home" href="index.html" />
-      <item name="GitHub Project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
+      <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
       <item name="Blog" href="http://andrius.velykis.lt/tag/reflow-maven-skin" />
       <item ref="modules" />
     </menu>
@@ -101,11 +101,15 @@
       <item name="Download" href="skin/index.html#Usage" />
     </menu>
     <menu name="Documentation" inherit="bottom">
-      <item name="Usage" href="usage.html" />
-      <item name="Advanced Configuration" href="advanced.html" />
+      <item name="Usage" href="skin/index.html" />
+      <item name="Configuration" href="skin/config.html" />
+      <item name="Themes" href="skin/themes/index.html" />
+      <item name="Layouts" href="skin/layout.html" />
+      <item name="Components" href="skin/components.html" />
+      <item name="Other" href="skin/misc.html" />
+      <item name="Multi-module site" href="skin/multi-module.html" />
     </menu>
     <menu ref="modules" inherit="bottom" />
     <menu ref="reports" inherit="bottom" />
-    <menu ref="parent" inherit="bottom" />
   </body>
 </project>
