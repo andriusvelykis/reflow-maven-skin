@@ -8,8 +8,8 @@ body {
 	background-image:url(resources/bkg_gradient.gif);
 	background-repeat: repeat-x;
 	margin:0 auto;
-	font-family:'Lucida Grande', Geneva, Verdana, Arial, sans-serif;
-	font-size:12px;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size:14px;
 	padding:0em 2em;
 	color:#333;
 
@@ -70,9 +70,9 @@ th, table { border-collapse:collapse;border-color: #E6E7E8; }
 .TableRowColor td { line-height: 175%; padding-left: 10px;}
 
 /* Font used in left-hand frame lists */
-.FrameTitleFont   { font-size: 125%; font-family: Helvetica, Arial, sans-serif; font-weight: bold; margin-top: 1em; display: block; }
-.FrameHeadingFont { font-size: 125%; font-family: 'Lucida Grande', Geneva, Verdana, Arial, sans-serif; font-weight: bold; margin-top: 1em; display: block;  }
-.FrameItemFont    { font-size: 100%; font-family: Helvetica, Arial, sans-serif }
+.FrameTitleFont   { font-size: 125%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-weight: bold; margin-top: 1em; display: block; }
+.FrameHeadingFont { font-size: 125%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-weight: bold; margin-top: 1em; display: block;  }
+.FrameItemFont    { font-size: 100%; font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
 
 /* Navigation bar fonts and colors */
 
