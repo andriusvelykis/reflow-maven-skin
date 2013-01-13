@@ -20,7 +20,7 @@ Refer to [Javadoc][javadoc-all] for each tool for more information.
 [per-page-info]: ../skin/config.html#Per-page_configuration
 [jsoup]: http://jsoup.org/
 
-[javadoc-all]: apidocs/index.html
+[javadoc-all]: apidocs/
 [javadoc-config]: apidocs/lt/velykis/maven/skins/reflow/SkinConfigTool.html
 [javadoc-html]: apidocs/lt/velykis/maven/skins/reflow/HtmlTool.html
 [javadoc-uri]: apidocs/lt/velykis/maven/skins/reflow/URITool.html

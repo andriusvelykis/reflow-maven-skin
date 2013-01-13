@@ -8,7 +8,7 @@ using the `<custom><reflowSkin>` element.
 
 The documentation is split over several pages, describing the various configuration options:
 
--   **[Themes]( themes/index.html )**
+-   **[Themes]( themes/ )**
 
     How to configure own theme or select one of the excellent [Bootswatch][bootswatch] themes.
 -   **[Layouts]( layout.html )**

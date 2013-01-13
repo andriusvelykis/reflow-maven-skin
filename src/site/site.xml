@@ -83,8 +83,8 @@
   <body>
   
     <links>
-      <item name="Download" href="skin/index.html#Usage" />
-      <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
+      <item name="Download" href="skin/#Usage" />
+      <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin/" />
     </links>
 
     <breadcrumbs>
@@ -92,26 +92,26 @@
     </breadcrumbs>
   
     <menu name="Main" inherit="top">
-      <item name="Home" href="index.html" />
-      <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin" />
-      <item name="Blog" href="http://andrius.velykis.lt/tag/reflow-maven-skin" />
+      <item name="Home" href="./" />
+      <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin/" />
+      <item name="Blog" href="http://andrius.velykis.lt/tag/reflow-maven-skin/" />
       <item ref="modules" />
     </menu>
     <menu name="Download" inherit="top">
       <item name="Download" href="skin/index.html#Usage" />
     </menu>
     <menu name="Documentation" inherit="bottom">
-      <item name="Usage" href="skin/index.html" />
+      <item name="Usage" href="skin/" />
       <item name="Configuration" href="skin/config.html" />
-      <item name="Themes" href="skin/themes/index.html" />
+      <item name="Themes" href="skin/themes/" />
       <item name="Layouts" href="skin/layout.html" />
       <item name="Components" href="skin/components.html" />
       <item name="Other" href="skin/misc.html" />
       <item name="Multi-module site" href="skin/multi-module.html" />
     </menu>
     <menu name="Tools" inherit="bottom">
-      <item name="Reflow Velocity tools" href="reflow-velocity-tools/index.html" />
-      <item name="Tools Javadoc" href="reflow-velocity-tools/apidocs/index.html" />
+      <item name="Reflow Velocity tools" href="reflow-velocity-tools/" />
+      <item name="Tools Javadoc" href="reflow-velocity-tools/apidocs/" />
     </menu>
     <menu ref="reports" inherit="bottom" />
   </body>

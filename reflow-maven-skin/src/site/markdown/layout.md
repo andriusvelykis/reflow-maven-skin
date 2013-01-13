@@ -99,14 +99,14 @@ Columns section with the number of columns is indicated using `<columns>num</col
 ...
 ```
 
-[columns-reflow]: index.html#Usage
+[columns-reflow]: ./#Usage
 
 
 ## Thumbnails
 
 _Thumbnails_ layout is best suited to produce a gallery of images. Each subsection constitutes a
 thumbnail block, with its first image followed by the subsection heading and text. The [themes
-section above][themes-reflow] uses thumbnails to showcase examples of Bootswatch themes.
+page][themes-reflow] uses thumbnails to showcase examples of Bootswatch themes.
 
 Thumbnails are placed in columns, so the same requirements as in _columns_ layout apply. To set
 the layout with the number of columns, use `<thumbs>num</thumbs>` element:
@@ -121,7 +121,7 @@ the layout with the number of columns, use `<thumbs>num</thumbs>` element:
 ...
 ```
 
-[themes-reflow]: #theme-bootswatch
+[themes-reflow]: themes/#theme-bootswatch
 
 
 ## Body
