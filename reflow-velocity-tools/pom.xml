@@ -48,7 +48,9 @@
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>2.9</version>
         <configuration>
-          <stylesheet>maven</stylesheet>
+          <stylesheetfile>${project.basedir}/src/javadoc/stylesheet.css</stylesheetfile>
+          <javadocDirectory>${project.basedir}/src/javadoc</javadocDirectory>
+          <docfilessubdirs>true</docfilessubdirs>
         </configuration>
         <reportSets>
           <reportSet>
