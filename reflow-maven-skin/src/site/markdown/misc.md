@@ -1,16 +1,6 @@
-# Advanced configuration
+# Other configuration
 
-Reflow skin allows configuring various parts on the Maven site and updates the pages to use
-HTML5 and Bootstrap components. This page outlines the various configuration options.
-All options can be specified globally or per-page. Refer to the [Basic configuration][basic]
-page for details on per-page configuration.
-
-The configuration is specified in the [`site.xml` site descriptor][site-xml] file,
-using the `<custom><reflowSkin>` element.
-
-[site-xml]: http://maven.apache.org/doxia/doxia-sitetools/doxia-decoration-model/decoration.html
-[basic]: config.html
-
+This page lists various other configuration options for Reflow Maven skin.
 
 ## JavaScript goodies
 
