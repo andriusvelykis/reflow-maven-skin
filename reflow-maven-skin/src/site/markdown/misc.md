@@ -178,5 +178,5 @@ the popularity of the skin. If you want, it can be disabled using `<skinAttribut
 -   **true (default)** - Include links to Reflow skin homepage and author's website
 -   **false** - Remove skin attribution text and links
 
-[apache-license]: http://www.apache.org/licenses/LICENSE-2.0.html
+[apache-license]: http://www.apache.org/licenses/LICENSE-2.0
 
