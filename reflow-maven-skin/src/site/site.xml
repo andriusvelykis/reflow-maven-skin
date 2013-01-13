@@ -13,7 +13,6 @@
           <!-- no ToC on the main index page -->
           <toc>false</toc>
           <sections>
-            <body />
             <columns>2</columns>
             <body />
           </sections>

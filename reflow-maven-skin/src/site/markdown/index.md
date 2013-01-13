@@ -1,11 +1,3 @@
-# Reflow Maven skin
-
-Reflow is an Apache Maven site skin built on Twitter Bootstrap. It allows various structural
-and stylistic customizations to create a modern-looking Maven-generated website.
-
----
-
-
 ## Usage
 
 To use this Maven skin, include it in your [`site.xml` site descriptor][site-xml] file:
