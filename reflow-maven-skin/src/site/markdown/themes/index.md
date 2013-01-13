@@ -58,16 +58,6 @@ There are several options for the `<theme>` value:
 
 ---
 
-### [Amelia][theme-amelia]
-
-[![Amelia Bootswatch theme](../img/bootswatch-amelia.png)][theme-amelia]
-
-```xml
-<theme>bootswatch-amelia</theme>
-```
-
-[theme-amelia]: bootswatch-amelia.html
-
 
 ### [Cerulean][theme-cerulean]
 
@@ -125,4 +115,19 @@ There are several options for the `<theme>` value:
 ```
 
 [theme-united]: bootswatch-united.html
+
+
+
+### [And more..][bootswatch-gallery]
+
+Check out all themes at [Bootswatch gallery][bootswatch-gallery].
+
+```xml
+<theme>bootswatch-*</theme>
+```
+
+
+---
+
+All theme images above are from the [Bootswatch gallery][bootswatch-gallery].
 
