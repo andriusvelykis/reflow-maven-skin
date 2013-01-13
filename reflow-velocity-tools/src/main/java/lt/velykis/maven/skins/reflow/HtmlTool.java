@@ -873,7 +873,7 @@ public class HtmlTool extends SafeConfig {
 	 * IDs for heading elements.
 	 * <p>
 	 * The anchors are used to indicate positions within a HTML page. In HTML5, however, the
-	 * {@code name} attribute is no longer supported on {@code <a>) tag. The positions within pages
+	 * {@code name} attribute is no longer supported on {@code <a>}) tag. The positions within pages
 	 * are indicated using {@code id} attribute instead, e.g. {@code <h1 id="myheading">}.
 	 * </p>
 	 * <p>
