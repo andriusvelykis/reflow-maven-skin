@@ -1314,17 +1314,20 @@
 		*##set ( $bootstrapCssPath = "$resourcePath/css" )#*
 		*##set ( $bootstrapCssResponsivePath = $bootstrapCssPath )#*
 		*##set ( $bootstrapJsPath = "$resourcePath/js" )#*
-	*##else#*
+	*##else#*	
+	    *##set ( $bootstrapVersion = "2.2.2" )#*
+	    *##set ( $bootswatchVersion = "2.2.2" )#*
+
 		// use Bootstrap theme from BootstrapCDN (loaded over network)
 		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
 			*##set ( $bootswatchTheme = $config.theme.getValue().substring(11) )#*
-			*##set ( $bootstrapCssPath = "$protocol//netdna.bootstrapcdn.com/bootswatch/2.1.0/$bootswatchTheme" )#*
+			*##set ( $bootstrapCssPath = "$protocol//netdna.bootstrapcdn.com/bootswatch/${bootswatchVersion}/$bootswatchTheme" )#*
 		*##else#*
-			*##set ( $bootstrapCssPath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css" )#*
+			*##set ( $bootstrapCssPath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/${bootstrapVersion}/css" )#*
 		*##end#*
 		
-		*##set ( $bootstrapCssResponsivePath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css" )#*
-		*##set ( $bootstrapJsPath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js" )#*
+		*##set ( $bootstrapCssResponsivePath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/${bootstrapVersion}/css" )#*
+		*##set ( $bootstrapJsPath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/${bootstrapVersion}/js" )#*
 		
 	*##end##
 
@@ -1633,7 +1636,7 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 
 #*	
-	*##set ( $jQueryVersion = "1.8.2" )##
+	*##set ( $jQueryVersion = "1.8.3" )##
 	<!-- Fallback jQuery loading from Google CDN:
 	     http://stackoverflow.com/questions/1014203/best-way-to-use-googles-hosted-jquery-but-fall-back-to-my-hosted-library-on-go -->
 	<script type="text/javascript" src="$protocol//ajax.googleapis.com/ajax/libs/jquery/${jQueryVersion}/jquery.min.js"></script>
