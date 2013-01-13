@@ -1330,7 +1330,12 @@
 
 		<link href="$bootstrapCssPath/bootstrap.min.css" rel="stylesheet" />
 		<link href="$bootstrapCssResponsivePath/bootstrap-responsive.min.css" rel="stylesheet" />
+#*		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
+		    // for Bootswatch themes, add bootswatch.css *###
+		<link href="$resourcePath/css/bootswatch.css" rel="stylesheet" />
+#*		*##else##
 		<link href="$resourcePath/css/docs.css" rel="stylesheet" />
+#*		*##end##
 		<link href="$resourcePath/css/reflow-skin.css" rel="stylesheet" />
 		
 #*	*##if ( $config.is( "highlightJs" ) )#*
