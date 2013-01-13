@@ -14,7 +14,7 @@
   <artifactId>reflow-velocity-tools</artifactId>
 
   <name>Reflow Velocity Tools</name>
-  <description>Velocity tools supporting Reflow Maven skin.</description>
+  <description>Velocity tools supporting Reflow Maven skin</description>
 
   <dependencies>
     <dependency>
@@ -39,5 +39,26 @@
       <version>1.6.3</version>
     </dependency>
   </dependencies>
+
+  <reporting>
+    <plugins>
+      <plugin>
+        <!-- Generate Javadoc for Reflow Tools only (the others do not have Java sources) -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <stylesheet>maven</stylesheet>
+        </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>javadoc</report>
+            </reports>
+          </reportSet>
+        </reportSets>
+      </plugin>
+    </plugins>
+  </reporting>
 
 </project>
