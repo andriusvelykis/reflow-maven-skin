@@ -123,7 +123,9 @@
 #macro ( activeLink $href )#*
 
 	*##relativeLink ( $href )#*
-	*##if ( '' == $relativeLink )#*
+	// either empty link (pointing to a page), or if the current file is index.html,
+	// the link may point to the whole directory
+	*##if ( '' == $relativeLink || ( $alignedFileName.endsWith("index.html") && './' == $relativeLink ) )#*
 		*##set ( $activeLink = true )#*
 	*##else#*
 		*##set ( $activeLink = false )#*
