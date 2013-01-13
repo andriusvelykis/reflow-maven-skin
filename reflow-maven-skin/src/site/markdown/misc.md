@@ -17,7 +17,19 @@ highlighting functionality. To enable it, use `<highlightJs>` flag:
 -   **true** - Source code is highlighted (syntax colouring) - requires JavaScript
 -   **false (default)** - Source code is displayed in fixed font without syntax colouring
 
+Code highlighting theme can be changed to match your website theme. Available themes are listed in 
+[highlight.js website][highlight-js-themes]. The theme can be selected using `<highlightJsTheme>`
+element:
+
+```xml
+<highlightJsTheme>default|*</highlightJsTheme>
+```
+
+-   **default (default)** - Default code highlighting theme is used
+-   **theme name** - Entered theme is used
+
 [highlight-js]: http://softwaremaniacs.org/soft/highlight/en/
+[highlight-js-themes]: http://softwaremaniacs.org/media/soft/highlight/test.html#styleswitcher
 
 
 ### Image previews (lightbox)
