@@ -33,9 +33,7 @@ on using the skin with Maven 2 site or other configurations.
 
 ## POM dependencies
 
-The skin requires custom Velocity tools ([`reflow-velocity-tools`][reflow-tools])
-to be available when generating Maven site. The tools library needs to be included
-as dependency to `maven-site-plugin` in your POM file:
+Add [`reflow-velocity-tools`][reflow-tools] dependency to `maven-site-plugin` in the POM file:
 
 [reflow-tools]: ../reflow-velocity-tools
 
@@ -69,6 +67,10 @@ as dependency to `maven-site-plugin` in your POM file:
 </build>
 ```
 
+Reflow Velocity tools ([`reflow-velocity-tools`][reflow-tools]) are required by the Reflow skin
+to read skin configuration and provides other functionality. The library must be available when
+generating Maven site.
+
 Note that _Velocity 1.7_ is also required by the template.
 
 ---
@@ -77,9 +79,11 @@ Note that _Velocity 1.7_ is also required by the template.
 ## Configuration
 
 The skin is configurable using the `<custom>` element in your `site.xml` file. The available
-options are described in the documentation. A sample configuration file is below.
+options are [described in the documentation][doc]. A sample configuration file is below.
 Note that all configuration options can be set on a per-page basis
 ([see below](#Per-page_configuration)).
+
+[doc]: config.html
 
 ```xml
 <project>
