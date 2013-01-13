@@ -645,8 +645,13 @@
 					<div class="thumbnail">
 #* 		// bring the first image (possibly with a link) to the top of the subsection
 		// (to have a thumbnail with leading image)
-		*##set ( $thumbnailContent = $htmlTool.reorderToTop( $subsection, "a:has(img), img", 1, '<div class="caption"></div>' ) )##
+		*##set ( $thumbnailContent = $htmlTool.reorderToTop( $subsection, "a:has(img), img", 1, '<div class="caption"></div>' ) )#*
+		*##if ( $thumbnailContent == $subsection )#*
+			// no image found, so at least wrap into a caption *###
+						<div class="caption">#stripEmptyP ( $thumbnailContent )</div>
+#*		*##else##
 						#stripEmptyP ( $thumbnailContent )
+#*		*##end##
 					</div>
 				</li>
 #*	*##end## /foreach $subsection
