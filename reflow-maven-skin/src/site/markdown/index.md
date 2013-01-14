@@ -8,11 +8,9 @@ To use this Maven skin, include it in your [`site.xml` site descriptor][site-xml
 <project>
   ...
   <skin>
-    <skin>
-      <groupId>lt.velykis.maven.skins</groupId>
-      <artifactId>reflow-maven-skin</artifactId>
-      <version>1.0.0</version>
-    </skin>
+    <groupId>lt.velykis.maven.skins</groupId>
+    <artifactId>reflow-maven-skin</artifactId>
+    <version>1.0.0</version>
   </skin>
   ...
 </project>
