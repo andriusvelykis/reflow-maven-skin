@@ -961,6 +961,10 @@
 		*##set ( $menuColumns = [ $decoration.body.menus ] )#*
 	*##end#*
 
+	*##if ( $maxNavSpan > 12 )#*
+		*##set ( $maxNavSpan = 12 )#*
+	*##end#*
+
 	// Determine the column widths (aim for max span of 9 (default), and max width of 4)
 	*##set ( $navSpan = $maxNavSpan / $menuColumns.size() )#*
 	*##if ( $navSpan > 4 )#*
@@ -970,14 +974,24 @@
 		*##set ( $navSpan = 1 )#*
 	*##end#*
 
+	*##if ( $maxNavSpan <= 0 )#*
+		*##set ( $maxNavSpan = $navSpan * $menuColumns.size() )#*
+	*##end#*
+
 	// mark total span taken by the bottomNav (needed to add other components to the footer)
-	*##set ( $totalNavSpan = $navSpan * $menuColumns.size() )#*
+	*##set ( $lastNavSpan = $maxNavSpan - ($navSpan * ($menuColumns.size() - 1)) )#*
+	*##set ( $totalNavSpan = $maxNavSpan )#*
 	
-	*##foreach ( $menuCol in $menuColumns )##
+	*##set ( $navColIndex = 0 )#*
+	*##foreach ( $menuCol in $menuColumns )#*
+		*##if ( $navColIndex == $menuColumns.size() - 1 )#*
+			*##set ( $navSpan = $lastNavSpan )#*
+		*##end##
 				<div class="span$navSpan bottom-nav">
 #*					*##listMenu ( $menuCol )
 				</div>
-#*	*##end##
+#*		*##set ( $navColIndex = $navColIndex + 1 )#*
+	*##end##
 #end#* /bottomNav
 
 
