@@ -1,7 +1,7 @@
 # Multi-module site
 
-Aimed good support for websites of multi-module Maven projects, Reflow skin provides several options
-enhancing such configurations.
+Aimed at providing good support for websites of multi-module Maven projects, Reflow skin has
+several options enhancing such configurations.
 
 ## Reuse resources
 

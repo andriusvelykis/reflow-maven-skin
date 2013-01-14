@@ -56,7 +56,7 @@
       <bottomDescription>
         <![CDATA[
           <span class="color-highlight">Reflow</span> is an Apache Maven site skin built on 
-          <a href="http://twitter.github.com/bootstrap/" title="Twitter Bootstrap">Twitter Bootstrap</a>.
+          <a href="http://getbootstrap.com" title="Bootstrap">Bootstrap</a>.
           It allows various structural and stylistic customizations to create a
           modern-looking Maven-generated website.
         ]]>
@@ -69,13 +69,13 @@
           <breadcrumbs>false</breadcrumbs>
           <!-- no ToC on the main index page -->
           <toc>false</toc>
-          <!-- <sections>
+          <markPageHeader>false</markPageHeader>
+          <sections>
             <carousel />
-            <thumbs>2</thumbs>
+            <columns>2</columns>
             <body />
             <sidebar />
-            <columns>3</columns>
-          </sections> -->
+          </sections>
         </index>
         <contribute>
           <breadcrumbs>false</breadcrumbs>

@@ -50,14 +50,20 @@ If you _really really_ like the skin and want to support the author, I will be g
 
 ## Acknowledgements
 
-Reflow skin is built on top of [Bootstrap][bootstrap] and uses themes from [Bootswatch][bootswatch].
+Reflow skin is built on [Bootstrap][bootstrap] and uses themes from [Bootswatch][bootswatch].
 These include icons from [Glyphicons][glyphicons] and web fonts from [Google][webfonts].
 
 JavaScript goodies with [jQuery][jquery].
+
 Image previews with [Lightbox2][lightbox2].
+
 Smooth scrolling with [jQuery Smooth Scroll][smooth-scroll] and [jQuery BBQ][bbq].
+
 Code highlighting with [highlight.js][highlight-js].
+
 HTML rewriting with [jsoup][jsoup].
+
+Some artwork resources from [MediaLoot][medialoot].
 
 Inspired by [Maven Fluido Skin][fluido].
 
@@ -71,6 +77,7 @@ Inspired by [Maven Fluido Skin][fluido].
 [bbq]: http://benalman.com/projects/jquery-bbq-plugin
 [highlight-js]: http://softwaremaniacs.org/soft/highlight/en/
 [jsoup]: http://jsoup.org/
+[medialoot]: http://medialoot.com/
 [fluido]: http://maven.apache.org/skins/maven-fluido-skin/
 
 
