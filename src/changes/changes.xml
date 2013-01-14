@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document xmlns="http://maven.apache.org/changes/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/changes/1.0.0 http://maven.apache.org/xsd/changes-1.0.0.xsd">
+  <properties>
+    <title>Release notes</title>
+    <author>Andrius Velykis</author>
+  </properties>
+  <body>
+    <release version="1.0.0" date="15 January 2013" description="Initial release of Reflow Maven skin">
+      <action type="add" dev="andriusvelykis">
+        Initial release of Reflow Maven skin and Reflow Velocity tools.
+      </action>
+    </release>
+  </body>
+</document>

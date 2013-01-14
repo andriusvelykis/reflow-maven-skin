@@ -16,7 +16,7 @@
   <packaging>pom</packaging>
 
   <name>Reflow Maven Skin Parent</name>
-  <description>Reflow Maven skin and supporting libraries parent.</description>
+  <description>Reflow Maven skin and supporting libraries parent</description>
   <inceptionYear>2012</inceptionYear>
   
   <modules>
@@ -38,7 +38,7 @@
     <url>http://github.com/andriusvelykis/reflow-maven-skin/tree/master</url>
   </scm>
   <issueManagement>
-    <system>GitHub Issues</system>
+    <system>GitHub</system>
     <url>http://github.com/andriusvelykis/reflow-maven-skin/issues</url>
   </issueManagement>
 
@@ -148,6 +148,7 @@
           <reportSet>
             <reports>
               <report>changes-report</report>
+              <!-- <report>github-report</report> -->
             </reports>
           </reportSet>
         </reportSets>
