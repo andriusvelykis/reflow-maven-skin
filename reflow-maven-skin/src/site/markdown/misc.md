@@ -139,6 +139,20 @@ To use the inverse navigation bar colour, add the `<navbarInverse>` flag:
 [navbar-inverse]: http://twitter.github.com/bootstrap/components.html#navbar
 
 
+## Mark page header
+
+By default, the first `<h1>` or `<h2>` heading in the page body is marked as _page header_.
+It allows Bootstrap CSS to give it an emphasised presentation. To disable page header being
+marked, use the `<markPageHeader>` flag:
+
+```xml
+<markPageHeader>true|false</markPageHeader>
+```
+
+-   **true (default)** - The first heading (`<h1>` or else `<h2>`) in page is marked
+-   **false** - Page content is unchanged
+
+
 ## Protocol-relative URLs
 
 By default, a number of core resources are loaded from the cloud. Bootstrap, JQuery,

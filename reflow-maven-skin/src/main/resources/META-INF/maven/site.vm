@@ -1049,10 +1049,16 @@
  * a div with `page-header` class
  *###
 #macro ( bodyWithHeader $content )#*
-	*##set ( $bodyWithHeader = $htmlTool.wrap($content, "h1", '<div class="page-header"></div>', 1) )#*
-	*##if ( $bodyWithHeader == $content )#*
-		// nothing's changed - try with h2
-		*##set ( $bodyWithHeader = $htmlTool.wrap($content, "h2", '<div class="page-header"></div>', 1) )#*
+	*##if ( $config.not( "markPageHeader" ) )#*
+		// do not mark page header, just print the content
+		*##set ( $bodyWithHeader = $content )#*
+	*##else#*
+		// try marking the header
+		*##set ( $bodyWithHeader = $htmlTool.wrap($content, "h1", '<div class="page-header"></div>', 1) )#*
+		*##if ( $bodyWithHeader == $content )#*
+			// nothing's changed - try with h2
+			*##set ( $bodyWithHeader = $htmlTool.wrap($content, "h2", '<div class="page-header"></div>', 1) )#*
+		*##end#*
 	*##end#*
 	*#$bodyWithHeader
 #end#* /bodyWithHeader
