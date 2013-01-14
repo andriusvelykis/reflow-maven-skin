@@ -26,8 +26,12 @@
 
   <properties>
     <site.url>http://andriusvelykis.github.com/reflow-maven-skin</site.url>
+    <github.global.server>github</github.global.server>
     <site.deploy.id>gh-pages</site.deploy.id>
     <site.deploy.url>http://github.com/andriusvelykis/reflow-maven-skin/tree/gh-pages</site.deploy.url>
+
+    <repositoryName>reflow-maven-skin</repositoryName>
+    <repositoryOwner>andriusvelykis</repositoryOwner>
   </properties>
 
   <url>${site.url}</url>
@@ -94,7 +98,31 @@
           <generateReports>true</generateReports>
           <inputEncoding>UTF-8</inputEncoding>
           <outputEncoding>UTF-8</outputEncoding>
+          <!-- Site deployment done using GitHub site plugin -->
+          <skipDeploy>true</skipDeploy>
         </configuration>
+      </plugin>
+
+      <plugin>
+        <!-- GitHub site plug-in for deployment to GitHub pages -->
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.7</version>
+        <configuration>
+          <message>Creating site for ${project.artifactId}, ${project.version}</message>
+          <!-- this does the trick to place every module in the correct subfolder -->
+          <path>${project.distributionManagement.site.url}</path>
+          <merge>true</merge>
+        </configuration>
+        <executions>
+          <execution>
+            <id>github-site</id>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>site-deploy</phase>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
 
