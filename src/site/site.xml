@@ -106,7 +106,7 @@
   <body>
   
     <links>
-      <item name="Download" href="skin/#Usage" />
+      <item name="Download" href="skin/index.html#Usage" />
       <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin/" />
     </links>
 
