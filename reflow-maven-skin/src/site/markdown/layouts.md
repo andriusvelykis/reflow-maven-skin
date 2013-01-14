@@ -1,7 +1,7 @@
 # Page section layouts
 
 When writing Maven site pages using most of the available file formats, such as
-[Apt, Xdoc or Markdown][doxia-formats], it is difficult to write anything more but a
+[APT, XDoc or Markdown][doxia-formats], it is difficult to write anything more but a
 straightforward linear page with headings to split the content. Reflow skin allows customizing
 the page layout and reflowing the page using columns, thumbnails, or with the _carousel_ component.
 
@@ -32,11 +32,13 @@ using `<sections>` element in the per-page (or global) configuration:
 </custom>
 ```
 
+[doxia-formats]: http://maven.apache.org/doxia/references/index.html
+
 
 ## Defining sections
 
 Page sections are indicated using _horizontal rule_ (`<hr/>`) elements in the generated page.
-Check your file format reference on how to write them, e.g. `"==="` for [Apt][apt-ref] or `"---"`
+Check your file format reference on how to write them, e.g. `"==="` for [APT][apt-ref] or `"---"`
 for [Markdown][markdown-hr-ref].
 
 If sections are configured for a page, its contents are split on the `<hr/>` element
@@ -164,3 +166,11 @@ Sidebar section is indicated using `<sidebar />` element without any attributes.
 </sections>
 ...
 ```
+
+
+## Responsive design
+
+Reflow skin is built on [Bootstrap][bootstrap] and provides responsive design features out of the
+box. The page layouts are rearranged for smaller screens to provide a good viewing experience.
+
+[bootstrap]: http://getbootstrap.com

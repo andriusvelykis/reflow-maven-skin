@@ -20,9 +20,9 @@
         <config>
           <toc>false</toc>
         </config>
-        <layout>
+        <layouts>
           <tocTopMax>-1</tocTopMax>
-        </layout>
+        </layouts>
         <themes-index>
           <toc>false</toc>
           <sections>

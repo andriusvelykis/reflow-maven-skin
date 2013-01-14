@@ -11,7 +11,7 @@ The documentation is split over several pages, describing the various configurat
 -   **[Themes]( themes/ )**
 
     How to configure own theme or select one of the excellent [Bootswatch][bootswatch] themes.
--   **[Layouts]( layout.html )**
+-   **[Layouts]( layouts.html )**
 
     Reflow the page with different layouts: multi-column text, carousel, thumbnails and others.
 -   **[Components]( components.html )**
@@ -71,7 +71,7 @@ Each element within `<pages>` indicates the name of the page file being customiz
 Each page configuration is set within a `<pages><[pageId]>` element.
     
 The page ID is its file name without extension. This is because the pages may be generated
-from different file formats, e.g. [Apt, Xdoc, Markdown, etc][doxia-formats]. The page ID
+from different file formats, e.g. [APT, XDoc, Markdown, etc][doxia-formats]. The page ID
 characters must be of the same case as the generated file name.
     
 For generated files that are in directories, `"-"` is used as the separator for directory
