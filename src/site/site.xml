@@ -48,8 +48,8 @@
       <topNav>Documentation|Tools|Contribute</topNav>
       <!-- Split menus in the bottom navigation -->
       <bottomNav maxSpan="9" >
-        <column>Main|Download</column>
-        <column>Tools|Contribute</column>
+        <column>Main|Tools</column>
+        <column>Download|Contribute</column>
         <column>Documentation</column>
         <column>reports</column>
       </bottomNav>
@@ -80,6 +80,25 @@
         <contribute>
           <breadcrumbs>false</breadcrumbs>
         </contribute>
+        <!-- Disable source highlighting for Maven reports -->
+        <source-repository>
+          <highlightJs>false</highlightJs>
+        </source-repository>
+        <issue-tracking>
+          <highlightJs>false</highlightJs>
+          <toc>false</toc>
+        </issue-tracking>
+        <license>
+          <highlightJs>false</highlightJs>
+          <toc>false</toc>
+        </license>
+        <!-- Disable ToC for some Maven reports -->
+        <project-info>
+          <toc>false</toc>
+        </project-info>
+        <dependencies>
+          <tocTopMax>4</tocTopMax>
+        </dependencies>
       </pages>
     </reflowSkin>
   </custom>
@@ -99,10 +118,10 @@
       <item name="Home" href="./" />
       <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin/" />
       <item name="Blog" href="http://andrius.velykis.lt/tag/reflow-maven-skin/" />
-      <item ref="modules" />
     </menu>
     <menu name="Download" inherit="top">
       <item name="Download" href="skin/index.html#Usage" />
+      <item name="License" href="license.html" />
     </menu>
     <menu name="Documentation" inherit="bottom">
       <item name="Usage" href="skin/" />
@@ -123,6 +142,6 @@
       <item name="Fork on GitHub" href="http://github.com/andriusvelykis/reflow-maven-skin/" />
       <item name="Donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=QWKNRFZH52828" />
     </menu>
-    <menu ref="reports" inherit="bottom" />
+    <menu name="Maven documentation" ref="reports" inherit="bottom"/>
   </body>
 </project>
