@@ -84,7 +84,7 @@
           <dependency>
             <groupId>lt.velykis.maven.skins</groupId>
             <artifactId>reflow-velocity-tools</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.0.0</version>
           </dependency>
           <dependency>
             <!-- Reflow skin requires velocity 1.7 -->
