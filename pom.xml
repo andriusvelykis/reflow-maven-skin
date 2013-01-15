@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
   <parent>
@@ -12,7 +10,7 @@
 
   <groupId>lt.velykis.maven.skins</groupId>
   <artifactId>reflow-parent</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.0</version>
   <packaging>pom</packaging>
 
   <name>Reflow Maven Skin Parent</name>
@@ -28,7 +26,7 @@
     <site.url>http://andriusvelykis.github.com/reflow-maven-skin</site.url>
     <github.global.server>github</github.global.server>
     <site.deploy.id>gh-pages</site.deploy.id>
-    <site.deploy.url></site.deploy.url>
+    <site.deploy.url />
 
     <repositoryName>reflow-maven-skin</repositoryName>
     <repositoryOwner>andriusvelykis</repositoryOwner>
@@ -40,6 +38,7 @@
     <connection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</connection>
     <developerConnection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</developerConnection>
     <url>http://github.com/andriusvelykis/reflow-maven-skin/tree/master</url>
+    <tag>reflow-parent-1.0.0</tag>
   </scm>
   <issueManagement>
     <system>GitHub</system>
@@ -85,7 +84,7 @@
           <dependency>
             <groupId>lt.velykis.maven.skins</groupId>
             <artifactId>reflow-velocity-tools</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
           </dependency>
           <dependency>
             <!-- Reflow skin requires velocity 1.7 -->
