@@ -1,9 +1,12 @@
-# Reflow Maven skin
+# [Reflow Maven skin]( http://andriusvelykis.github.com/reflow-maven-skin/ )
 
-Reflow is an Apache Maven site skin built on Twitter Bootstrap. It allows various structural
+Reflow is an Apache Maven site skin built on [Bootstrap][bootstrap]. It allows various structural
 and stylistic customizations to create a modern-looking Maven-generated website.
 
+To get started and see how the skin looks by default, check out
+http://andriusvelykis.github.com/reflow-maven-skin!
 
+[bootstrap]: http://getbootstrap.com
 
 ## Usage
 
@@ -15,38 +18,14 @@ To use this Maven skin, include it in your `site.xml` file:
   <skin>
     <groupId>lt.velykis.maven.skins</groupId>
     <artifactId>reflow-maven-skin</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
   </skin>
   ...
 </project>
 ```
 
-Note that the skin has not been released yet, so you need to use the `-SNAPSHOT` version.
-Add the snapshot repository to your POM file until the skin is released (both as `repository`
-and `pluginRepository`):
-
-```xml
-<repositories>
-  <repository>
-    <id>snapshots-repo</id>
-    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    <releases><enabled>false</enabled></releases>
-    <snapshots><enabled>true</enabled></snapshots>
-  </repository>
-</repositories>
-<pluginRepositories>
-  <pluginRepository>
-    <id>snapshots-plugin-repo</id>
-    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-    <releases><enabled>false</enabled></releases>
-    <snapshots><enabled>true</enabled></snapshots>
-  </pluginRepository>
-</pluginRepositories>
-```
-
-The skin requires custom Velocity tools (`reflow-velocity-tools`) to be available when
-generating Maven site. The tools are available from the snapshots repository and need to be
-included as dependency to `maven-site-plugin` in your POM file:
+The skin requires accompanying Reflow Velocity tools (`reflow-velocity-tools`) to be available when
+generating Maven site. Add them as a dependency to `maven-site-plugin` in your POM file:
 
 ```xml
 <build>
@@ -55,14 +34,15 @@ included as dependency to `maven-site-plugin` in your POM file:
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-site-plugin</artifactId>
-      <version>3.1</version>
+      <version>3.2</version>
       <dependencies>
         ...
         <dependency>
           <groupId>lt.velykis.maven.skins</groupId>
           <artifactId>reflow-velocity-tools</artifactId>
-          <version>1.0.0-SNAPSHOT</version>
+          <version>1.0.0</version>
         </dependency>
+        <!-- Reflow skin requires Velocity >= 1.7  -->
         <dependency>
           <groupId>org.apache.velocity</groupId>
           <artifactId>velocity</artifactId>
@@ -77,7 +57,7 @@ included as dependency to `maven-site-plugin` in your POM file:
 </build>
 ```
 
-Note that _Velocity 1.7_ is also required by the template.
+Note that _Apache Velocity 1.7_ is also required by the template.
 
 The skin is provided on the "works on my computer" basis at the moment. I am using the newest
 versions of `maven-site-plugin` and other components and at the moment do not have any feedback
@@ -86,8 +66,12 @@ on using the skin with Maven 2 site or other configurations.
 
 ### Configuration
 
-The skin is configurable using the `<custom>` element in your `site.xml` file. Documentation
-on the configuration options is in the works. For now, here is a sample configuration file:
+The skin is configurable using the `<custom><reflowSkin>` element in your `site.xml` file.
+Refer to [documentation][reflow-config] for all configuration options.
+
+[reflow-config]: http://andriusvelykis.github.com/reflow-maven-skin/skin/config.html
+
+A sample configuration file is given below:
 
 ```xml
 <project>
@@ -97,7 +81,7 @@ on the configuration options is in the works. For now, here is a sample configur
       <theme>bootswatch-spacelab</theme>
       <brand>
         <name>My Project</name>
-        <href>http://github.com/andriusvelykis/reflow-maven-skin</href>
+        <href>http://andriusvelykis.github.com/reflow-maven-skin/</href>
       </brand>
       <slogan>Super interesting project doing good things.</slogan>
       <titleTemplate>%2$s | %1$s</titleTemplate>
@@ -137,10 +121,15 @@ on the configuration options is in the works. For now, here is a sample configur
 
 ## Bug tracker
 
-Have a bug? Please create an issue here on GitHub that conforms with [necolas's guidelines](https://github.com/necolas/issue-guidelines).
+Have a bug or a feature request? Please create an issue here on GitHub that conforms with
+[necolas's guidelines](https://github.com/necolas/issue-guidelines).
 
 http://github.com/andriusvelykis/reflow-maven-skin/issues
 
+
+## Contributing
+
+Fork the repository and submit pull requests.
 
 
 ## Author
@@ -154,7 +143,7 @@ http://github.com/andriusvelykis/reflow-maven-skin/issues
 
 ## Copyright and license
 
-Copyright 2012 Andrius Velykis
+Copyright 2012-2013 Andrius Velykis
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this work except in compliance with the License.
