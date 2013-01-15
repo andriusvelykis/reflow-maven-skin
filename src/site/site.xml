@@ -15,6 +15,7 @@
   
   <publishDate position="bottom" format="yyyy-MM-dd" />
   <version position="bottom" />
+  <googleAnalyticsAccountId>UA-1402675-6</googleAnalyticsAccountId>
 
   <skin>
     <groupId>lt.velykis.maven.skins</groupId>
@@ -104,6 +105,10 @@
   </custom>
 
   <body>
+    <!-- Add a rel to Google profile for all pages -->
+    <head>
+      <link rel="author" href="http://plus.google.com/109737404465892813363"/>
+    </head>
   
     <links>
       <item name="Download" href="skin/index.html#Usage" />
