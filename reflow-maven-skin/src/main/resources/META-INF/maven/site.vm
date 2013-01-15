@@ -1049,7 +1049,7 @@
 		*##if ( $item.name == "script" )#*
 			*##set ( $itemHtml = $StringUtils.replace( $item.toUnescapedString(), $documentHeader, "" ) )#*
 		*##else#*
-			*##set ( $itemHtml = $StringUtils.replace( $foot.toString(), $documentHeader, "" ) )#*
+			*##set ( $itemHtml = $StringUtils.replace( $item.toString(), $documentHeader, "" ) )#*
 		*##end#*
 		// eval the HTML - this will allow users to specify Velocity variables
 		*##evaluate ( $itemHtml )#*
