@@ -63,7 +63,7 @@ using [jQuery Smooth Scroll][jquery-sscroll]. Smooth scrolling can be disabled u
 -   **true (default)** - smooth scrolling for in-page navigation (requires JavaScript)
 -   **false** - default in-page jumps
 
-[jquery-sscroll]: https://github.com/kswedberg/jquery-smooth-scroll
+[jquery-sscroll]: http://github.com/kswedberg/jquery-smooth-scroll
 
 
 ## Bootstrap
