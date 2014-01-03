@@ -1374,8 +1374,17 @@
 		<link href="$resourcePath/css/docs.css" rel="stylesheet" />
 #*		*##end##
 		<link href="$resourcePath/css/reflow-skin.css" rel="stylesheet" />
-		
-#*	*##if ( $config.is( "highlightJs" ) )#*
+
+#*
+	// disable CDN-loaded highlightJs altogether if `localResources` is selected.
+	// it will need to be added manually
+	*##if ( !$localResources && $config.is( "highlightJs" ) )#*
+		*##set ( $highlightJs = true )#*
+	*##else#*
+		*##set ( $highlightJs = false )#*
+	*##end#*
+
+#*	*##if ( $highlightJs )#*
 		// get the configured theme, or use default if not explicitly specified
 		*##if ( $config.highlightJsTheme )#*
 			*##set ( $highlightJsTheme = $config.highlightJsTheme.getValue() )#*
@@ -1693,7 +1702,7 @@
 	<script src="$resourcePath/js/jquery.ba-bbq.min.js"></script>
 #*	*##end#*
 
-	*##if ( $config.is( "highlightJs" ) )#*
+	*##if ( $highlightJs )#*
 		// use a hosted version of highlight.js for syntax highlighting	*###
 	<script src="$protocol//yandex.st/highlightjs/7.3/highlight.min.js"></script>
 #*	*##end#*
