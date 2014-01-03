@@ -137,6 +137,7 @@
       <item name="Components" href="skin/components.html" />
       <item name="Other" href="skin/misc.html" />
       <item name="Multi-module site" href="skin/multi-module.html" />
+      <item name="Local resources" href="skin/resources.html" />
     </menu>
     <menu name="Tools" inherit="bottom">
       <item name="Reflow Velocity tools" href="reflow-velocity-tools/" />

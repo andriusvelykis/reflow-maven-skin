@@ -1691,6 +1691,11 @@
 	*##if ( $config.is( "highlightJs" ) )#*
 		// use a hosted version of highlight.js for syntax highlighting	*###
 	<script src="$protocol//yandex.st/highlightjs/7.3/highlight.min.js"></script>
+#*	*##end#*
+
+	*##if ( $config.endContent )#*
+		// custom HTML (e.g. JavaScript) to place at the end of the document before </body>	*###
+	#htmlContent ( $config.endContent.getChildren() )
 #*	*##end##
 
 	<script src="$resourcePath/js/reflow-skin.js"></script>
