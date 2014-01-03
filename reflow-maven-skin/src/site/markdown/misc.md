@@ -28,9 +28,22 @@ element:
 -   **default (default)** - Default code highlighting theme is used
 -   **theme name** - Entered theme is used
 
+highlight.js is loaded from the [Yandex JS CDN][yandex-highlight-js-cdn].
+If you want to use a downloaded version, place the following files in `src/site/resources` and set the `<highlightJsLocal>` flag:
+
+-   `js/highlight.min.js`
+-   `css/THEME.css` (THEME is your chosen theme or `default` - see above)
+
+```xml
+<highlightJsLocal>true|false</highlightJsLocal>
+```
+
+-   **true** - Files from `src/site/resources` get used
+-   **false (default)** - [Yandex JS CDN][yandex-highlight-js-cdn] is used
+
 [highlight-js]: http://softwaremaniacs.org/soft/highlight/en/
 [highlight-js-themes]: http://softwaremaniacs.org/media/soft/highlight/test.html#styleswitcher
-
+[yandex-highlight-js-cdn]: http://api.yandex.ru/jslibs/libs.xml#highlightjs
 
 ### Image previews (lightbox)
 
@@ -177,6 +190,20 @@ For this reason, the protocol-relative URLs are disabled by default. Enable them
 
 [protocol-url]: http://paulirish.com/2010/the-protocol-relative-url/
 
+## Local jQuery
+
+By default, jQuery gets loaded from [Google Hosted Libraries CDN][google-js-cdn].
+If your site cannot use external CDNs, because it is intranet-only or for privacy reasons, set the
+`<localjQuery>` flag, so an already included jQuery version gets used:
+
+```xml
+<localjQuery>true|false</localjQuery>
+```
+
+-   **true** - included jQuery gets used
+-   **false (default)** - [Google Hosted Libraries][google-js-cdn] is used for jQuery
+
+[google-js-cdn]: https://developers.google.com/speed/libraries/
 
 ## Skin attribution
 

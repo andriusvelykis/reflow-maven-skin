@@ -1375,8 +1375,14 @@
 		*##else#*
 			*##set ( $highlightJsTheme = 'default' )#*
 		*##end#*
-		// use a hosted version of highlight.js for syntax highlighting	*###
-		<link href="$protocol//yandex.st/highlightjs/7.3/styles/${highlightJsTheme}.min.css" rel="stylesheet" />
+		// use the local highlightJs path if set
+		*##if ( $config.is( "highlightJsLocal" ) )#*
+			*##set ( $highlightJsCssPath = "$resourcePath/css" )#*
+		*##else#*
+			*##set ( $highlightJsCssPath = "$protocol//yandex.st/highlightjs/7.3/styles" )#*
+		*##end#*
+		// use highlight.js for syntax highlighting	*###
+		<link href="$highlightJsCssPath/${highlightJsTheme}.min.css" rel="stylesheet" />
 #*	*##end##
 		
 #*	*##if ( !$config.not( "imgLightbox" ) )#*
@@ -1663,7 +1669,8 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 
 #*	
-	*##set ( $jQueryVersion = "1.8.3" )##
+	*##set ( $jQueryVersion = "1.8.3" )#*
+		*##if ( $config.not( "localjQuery" ) )##
 	<!-- Fallback jQuery loading from Google CDN:
 	     http://stackoverflow.com/questions/1014203/best-way-to-use-googles-hosted-jquery-but-fall-back-to-my-hosted-library-on-go -->
 	<script type="text/javascript" src="$protocol//ajax.googleapis.com/ajax/libs/jquery/${jQueryVersion}/jquery.min.js"></script>
@@ -1673,7 +1680,11 @@
 			document.write(unescape("%3Cscript src='$resourcePath/js/jquery-${jQueryVersion}.min.js' type='text/javascript'%3E%3C/script%3E"));
 		}
 	</script>
+#*	*##else##
+	<script src="$resourcePath/js/jquery-${jQueryVersion}.min.js"></script>
+#*	*##end#*
 	
+*###
 	<script src="$bootstrapJsPath/bootstrap.min.js"></script>
 #*
 	*##if ( !$config.not( "imgLightbox" ) )#*
@@ -1689,8 +1700,14 @@
 #*	*##end#*
 
 	*##if ( $config.is( "highlightJs" ) )#*
-		// use a hosted version of highlight.js for syntax highlighting	*###
-	<script src="$protocol//yandex.st/highlightjs/7.3/highlight.min.js"></script>
+		// use the local highlightJs path if set
+		*##if ( $config.is( "highlightJsLocal" ) )#*
+			*##set ( $highlightJsScriptPath = "$resourcePath/js" )#*
+		*##else#*
+			*##set ( $highlightJsScriptPath = "$protocol//yandex.st/highlightjs/7.3" )#*
+		*##end#*
+		// use highlight.js for syntax highlighting	*###
+	<script src="$highlightJsScriptPath/highlight.min.js"></script>
 #*	*##end##
 
 	<script src="$resourcePath/js/reflow-skin.js"></script>
