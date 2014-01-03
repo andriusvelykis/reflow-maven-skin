@@ -1662,15 +1662,13 @@
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
 
-#*	
-	*##set ( $jQueryVersion = "1.8.3" )##
 	<!-- Fallback jQuery loading from Google CDN:
 	     http://stackoverflow.com/questions/1014203/best-way-to-use-googles-hosted-jquery-but-fall-back-to-my-hosted-library-on-go -->
-	<script type="text/javascript" src="$protocol//ajax.googleapis.com/ajax/libs/jquery/${jQueryVersion}/jquery.min.js"></script>
+	<script type="text/javascript" src="$protocol//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	<script type="text/javascript">
 		if (typeof jQuery == 'undefined')
 		{
-			document.write(unescape("%3Cscript src='$resourcePath/js/jquery-${jQueryVersion}.min.js' type='text/javascript'%3E%3C/script%3E"));
+			document.write(unescape("%3Cscript src='$resourcePath/js/jquery.min.js' type='text/javascript'%3E%3C/script%3E"));
 		}
 	</script>
 	
