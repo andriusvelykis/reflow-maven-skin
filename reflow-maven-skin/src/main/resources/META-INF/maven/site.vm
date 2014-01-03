@@ -1,5 +1,5 @@
 #* 
- * Copyright 2012 Andrius Velykis
+ * Copyright 2012-2013 Andrius Velykis
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1375,8 +1375,14 @@
 		*##else#*
 			*##set ( $highlightJsTheme = 'default' )#*
 		*##end#*
+                // get highlight version, or use 7.5 as default if not explicitly specified
+		*##if ( $config.highlightJsVersion )#*
+			*##set ( $highlightJsVersion = $config.highlightJsVersion.getValue() )#*
+		*##else#*
+			*##set ( $highlightJsVersion = '7.5' )#*
+		*##end#*
 		// use a hosted version of highlight.js for syntax highlighting	*###
-		<link href="$protocol//yandex.st/highlightjs/7.3/styles/${highlightJsTheme}.min.css" rel="stylesheet" />
+		<link href="$protocol//yandex.st/highlightjs/${highlightJsVersion}/styles/${highlightJsTheme}.min.css" rel="stylesheet" />
 #*	*##end##
 		
 #*	*##if ( !$config.not( "imgLightbox" ) )#*
@@ -1690,7 +1696,7 @@
 
 	*##if ( $config.is( "highlightJs" ) )#*
 		// use a hosted version of highlight.js for syntax highlighting	*###
-	<script src="$protocol//yandex.st/highlightjs/7.3/highlight.min.js"></script>
+	<script src="$protocol//yandex.st/highlightjs/${highlightJsVersion}/highlight.min.js"></script>
 #*	*##end##
 
 	<script src="$resourcePath/js/reflow-skin.js"></script>
