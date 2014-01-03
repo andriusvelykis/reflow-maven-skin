@@ -149,7 +149,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-project-info-reports-plugin</artifactId>
-        <version>2.6</version>
+        <version>2.7</version>
         <configuration>
           <anonymousConnection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</anonymousConnection>
           <developerConnection>scm:git:git@github.com:andriusvelykis/reflow-maven-skin.git</developerConnection>
