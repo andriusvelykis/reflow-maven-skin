@@ -44,7 +44,7 @@
         <!-- Generate Javadoc for Reflow Tools only (the others do not have Java sources) -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9</version>
+        <version>2.9.1</version>
         <configuration>
           <stylesheetfile>${project.basedir}/src/javadoc/stylesheet.css</stylesheetfile>
           <javadocDirectory>${project.basedir}/src/javadoc</javadocDirectory>
