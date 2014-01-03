@@ -34,7 +34,7 @@ Add [`reflow-velocity-tools`][reflow-tools] dependency to `maven-site-plugin` in
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-site-plugin</artifactId>
-      <version>3.2</version>
+      <version>3.3</version>
       <dependencies>
         ...
         <dependency>
