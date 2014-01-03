@@ -152,4 +152,4 @@ be glad to [accept a small donation][donate].
 [apache-license]: http://www.apache.org/licenses/LICENSE-2.0
 [contribute]: contribute.html
 [reflow-github]: http://github.com/andriusvelykis/reflow-maven-skin/
-[donate]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QWKNRFZH52828
+[donate]: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=QWKNRFZH52828

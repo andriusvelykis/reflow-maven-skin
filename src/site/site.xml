@@ -146,7 +146,7 @@
       <item name="Contribute" href="contribute.html" />
       <item name="Issues" href="http://github.com/andriusvelykis/reflow-maven-skin/issues/" />
       <item name="Fork on GitHub" href="http://github.com/andriusvelykis/reflow-maven-skin/" />
-      <item name="Donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=QWKNRFZH52828" />
+      <item name="Donate" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;amp;hosted_button_id=QWKNRFZH52828" />
     </menu>
     <menu name="Maven documentation" ref="reports" inherit="bottom"/>
   </body>
