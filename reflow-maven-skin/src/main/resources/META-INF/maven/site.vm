@@ -43,9 +43,9 @@
 #macro ( checkExtLink $href )#*
 
 	*##set ( $checkExtLink = false )#*
-	*##if ( $href.toLowerCase().startsWith("http:/") || $href.toLowerCase().startsWith("https:/")
+	*##if ( $href && ($href.toLowerCase().startsWith("http:/") || $href.toLowerCase().startsWith("https:/")
 		|| $href.toLowerCase().startsWith("ftp:/") || $href.toLowerCase().startsWith("mailto:")
-		|| $href.toLowerCase().startsWith("file:/") || ($href.toLowerCase().indexOf("://") != -1) )#*
+		|| $href.toLowerCase().startsWith("file:/") || ($href.toLowerCase().indexOf("://") != -1) ))#*
 		
 		*##set ( $checkExtLink = true )#*
 	*##end##
@@ -59,20 +59,27 @@
  *###
 #macro ( relativeLink $href )#*
 
-	*##set ( $relativeLink = $PathTool.calculateLink( $href, $relativePath ) )#*
-	*##set ( $relativeLink = $relativeLink.replaceAll( '\\', '/' ) )#*
-	*##if ( ( $relativeLink == '' ) )#*
-		*##set ( $relativeLink = './' )#*
-	*##end#*
+	*##if ( $href )#*
 
-	// Also normalise from the view of $projectSiteLoc
-	*##set ( $absoluteLink = $uriTool.toURI( "$currentFileLoc" ).resolve( "$relativeLink" ).normalize().toString() )#*
-	*##if ( $currentFileLoc == $absoluteLink )#*
-		// for matching link, use empty relative link
-		*##set ( $relativeLink = '' )#*
+		*##set ( $relativeLink = $PathTool.calculateLink( $href, $relativePath ) )#*
+		*##set ( $relativeLink = $relativeLink.replaceAll( '\\', '/' ) )#*
+		*##if ( ( $relativeLink == '' ) )#*
+			*##set ( $relativeLink = './' )#*
+		*##end#*
+
+		// Also normalise from the view of $projectSiteLoc
+		*##set ( $absoluteLink = $uriTool.toURI( "$currentFileLoc" ).resolve( "$relativeLink" ).normalize().toString() )#*
+		*##if ( $currentFileLoc == $absoluteLink )#*
+			// for matching link, use empty relative link
+			*##set ( $relativeLink = '' )#*
+		*##else#*
+			*##set ( $currentFileDir = $PathTool.getDirectoryComponent( $currentFileLoc ) )#*
+			*##set ( $relativeLink = $uriTool.relativizeLink( $currentFileDir, $absoluteLink ) )#*
+		*##end#*
+
 	*##else#*
-		*##set ( $currentFileDir = $PathTool.getDirectoryComponent( $currentFileLoc ) )#*
-		*##set ( $relativeLink = $uriTool.relativizeLink( $currentFileDir, $absoluteLink ) )#*
+		// null $href
+		*##set ( $relativeLink = false )#*
 	*##end##
 #end#* /relativeLink
 
@@ -123,15 +130,36 @@
 #macro ( activeLink $href )#*
 
 	*##relativeLink ( $href )#*
-	// either empty link (pointing to a page), or if the current file is index.html,
-	// the link may point to the whole directory
-	*##if ( '' == $relativeLink || ( $alignedFileName.endsWith("index.html") && './' == $relativeLink ) )#*
-		*##set ( $activeLink = true )#*
+
+	*##if ( $href )#*
+		// either empty link (pointing to a page), or if the current file is index.html,
+		// the link may point to the whole directory
+		*##if ( '' == $relativeLink || ( $alignedFileName.endsWith("index.html") && './' == $relativeLink ) )#*
+			*##set ( $activeLink = true )#*
+			*##set ( $activeClass = 'active' )#*
+		*##else#*
+			*##set ( $activeLink = false )#*
+			*##set ( $activeClass = '' )#*
+		*##end#*
 	*##else#*
+		// null href - disable the link
 		*##set ( $activeLink = false )#*
+		*##set ( $activeClass = 'disabled' )#*
 	*##end##
 #end#* /activeLink
 
+
+
+--------------------------------------------------*###
+#**
+ * Creates a class="name" attribute if the given name exists
+ *###
+#macro ( classAttr $name )#*
+
+	*##if ( $name && '' != $name )#*
+		*#class="$name"#*
+	*##end##
+#end#* /class
 
 
 --------------------------------------------------*###
@@ -153,15 +181,15 @@
 
 				*##activeLink ( $item.href )#*
 				*##if ($item.items.isEmpty())##
-									<li#if ( $activeLink ) class="active"#end>#link ( $relativeLink $item.name $item.target )</li>
+									<li #classAttr( $activeClass )>#link ( $relativeLink $item.name $item.target )</li>
 #*				*##else##
-									<li class="dropdown-submenu#if ( $activeLink ) active#end">
+									<li class="dropdown-submenu $activeClass">
 										#link ( $relativeLink $item.name $item.target )
 
 										<ul class="dropdown-menu">
 #*					*##foreach ($subitem in $item.items)#*
 						*##activeLink ( $subitem.href )##
-											<li#if ( $activeLink ) class="active"#end>#link ( $relativeLink $subitem.name $subitem.target )</li>
+											<li #classAttr( $activeClass )>#link ( $relativeLink $subitem.name $subitem.target )</li>
 #*					*##end## /foreach $subitem
 										</ul>
 									</li>
@@ -183,7 +211,7 @@
 
 	*##foreach ( $item in $links )#*
 		*##activeLink ( $item.href )##
-							<li#if ( $activeLink ) class="active"#end>#link ( $relativeLink $item.name $item.target )</li>
+							<li #classAttr( $activeClass )>#link ( $relativeLink $item.name $item.target )</li>
 #*	*##end##
 #end#* /links
 
@@ -206,7 +234,9 @@
 #macro ( fullLink $href $name $target $img $position $alt $border $width $height $icon)#*
 
 // The opening <a> tag	*###
-<a href="$href"#*
+<a#*
+	// if $href=false, do not create link
+	*##if ( $href ) href="$href"#end#*
 	*##if ( $name ) title="$name"#end#*
 	*##if ( $target ) target="$target"#end#*
 	*##checkExtLink ( $href )#*
@@ -856,7 +886,7 @@
 
 	*##end## /item with children
 ##
-						<li#if ( $active ) class="active"#end>
+						<li #classAttr( $activeClass )>
 ##
 							#fullLink ( $currentLink $item.name $item.target $item.img $item.position $item.alt $item.border $item.width $item.height $collapseClass)
 
