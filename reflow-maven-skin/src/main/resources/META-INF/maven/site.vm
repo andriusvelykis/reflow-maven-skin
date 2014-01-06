@@ -1349,8 +1349,8 @@
 		*##set ( $bootstrapCssResponsivePath = $bootstrapCssPath )#*
 		*##set ( $bootstrapJsPath = "$resourcePath/js" )#*
 	*##else#*	
-	    *##set ( $bootstrapVersion = "2.2.2" )#*
-	    *##set ( $bootswatchVersion = "2.2.2" )#*
+		*##set ( $bootstrapVersion = "2.2.2" )#*
+		*##set ( $bootswatchVersion = "2.2.2" )#*
 
 		// use Bootstrap theme from BootstrapCDN (loaded over network)
 		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
