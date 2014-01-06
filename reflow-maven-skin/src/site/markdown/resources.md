@@ -9,6 +9,54 @@ To support such deployments of Reflow skin, the configuration allows using local
 Furthermore, custom resources can also be easily added to the generated website.
 These include newer versions of the used libraries as well as arbitrary scripts.
 
+## Local Bootstrap & jQuery
+
+**Requires Reflow Maven skin &ge; v1.1.0.**
+
+To force the generated site use only local CSS/JavaScript resources, use the `<localResources>`
+flag:
+
+```xml
+<localResources>true|false</localResources>
+```
+
+-   **true** - Locally provided Bootstrap and jQuery files will be used in the generated site,
+    not the CDN versions. This forces [`site` Bootstrap theme][bootstrap-theme], which
+    uses local Bootstrap files. Furthermore, other non-local resources such as _highlight.js_
+    are disabled and their [local versions need to be added manually][local-css].
+    See below for the list of files that need to be available locally.
+
+-   **false (default)** - CDN delivered resources are used, where available.
+
+Note that when using `<localResources>`, you need to provide the necessary local versions of
+Bootstrap and jQuery files. Reflow skin does not package the default files at the moment, mainly
+because overriding packaged files is not possible at the moment (see [issue MSITE-702][msite-702]).
+Therefore it is easier to get appropriate Bootstrap files directly from the
+[customiser][bootstrap-cust] or [Bootswatch][bootswatch2] and use them with the Reflow skin.
+Furthermore, such approach allows you to customise the Bootstrap and jQuery versions used.
+Use at your own risk, however, as major version changes are likely to break the website!
+
+When using `<localResources>`, the following files need to be available in the corresponding
+directories within your project's `src/site/resources` folder:
+
+-   **`css/bootstrap.min.css`** - Reflow skin currently uses Bootstrap 2.3.2
+-   **`css/bootstrap-responsive.min.css`** - Bootstrap 2.3.2
+-   **`js/bootstrap.min.js`** - Bootstrap 2.3.2
+-   **`js/jquery.min.js`** - jQuery 1.9.1
+-   **`js/html5.js`** - HTML5 support for IE6-8, get it from [here][html5shiv].
+
+For multi-module site, remember to enable [resource reuse flag][resource-reuse], otherwise
+these files will have to be repeated for each sub-module.
+
+
+[bootstrap-theme]: themes/
+[local-css]: #Additional_CSS_files
+[msite-702]: https://jira.codehaus.org/browse/MSITE-702
+[bootstrap-cust]: http://getbootstrap.com/2.3.2/customize.html
+[bootswatch2]: http://bootswatch.com/2/
+[html5shiv]: http://html5shim.googlecode.com/svn/trunk/html5.js
+
+
 ## Additional CSS files
 
 Additional CSS files (or other resources) can be added to the page head using [`<body><head>`
