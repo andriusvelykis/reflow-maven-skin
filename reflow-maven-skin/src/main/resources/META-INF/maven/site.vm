@@ -1334,16 +1334,23 @@
 	*##else#*
 		*##set ( $resourcePath = $relativePath )#*
 	*##end#*
+
+	// Config option <localResources>true</localResources> to force CDN-less Bootstrap & jQuery
+	*##if ( $config.is( "localResources" ) )#*
+		*##set ( $localResources = true )#*
+	*##else#*
+		*##set ( $localResources = false )#*
+	*##end#*
 	
 	// for 'site' theme, use local CSS/Javascript. This allows users to use their own Bootstrap configs.
 	// Otherwise, load the default or Bootswatch themes from BootstrapCDN	
-	*##if ( $config.theme && "site" == $config.theme.getValue() )#*
+	*##if ( $localResources || ( $config.theme && "site" == $config.theme.getValue() ) )#*
 		*##set ( $bootstrapCssPath = "$resourcePath/css" )#*
 		*##set ( $bootstrapCssResponsivePath = $bootstrapCssPath )#*
 		*##set ( $bootstrapJsPath = "$resourcePath/js" )#*
 	*##else#*	
-	    *##set ( $bootstrapVersion = "2.2.2" )#*
-	    *##set ( $bootswatchVersion = "2.2.2" )#*
+		*##set ( $bootstrapVersion = "2.2.2" )#*
+		*##set ( $bootswatchVersion = "2.2.2" )#*
 
 		// use Bootstrap theme from BootstrapCDN (loaded over network)
 		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
@@ -1367,8 +1374,17 @@
 		<link href="$resourcePath/css/docs.css" rel="stylesheet" />
 #*		*##end##
 		<link href="$resourcePath/css/reflow-skin.css" rel="stylesheet" />
-		
-#*	*##if ( $config.is( "highlightJs" ) )#*
+
+#*
+	// disable CDN-loaded highlightJs altogether if `localResources` is selected.
+	// it will need to be added manually
+	*##if ( !$localResources && $config.is( "highlightJs" ) )#*
+		*##set ( $highlightJs = true )#*
+	*##else#*
+		*##set ( $highlightJs = false )#*
+	*##end#*
+
+#*	*##if ( $highlightJs )#*
 		// get the configured theme, or use default if not explicitly specified
 		*##if ( $config.highlightJsTheme )#*
 			*##set ( $highlightJsTheme = $config.highlightJsTheme.getValue() )#*
@@ -1389,7 +1405,11 @@
 		
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
+#*	*##if ( $localResources )##
+			<script src="$resourcePath/js/html5.js"></script>
+#*	*##else##
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+#*	*##end##
 		<![endif]-->
 #*
 		<!-- Le fav and touch icons -->
@@ -1647,7 +1667,7 @@
 #*	*##if ( !$config.not("skinAttribution") )##
 				<p><a href="http://github.com/andriusvelykis/reflow-maven-skin" title="Reflow Maven skin">Reflow Maven skin</a> by <a href="http://andrius.velykis.lt" target="_blank" title="Andrius Velykis">Andrius Velykis</a>.</p>
 #*	*##end#*
-#*
+
 
 	*##if ( $decoration.body.footer )##
 		#htmlContent ( $decoration.body.footer.getChildren() )
@@ -1661,18 +1681,12 @@
 	<!-- Le javascript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-
 #*	
-	*##set ( $jQueryVersion = "1.8.3" )##
-	<!-- Fallback jQuery loading from Google CDN:
-	     http://stackoverflow.com/questions/1014203/best-way-to-use-googles-hosted-jquery-but-fall-back-to-my-hosted-library-on-go -->
-	<script type="text/javascript" src="$protocol//ajax.googleapis.com/ajax/libs/jquery/${jQueryVersion}/jquery.min.js"></script>
-	<script type="text/javascript">
-		if (typeof jQuery == 'undefined')
-		{
-			document.write(unescape("%3Cscript src='$resourcePath/js/jquery-${jQueryVersion}.min.js' type='text/javascript'%3E%3C/script%3E"));
-		}
-	</script>
+	*##if ( $localResources )##
+	<script src="$resourcePath/js/jquery.min.js"></script>
+#*	*##else##
+	<script src="$protocol//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+#*	*##end##
 	
 	<script src="$bootstrapJsPath/bootstrap.min.js"></script>
 #*
@@ -1688,9 +1702,14 @@
 	<script src="$resourcePath/js/jquery.ba-bbq.min.js"></script>
 #*	*##end#*
 
-	*##if ( $config.is( "highlightJs" ) )#*
+	*##if ( $highlightJs )#*
 		// use a hosted version of highlight.js for syntax highlighting	*###
 	<script src="$protocol//yandex.st/highlightjs/7.3/highlight.min.js"></script>
+#*	*##end#*
+
+	*##if ( $config.endContent )#*
+		// custom HTML (e.g. JavaScript) to place at the end of the document before </body>	*###
+	#htmlContent ( $config.endContent.getChildren() )
 #*	*##end##
 
 	<script src="$resourcePath/js/reflow-skin.js"></script>
