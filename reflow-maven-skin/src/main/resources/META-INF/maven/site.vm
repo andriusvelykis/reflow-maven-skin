@@ -1667,7 +1667,7 @@
 #*	*##if ( !$config.not("skinAttribution") )##
 				<p><a href="http://github.com/andriusvelykis/reflow-maven-skin" title="Reflow Maven skin">Reflow Maven skin</a> by <a href="http://andrius.velykis.lt" target="_blank" title="Andrius Velykis">Andrius Velykis</a>.</p>
 #*	*##end#*
-#*
+
 
 	*##if ( $decoration.body.footer )##
 		#htmlContent ( $decoration.body.footer.getChildren() )
