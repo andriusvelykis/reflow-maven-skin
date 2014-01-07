@@ -1723,7 +1723,7 @@
 	*##if ( $localResources )##
 	<script src="$resourcePath/js/jquery.min.js"></script>
 #*	*##else##
-	<script src="$protocol//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="$protocol//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 #*	*##end##
 	
 	<script src="$bootstrapJsPath/bootstrap.min.js"></script>
