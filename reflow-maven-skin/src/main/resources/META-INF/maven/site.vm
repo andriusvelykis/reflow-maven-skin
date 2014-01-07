@@ -1385,6 +1385,11 @@
 		// use Bootstrap theme from BootstrapCDN (loaded over network)
 		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
 			*##set ( $bootswatchTheme = $config.theme.getValue().substring(11) )#*
+		*##else#*
+			*##set ( $bootswatchTheme = false )#*
+		*##end#*
+
+		*##if ( $bootswatchTheme )#*
 			*##set ( $bootstrapCssPath = "$protocol//netdna.bootstrapcdn.com/bootswatch/${bootswatchVersion}/$bootswatchTheme" )#*
 		*##else#*
 			*##set ( $bootstrapCssPath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/${bootstrapVersion}/css" )#*
@@ -1397,7 +1402,7 @@
 
 		<link href="$bootstrapCssPath/bootstrap.min.css" rel="stylesheet" />
 		<link href="$bootstrapCssResponsivePath/bootstrap-responsive.min.css" rel="stylesheet" />
-#*		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
+		*##if ( $bootswatchTheme )#*
 		    // for Bootswatch themes, add bootswatch.css *###
 		<link href="$resourcePath/css/bootswatch.css" rel="stylesheet" />
 #*		*##else##
