@@ -1377,27 +1377,41 @@
 	*##if ( $localResources || ( $config.theme && "site" == $config.theme.getValue() ) )#*
 		*##set ( $bootstrapCssPath = "$resourcePath/css" )#*
 		*##set ( $bootstrapCssResponsivePath = $bootstrapCssPath )#*
+		*##set ( $bootstrapCssCombined = false )#*
 		*##set ( $bootstrapJsPath = "$resourcePath/js" )#*
 	*##else#*	
-		*##set ( $bootstrapVersion = "2.2.2" )#*
-		*##set ( $bootswatchVersion = "2.2.2" )#*
+		*##set ( $bootstrapVersion = "2.3.2" )#*
+		*##set ( $bootswatchVersion = "2.3.2" )#*
 
 		// use Bootstrap theme from BootstrapCDN (loaded over network)
 		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
 			*##set ( $bootswatchTheme = $config.theme.getValue().substring(11) )#*
+		*##else#*
+			*##set ( $bootswatchTheme = false )#*
+		*##end#*
+
+		*##if ( $bootswatchTheme )#*
 			*##set ( $bootstrapCssPath = "$protocol//netdna.bootstrapcdn.com/bootswatch/${bootswatchVersion}/$bootswatchTheme" )#*
+			// use Bootstrap 2.3.1 for responsive CDN, because 2.3.2 is not available (CSS did not change 2.3.1 -> 2.3.2)
+			*##set ( $bootstrapCssResponsivePath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css" )#*
+			*##set ( $bootstrapCssCombined = false )#*
 		*##else#*
 			*##set ( $bootstrapCssPath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/${bootstrapVersion}/css" )#*
+			// since Bootstrap 2.3.2, the CDN hosts a combined version of default Bootstrap
+			*##set ( $bootstrapCssCombined = true )#*
 		*##end#*
 		
-		*##set ( $bootstrapCssResponsivePath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/${bootstrapVersion}/css" )#*
+		
 		*##set ( $bootstrapJsPath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/${bootstrapVersion}/js" )#*
 		
 	*##end##
 
 		<link href="$bootstrapCssPath/bootstrap.min.css" rel="stylesheet" />
+#*		*##if ( !$bootstrapCssCombined )#*
+		    // if Bootstrap CSS is not combined, add bootstrap-responsive CSS *###
 		<link href="$bootstrapCssResponsivePath/bootstrap-responsive.min.css" rel="stylesheet" />
-#*		*##if ( $config.theme && $config.theme.getValue().startsWith("bootswatch-") )#*
+#*		*##end#*
+		*##if ( $bootswatchTheme )#*
 		    // for Bootswatch themes, add bootswatch.css *###
 		<link href="$resourcePath/css/bootswatch.css" rel="stylesheet" />
 #*		*##else##
