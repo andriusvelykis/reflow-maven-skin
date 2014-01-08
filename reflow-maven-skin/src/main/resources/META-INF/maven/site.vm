@@ -1534,8 +1534,15 @@
 	================================================== -->
 #*
 	
-	*##if ( ($decoration.bannerLeft.name && $decoration.bannerLeft.name != $project.name || $decoration.bannerLeft.src || $decoration.bannerLeft.href ) || $decoration.bannerRight )##
-	<header class="jumbotron subhead">
+	*##if ( ($decoration.bannerLeft.name && $decoration.bannerLeft.name != $project.name || $decoration.bannerLeft.src || $decoration.bannerLeft.href ) || $decoration.bannerRight )#*
+		*##set ( $hasBanner = true )#*
+	*##else#*
+		*##set ( $hasBanner = false )#*
+	*##end##
+
+	<header#if ( $hasBanner ) class="jumbotron subhead"#end>
+#*
+	*##if  ( $hasBanner )##
 		<div class="row" id="banner">
 			<div class="span12">
 				<div class="pull-left">
