@@ -1476,7 +1476,7 @@
 		<div class="navbar navbar-fixed-top#if ( $config.is( "navbarInverse" ) ) navbar-inverse#end">
 			<div class="navbar-inner">
 				<div class="container">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target="#top-nav-collapse">
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -1501,7 +1501,7 @@
 	*##end#*
 	
 *###
-					<div class="nav-collapse collapse">
+					<div class="nav-collapse collapse" id="top-nav-collapse">
 						<ul class="nav pull-right">
 #*
 	
