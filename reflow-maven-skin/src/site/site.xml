@@ -35,9 +35,11 @@
         </themes-index>
         <themes-bootswatch-cerulean>
           <theme>bootswatch-cerulean</theme>
+          <toc offsetTop="225">top</toc>
         </themes-bootswatch-cerulean>
         <themes-bootswatch-readable>
           <theme>bootswatch-readable</theme>
+          <toc offsetTop="250">top</toc>
         </themes-bootswatch-readable>
         <themes-bootswatch-spacelab>
           <theme>bootswatch-spacelab</theme>
