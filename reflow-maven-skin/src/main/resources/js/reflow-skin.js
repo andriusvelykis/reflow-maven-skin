@@ -6,17 +6,6 @@
 	$(function(){
 
 		var $window = $(window)
-
-		// Fix table of contents when scrolled a certain offset
-		// Note that ToC list is not fixed, because if it is long, the bottom items may go outside the window.
-		// Also there are issues if page has full-width sections (e.g. thumbnails) after the main body section.
-		// For now only fixing the top navbar ToC.
-		$('#toc-bar').affix({
-			offset: {
-				top: function () { return $window.width() <= 980 ? 290 : 210 }
-			,	bottom: 270
-			}
-		})
 	
 		// Start carousel
 		$(function() {

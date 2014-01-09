@@ -1605,7 +1605,7 @@
 
 	*##if ( $tocTop )##
 		<hr class="toc-separator" />
-		<div id="toc-bar" class="navbar">
+		<div id="toc-bar" class="navbar" data-spy="affix" data-offset-top="210">
 			<div class="navbar-inner">
 				<div id="toc-scroll-target" class="container">
 					<ul id="toc" class="nav">
