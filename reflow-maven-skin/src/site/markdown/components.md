@@ -40,6 +40,38 @@ The ToC snaps to the top of the screen to allow easy navigation in long pages.
 ---
 
 
+#### Change when the ToC snaps to the top
+
+**Requires Reflow Maven skin &ge; v1.1.0.**
+
+The moment when the ToC snaps to the top of the screen depends on the theme you are using
+as well as whether other components (e.g. the banner or the breadcrumbs) are shown.
+You can adjust the snapping point by indicating the amount of pixels from the top to activate it.
+Use the `offsetTop` attribute on the `<toc>` element to indicate that:
+
+```xml
+<toc offsetTop="200">top</toc>
+```
+
+-   **number** - snap when this amount of pixels is scrolled (e.g. 225 for the [Cerulean theme
+    with banner, slogan and breadcrumbs][cerulean-theme]).
+-   **no `offsetTop` attribute (default)** - The default offset of **250** is used.
+
+Furthermore, for different themes you may need to adjust the position where the ToC is fixed
+to avoid overlap or gaps from the top navigation bar. To do this, add the CSS for
+`.navbar.affix` to your `site.css` file, e.g. 50px for the [Cerulean theme][cerulean-theme]:
+
+```css
+@media (min-width: 980px) {
+  .navbar.affix {
+    top: 50px;
+  }
+}
+```
+
+[cerulean-theme]: themes/bootswatch-cerulean.html
+
+
 #### Limit the number of top ToC items
 
 Top ToC can be limited to a certain number of items in configuration. All menu entries exceeding
