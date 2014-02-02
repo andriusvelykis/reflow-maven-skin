@@ -255,10 +255,10 @@
 		*##image ($img $alt $border $width $height)$name#*
 	*##elseif ( $img )#*
 		// Image on the right side of the name
-		*#$name #image ($img $alt $border $width $height)#*
+		*#${name}#if ($img) #image ($img $alt $border $width $height)#end#*
 	*##else#*
 		// No image - optional icon though on the right of the name
-		*#$name #if ($icon)<i class="$icon"></i>#end#*
+		*#${name}#if ($icon) <i class="$icon"></i>#end#*
 	*##end#*
 
 // Close </a>	*###
