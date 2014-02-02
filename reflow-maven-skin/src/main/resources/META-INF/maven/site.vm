@@ -62,7 +62,7 @@
 	*##if ( $href )#*
 
 		*##set ( $relativeLink = $PathTool.calculateLink( $href, $relativePath ) )#*
-		*##set ( $relativeLink = $relativeLink.replaceAll( '\\', '/' ) )#*
+		*##set ( $relativeLink = $relativeLink.replaceAll( "\\", "/" ) )#*
 		*##if ( ( $relativeLink == '' ) )#*
 			*##set ( $relativeLink = './' )#*
 		*##end#*
