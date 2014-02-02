@@ -67,12 +67,19 @@
 			*##set ( $relativeLink = './' )#*
 		*##end#*
 
-		// Also normalise from the view of $projectSiteLoc
+		// Attempt to normalise the relative link - this is useful for active link
+		// calculations and better relative links for subdirectories.
+		//
+		// The issue is particularly visible with pages in subdirectories,
+		// so that if you are in <root>/dev/index.html, the relative menu link to
+		// the _same_ page would likely be ../dev/index.html instead of '' or 'index.html'.
 		*##set ( $absoluteLink = $uriTool.toURI( "$currentFileLoc" ).resolve( "$relativeLink" ).normalize().toString() )#*
 		*##if ( $currentFileLoc == $absoluteLink )#*
 			// for matching link, use empty relative link
 			*##set ( $relativeLink = '' )#*
 		*##else#*
+			// relativize the absolute link based on current directory
+			// (uses Maven project link relativization)
 			*##set ( $currentFileDir = $PathTool.getDirectoryComponent( $currentFileLoc ) )#*
 			*##set ( $relativeLink = $uriTool.relativizeLink( $currentFileDir, $absoluteLink ) )#*
 		*##end#*
@@ -1213,17 +1220,17 @@
 	*##end#*
 
 	// Try resolving site URL from the POM.
-	// This can help with resolution of relative links
-	*##if ( $project.url )#*
+	// This can help with resolution of relative links, needed for 'active' link calculations,
+	// e.g. to normalise the relative links in menus.
+	*##if ( $project.url && $project.url != '' )#*
 		*##set ( $projectSiteLoc = $project.url )#*
-		*##if ( $projectSiteLoc == '' )#*
-			// for undefined site loc, assume root
-			*##set ( $projectSiteLoc = '/' )#*
-		*##end#*
 		*##if ( !$projectSiteLoc.endsWith("/") )#*
 			// ensure that the directory is uniform
 			*##set ( $projectSiteLoc = "$projectSiteLoc/" )#*
 		*##end#*
+	*##else#*
+	  // dummy project URL is used to provide a good base to resolve relative links with ../
+	  *##set ( $projectSiteLoc = "http://dummy.parent.url/" )#*
 	*##end#*
 
 	// absolute location of the current file
