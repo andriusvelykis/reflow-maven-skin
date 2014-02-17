@@ -189,7 +189,6 @@
             <id>release-notes</id>
             <inherited>false</inherited>
             <reports>
-              <report>changes-report</report>
               <report>github-report</report>
             </reports>
           </reportSet>
