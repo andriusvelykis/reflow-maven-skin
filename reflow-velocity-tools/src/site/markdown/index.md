@@ -44,7 +44,7 @@ file:
         <dependency>
           <groupId>lt.velykis.maven.skins</groupId>
           <artifactId>reflow-velocity-tools</artifactId>
-          <version>1.0.0</version>
+          <version>1.1.0</version>
         </dependency>
         ...
       </dependencies>
