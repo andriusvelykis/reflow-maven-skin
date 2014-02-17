@@ -8,7 +8,7 @@
 
 	<head>
 		<meta charset="UTF-8" />
-		<title>Project Summary | Reflow Maven Skin</title>
+		<title>Local/custom resources | Reflow Maven Skin</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="" />
 		<meta http-equiv="content-language" content="en" />
@@ -48,7 +48,7 @@
 		</script>
 		</head>
 
-	<body class="page-project-summary project-reflow-maven-skin" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
+	<body class="page-resources project-reflow-maven-skin" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
 
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
@@ -63,7 +63,7 @@
 						<ul class="nav pull-right">
 							<li ><a href="index.html#Usage" title="Download">Download</a></li>
 							<li ><a href="http://github.com/andriusvelykis/reflow-maven-skin/" title="GitHub project" class="externalLink">GitHub project</a></li>
-							<li class="dropdown">
+							<li class="dropdown active">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Documentation <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li ><a href="./" title="Usage">Usage</a></li>
@@ -73,7 +73,7 @@
 									<li ><a href="components.html" title="Components">Components</a></li>
 									<li ><a href="misc.html" title="Other">Other</a></li>
 									<li ><a href="multi-module.html" title="Multi-module site">Multi-module site</a></li>
-									<li ><a href="resources.html" title="Local resources">Local resources</a></li>
+									<li class="active"><a href="" title="Local resources">Local resources</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -122,7 +122,7 @@
 				<li class="divider">/</li>
 				<li><a href="./" title="Maven skin">Maven skin</a></li>
 				<li class="divider">/</li>
-				<li>Project Summary</li>
+				<li>Local/custom resources</li>
 			</ul>
 		</div>
 		<hr class="toc-separator" />
@@ -136,10 +136,10 @@
 					</a>
 					<div class="nav-collapse collapse" id="toc-nav-collapse">
 						<ul id="toc" class="nav">
-						<li class="toplevel"><a href="#Project_Summary" title="Project Summary">Project Summary</a></li>
-						<li class="toplevel"><a href="#Project_Information" title="Project Information">Project Information</a></li>
-						<li class="toplevel"><a href="#Project_Organization" title="Project Organization">Project Organization</a></li>
-						<li class="toplevel"><a href="#Build_Information" title="Build Information">Build Information</a></li>
+						<li class="toplevel"><a href="#localcustom_resources" title="Local/custom resources">Local/custom resources</a></li>
+						<li class="toplevel"><a href="#Local_Bootstrap__jQuery" title="Local Bootstrap & jQuery">Local Bootstrap & jQuery</a></li>
+						<li class="toplevel"><a href="#Additional_CSS_files" title="Additional CSS files">Additional CSS files</a></li>
+						<li class="toplevel"><a href="#Additional_JavaScript_files" title="Additional JavaScript files">Additional JavaScript files</a></li>
 						</ul>
 					</div>
 				</div>
@@ -151,93 +151,79 @@
 	<div class="row">
 		<div class="span12">
 			<div class="body-content">
+<div class="page-header">
+ <h1 id="localcustom_resources">Local/custom resources</h1>
+</div> 
+<p>Reflow Maven skin utilises content delivery networks (CDN) for a number of CSS and JavaScript resources. These include Bootstrap files, themes, the jQuery library, etc. The reuse of popular resources via CDN provides better performance. However, such resources may not be accessible when the site is used in an offline/intranet setting.</p> 
+<p>To support such deployments of Reflow skin, the configuration allows using local resources. Furthermore, custom resources can also be easily added to the generated website. These include newer versions of the used libraries as well as arbitrary scripts.</p> 
 <div class="section"> 
- <div class="page-header">
-  <h2 id="Project_Summary">Project Summary</h2>
+ <h2 id="Local_Bootstrap__jQuery">Local Bootstrap &amp; jQuery</h2> 
+ <p><b>Requires Reflow Maven skin ≥ v1.1.0.</b></p> 
+ <p>To force the generated site use only local CSS/JavaScript resources, use the <tt>&lt;localResources&gt;</tt> flag:</p> 
+ <div class="source"> 
+  <pre>&lt;localResources&gt;true|false&lt;/localResources&gt;
+</pre> 
  </div> 
- <a name="Project_Summary"></a> 
- <div class="section"> 
-  <h3 id="Project_Information">Project Information</h3> 
-  <a name="Project_Information"></a> 
-  <table border="0" class="bodyTable table table-striped table-hover"> 
-   <thead> 
-    <tr class="a"> 
-     <th>Field</th> 
-     <th>Value</th> 
-    </tr> 
-   </thead> 
-   <tbody> 
-    <tr class="b"> 
-     <td>Name</td> 
-     <td>Reflow Maven Skin</td> 
-    </tr> 
-    <tr class="a"> 
-     <td>Description</td> 
-     <td>Reflow is an Apache Maven site skin built on Twitter Bootstrap. It allows various structural and stylistic customizations to create a modern-looking Maven-generated website. Requires Reflow Velocity Tools.</td> 
-    </tr> 
-    <tr class="b"> 
-     <td>Homepage</td> 
-     <td><a class="externalLink" href="http://andriusvelykis.github.com/reflow-maven-skin/skin">http://andriusvelykis.github.com/reflow-maven-skin/skin</a></td> 
-    </tr> 
-   </tbody> 
-  </table> 
+ <ul> 
+  <li> <p><b>true</b> - Locally provided Bootstrap and jQuery files will be used in the generated site, not the CDN versions. This forces <a href="themes/"><tt>site</tt> Bootstrap theme</a>, which uses local Bootstrap files. Furthermore, other non-local resources such as <i>highlight.js</i> are disabled and their <a href="#Additional_CSS_files">local versions need to be added manually</a>. See below for the list of files that need to be available locally.</p></li> 
+  <li> <p><b>false (default)</b> - CDN delivered resources are used, where available.</p></li> 
+ </ul> 
+ <p>Note that when using <tt>&lt;localResources&gt;</tt>, you need to provide the necessary local versions of Bootstrap and jQuery files. Reflow skin does not package the default files at the moment, mainly because overriding packaged files is not possible at the moment (see <a class="externalLink" href="https://jira.codehaus.org/browse/MSITE-702">issue MSITE-702</a>). Therefore it is easier to get appropriate Bootstrap files directly from the <a class="externalLink" href="http://getbootstrap.com/2.3.2/customize.html">customiser</a> or <a class="externalLink" href="http://bootswatch.com/2/">Bootswatch</a> and use them with the Reflow skin. Furthermore, such approach allows you to customise the Bootstrap and jQuery versions used. Use at your own risk, however, as major version changes are likely to break the website!</p> 
+ <p>When using <tt>&lt;localResources&gt;</tt>, the following files need to be available in the corresponding directories within your project’s <tt>src/site/resources</tt> folder:</p> 
+ <ul> 
+  <li><b><tt>css/bootstrap.min.css</tt></b> - Reflow skin currently uses Bootstrap 2.3.2</li> 
+  <li><b><tt>css/bootstrap-responsive.min.css</tt></b> - Bootstrap 2.3.2</li> 
+  <li><b><tt>js/bootstrap.min.js</tt></b> - Bootstrap 2.3.2</li> 
+  <li><b><tt>js/jquery.min.js</tt></b> - jQuery 1.9.1</li> 
+  <li><b><tt>js/html5.js</tt></b> - HTML5 support for IE6-8, get it from <a class="externalLink" href="http://html5shim.googlecode.com/svn/trunk/html5.js">here</a>.</li> 
+ </ul> 
+ <p>For multi-module site, remember to enable <a href="multi-module.html#Reuse_resources">resource reuse flag</a>, otherwise these files will have to be repeated for each sub-module.</p> 
+</div> 
+<div class="section"> 
+ <h2 id="Additional_CSS_files">Additional CSS files</h2> 
+ <p>Additional CSS files (or other resources) can be added to the page head using <a class="externalLink" href="http://maven.apache.org/plugins/maven-site-plugin/examples/sitedescriptor.html#Inject_xhtml_into_head"><tt>&lt;body&gt;&lt;head&gt;</tt> configuration</a> in the <tt>site.xml</tt> site descriptor. This configuration is available to all Maven site skins and is part of the standard site descriptor configuration.</p> 
+ <p>The <tt>&lt;head&gt;</tt> element allows arbitrary XHTML, which will be injected in the generated page. Also, it can be used for custom (local or remote) versions of hard-coded Reflow skin resources. For example, to use a custom version of <a href="misc.html#Code_highlight">highlight.js syntax highlighting</a>, you can disable the default configuration (<tt>&lt;highlightJs&gt;false&lt;/highlightJs&gt;</tt>) and add the relevant CSS and JavaScript manually:</p> 
+ <div class="source"> 
+  <pre>&lt;project&gt;
+  ...
+  &lt;body&gt;
+    ...
+    &lt;head&gt;
+      &lt;link rel=&quot;stylesheet&quot; href=&quot;http://yandex.st/highlightjs/7.5/styles/default.min.css&quot;&gt;
+      &lt;script src=&quot;http://yandex.st/highlightjs/7.5/highlight.min.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    ...
+  &lt;/body&gt;
+  ...
+&lt;/project&gt;
+</pre> 
  </div> 
- <div class="section"> 
-  <h3 id="Project_Organization">Project Organization</h3> 
-  <a name="Project_Organization"></a> 
-  <table border="0" class="bodyTable table table-striped table-hover"> 
-   <thead> 
-    <tr class="a"> 
-     <th>Field</th> 
-     <th>Value</th> 
-    </tr> 
-   </thead> 
-   <tbody> 
-    <tr class="b"> 
-     <td>Name</td> 
-     <td>Andrius Velykis</td> 
-    </tr> 
-    <tr class="a"> 
-     <td>URL</td> 
-     <td><a class="externalLink" href="http://andrius.velykis.lt">http://andrius.velykis.lt</a></td> 
-    </tr> 
-   </tbody> 
-  </table> 
+ <p>Note: the <tt>&lt;head&gt;</tt> element is within <tt>&lt;body&gt;</tt>, not <tt>&lt;custom&gt;</tt> element of <tt>site.xml</tt> site descriptor.</p> 
+ <p>Furthermore, the injected XHTML allows using Velocity variables. Therefore you can <a href="multi-module.html#Reuse_resources">reuse a local version of the library</a> by indicating its path with a <tt>$resourcePath</tt> variable, e.g.: </p> 
+ <div class="source"> 
+  <pre>&lt;head&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;$resourcePath/css/default.min.css&quot;&gt;
+&lt;/head&gt;
+</pre> 
  </div> 
- <div class="section"> 
-  <h3 id="Build_Information">Build Information</h3> 
-  <a name="Build_Information"></a> 
-  <table border="0" class="bodyTable table table-striped table-hover"> 
-   <thead> 
-    <tr class="a"> 
-     <th>Field</th> 
-     <th>Value</th> 
-    </tr> 
-   </thead> 
-   <tbody> 
-    <tr class="b"> 
-     <td>GroupId</td> 
-     <td>lt.velykis.maven.skins</td> 
-    </tr> 
-    <tr class="a"> 
-     <td>ArtifactId</td> 
-     <td>reflow-maven-skin</td> 
-    </tr> 
-    <tr class="b"> 
-     <td>Version</td> 
-     <td>1.1.0-SNAPSHOT</td> 
-    </tr> 
-    <tr class="a"> 
-     <td>Type</td> 
-     <td>jar</td> 
-    </tr> 
-    <tr class="b"> 
-     <td>JDK Rev</td> 
-     <td>1.6</td> 
-    </tr> 
-   </tbody> 
-  </table> 
+</div> 
+<div class="section"> 
+ <h2 id="Additional_JavaScript_files">Additional JavaScript files</h2> 
+ <p><b>Requires Reflow Maven skin ≥ v1.1.0.</b></p> 
+ <p>JavaScript files can be added to the page head together with CSS files. However, for performance reasons, it can be better to reference JavaScript files at the end of the document. To place custom XHTML at the end of the page (before the <tt>&lt;/body&gt;</tt> tag), use the <tt>&lt;endContent&gt;</tt> element, which also supports Velocity variables, e.g.:</p> 
+ <div class="source"> 
+  <pre>&lt;custom&gt;
+  &lt;reflowSkin&gt;
+    ...
+    &lt;endContent&gt;
+      &lt;script src=&quot;$resourcePath/js/highlight.min.js&quot;&gt;&lt;/script&gt;
+    &lt;/endContent&gt;
+    ...
+  &lt;/reflowSkin&gt;
+&lt;/custom&gt;
+</pre> 
  </div> 
+ <p>Note: the <tt>&lt;endContent&gt;</tt> element is specific to Reflow skin and needs to be placed within the <tt>&lt;custom&gt;&lt;reflowSkin&gt;</tt> element.</p> 
 </div>
 			</div>
 		</div>
@@ -323,8 +309,8 @@
 						<li >
 							<a href="multi-module.html" title="Multi-module site">Multi-module site</a>
 						</li>
-						<li >
-							<a href="resources.html" title="Local resources">Local resources</a>
+						<li class="active">
+							<a href="#" title="Local resources">Local resources</a>
 						</li>
 					</ul>
 				</div>
@@ -332,33 +318,7 @@
 					<ul class="nav nav-list">
 						<li class="nav-header">Maven documentation</li>
 						<li >
-							<a href="project-info.html" title="Project Information">Project Information <i class="icon-chevron-down"></i></a>
-							<ul class="nav nav-list">
-						<li class="active">
-							<a href="#" title="Project Summary">Project Summary</a>
-						</li>
-						<li >
-							<a href="license.html" title="Project License">Project License</a>
-						</li>
-						<li >
-							<a href="team-list.html" title="Project Team">Project Team</a>
-						</li>
-						<li >
-							<a href="source-repository.html" title="Source Repository">Source Repository</a>
-						</li>
-						<li >
-							<a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
-						</li>
-						<li >
-							<a href="dependencies.html" title="Dependencies">Dependencies</a>
-						</li>
-						<li >
-							<a href="dependency-convergence.html" title="Dependency Convergence">Dependency Convergence</a>
-						</li>
-						<li >
-							<a href="plugins.html" title="Project Plugins">Project Plugins</a>
-						</li>
-							</ul>
+							<a href="project-info.html" title="Project Information">Project Information <i class="icon-chevron-right"></i></a>
 						</li>
 					</ul>
 				</div>
