@@ -97,6 +97,9 @@
         <project-info>
           <toc>false</toc>
         </project-info>
+        <github-report>
+          <toc>false</toc>
+        </github-report>
         <dependencies>
           <tocTopMax>4</tocTopMax>
         </dependencies>
