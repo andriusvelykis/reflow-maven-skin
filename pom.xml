@@ -23,7 +23,7 @@
   </modules>
 
   <properties>
-    <site.url>http://andriusvelykis.github.com/reflow-maven-skin</site.url>
+    <site.url>http://andriusvelykis.github.io/reflow-maven-skin</site.url>
     <github.global.server>github</github.global.server>
     <site.deploy.id>gh-pages</site.deploy.id>
     <site.deploy.url />

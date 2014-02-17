@@ -1,10 +1,10 @@
-# [Reflow Maven skin]( http://andriusvelykis.github.com/reflow-maven-skin/ )
+# [Reflow Maven skin]( http://andriusvelykis.github.io/reflow-maven-skin/ )
 
 Reflow is an Apache Maven site skin built on [Bootstrap][bootstrap]. It allows various structural
 and stylistic customizations to create a modern-looking Maven-generated website.
 
 To get started and see how the skin looks by default, check out
-http://andriusvelykis.github.com/reflow-maven-skin!
+http://andriusvelykis.github.io/reflow-maven-skin!
 
 [bootstrap]: http://getbootstrap.com
 
@@ -69,7 +69,7 @@ on using the skin with Maven 2 site or other configurations.
 The skin is configurable using the `<custom><reflowSkin>` element in your `site.xml` file.
 Refer to [documentation][reflow-config] for all configuration options.
 
-[reflow-config]: http://andriusvelykis.github.com/reflow-maven-skin/skin/config.html
+[reflow-config]: http://andriusvelykis.github.io/reflow-maven-skin/skin/config.html
 
 A sample configuration file is given below:
 
@@ -81,7 +81,7 @@ A sample configuration file is given below:
       <theme>bootswatch-spacelab</theme>
       <brand>
         <name>My Project</name>
-        <href>http://andriusvelykis.github.com/reflow-maven-skin/</href>
+        <href>http://andriusvelykis.github.io/reflow-maven-skin/</href>
       </brand>
       <slogan>Super interesting project doing good things.</slogan>
       <titleTemplate>%2$s | %1$s</titleTemplate>

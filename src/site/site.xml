@@ -10,7 +10,7 @@
       <span class="color-highlight">Reflow</span> Maven Skin
       ]]>
     </name>
-    <href>http://andriusvelykis.github.com/reflow-maven-skin</href>
+    <href>http://andriusvelykis.github.io/reflow-maven-skin</href>
   </bannerLeft>
   
   <publishDate position="bottom" format="yyyy-MM-dd" />
@@ -30,7 +30,7 @@
       <theme>default</theme>
       <highlightJs>true</highlightJs>
       <highlightJsTheme>github</highlightJsTheme>
-      <absoluteResourceURL>http://andriusvelykis.github.com/reflow-maven-skin/</absoluteResourceURL>
+      <absoluteResourceURL>http://andriusvelykis.github.io/reflow-maven-skin/</absoluteResourceURL>
       <brand>
         <!-- Brand text in top-left part of the site -->
         <name>
@@ -38,7 +38,7 @@
           <span class="color-highlight">Reflow</span> Maven Skin
           ]]>
         </name>
-        <href>http://andriusvelykis.github.com/reflow-maven-skin</href>
+        <href>http://andriusvelykis.github.io/reflow-maven-skin</href>
       </brand>
       <slogan>Responsive Apache Maven skin to reflow the standard Maven site with a modern feel</slogan>
       <titleTemplate>%2$s | %1$s</titleTemplate>
