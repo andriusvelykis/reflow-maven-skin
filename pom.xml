@@ -177,6 +177,7 @@
         <version>2.9</version>
         <configuration>
           <includeOpenIssues>false</includeOpenIssues>
+          <columnNames>Id,Type,Summary,Fix Version</columnNames>
         </configuration>
         <reportSets>
           <reportSet>
