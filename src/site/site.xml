@@ -97,6 +97,9 @@
         <project-info>
           <toc>false</toc>
         </project-info>
+        <github-report>
+          <toc>false</toc>
+        </github-report>
         <dependencies>
           <tocTopMax>4</tocTopMax>
         </dependencies>
@@ -123,7 +126,7 @@
       <item name="Home" href="./" />
       <item name="GitHub project" href="http://github.com/andriusvelykis/reflow-maven-skin/" />
       <item name="Blog" href="http://andrius.velykis.lt/tag/reflow-maven-skin/" />
-      <item name="Release notes" href="changes-report.html" />
+      <item name="Release notes" href="release-notes.html" />
     </menu>
     <menu name="Download" inherit="top">
       <item name="Download" href="skin/index.html#Usage" />

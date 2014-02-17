@@ -175,11 +175,21 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-changes-plugin</artifactId>
         <version>2.9</version>
+        <configuration>
+          <includeOpenIssues>false</includeOpenIssues>
+          <columnNames>Id,Type,Summary,Fix Version</columnNames>
+        </configuration>
         <reportSets>
           <reportSet>
+            <!-- Empty report set as default -->
             <reports>
-              <report>changes-report</report>
-              <!-- <report>github-report</report> -->
+            </reports>
+          </reportSet>
+          <reportSet>
+            <id>release-notes</id>
+            <inherited>false</inherited>
+            <reports>
+              <report>github-report</report>
             </reports>
           </reportSet>
         </reportSets>
