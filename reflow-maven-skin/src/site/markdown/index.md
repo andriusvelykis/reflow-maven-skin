@@ -10,7 +10,7 @@ To use this Maven skin, include it in your [`site.xml` site descriptor][site-xml
   <skin>
     <groupId>lt.velykis.maven.skins</groupId>
     <artifactId>reflow-maven-skin</artifactId>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
   </skin>
   ...
 </project>
@@ -40,7 +40,7 @@ Add [`reflow-velocity-tools`][reflow-tools] dependency to `maven-site-plugin` in
         <dependency>
           <groupId>lt.velykis.maven.skins</groupId>
           <artifactId>reflow-velocity-tools</artifactId>
-          <version>1.1.0</version>
+          <version>1.1.1</version>
         </dependency>
         <!-- Reflow skin requires Velocity >= 1.7  -->
         <dependency>
