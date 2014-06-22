@@ -17,7 +17,7 @@ highlighting functionality. To enable it, use `<highlightJs>` flag:
 -   **true** - Source code is highlighted (syntax colouring) - requires JavaScript
 -   **false (default)** - Source code is displayed in fixed font without syntax colouring
 
-Code highlighting theme can be changed to match your website theme. Available themes are listed in 
+Code highlighting theme can be changed to match your website theme. Available themes are listed in
 [highlight.js website][highlight-js-themes]. The theme can be selected using `<highlightJsTheme>`
 element:
 
@@ -159,7 +159,7 @@ latency for users, who may have these resources already cached.
 
 To support both `http://` and `https://` websites, these resources can be referenced
 using [protocol-relative URLs][protocol-url], starting with `//`. However, this is not supported
-when building the website locally, for `file://` URLs. 
+when building the website locally, for `file://` URLs.
 
 For this reason, the protocol-relative URLs are disabled by default. Enable them using
 `<protocolRelativeURLs>` flag:
@@ -190,4 +190,3 @@ the popularity of the skin. If you want, it can be disabled using `<skinAttribut
 -   **false** - Remove skin attribution text and links
 
 [apache-license]: http://www.apache.org/licenses/LICENSE-2.0
-

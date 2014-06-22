@@ -1,12 +1,12 @@
-#* 
+#*
  * Copyright 2012 Andrius Velykis
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -46,7 +46,7 @@
 	*##if ( $href && ($href.toLowerCase().startsWith("http:/") || $href.toLowerCase().startsWith("https:/")
 		|| $href.toLowerCase().startsWith("ftp:/") || $href.toLowerCase().startsWith("mailto:")
 		|| $href.toLowerCase().startsWith("file:/") || ($href.toLowerCase().indexOf("://") != -1) ))#*
-		
+
 		*##set ( $checkExtLink = true )#*
 	*##end##
 #end#* /checkExtLink
@@ -315,7 +315,7 @@
 	*##else#*
 		*##set ( $tocMax = -1 )#*
 	*##end#*
-	
+
 	// check if we flatten the first 2 levels of ToC:
 	*##set ( $flattenConfig = $config.tocTopFlatten )#*
 	*##if ( !$flattenConfig )#*
@@ -328,14 +328,14 @@
 	*##else#*
 		*##set ( $flattenLevel2 = false )#*
 	*##end#*
-	
+
 	// count items at top and the next level that will be displayed in the ToC bar
 	*##set ( $tocBarItems = [] )#*
 	*##set ( $tocBarMaxItems = [] )#*
-	
+
 	*##set ( $tocCount = 0 )#*
 	*##foreach ( $topItem in $topItems )#*
-	
+
 		*##if ( ($tocCount < $tocMax) || ($tocMax < 0) )#*
 			// only add items if not after the maximum
 			*##call ( $tocBarItems.add( $topItem ) )#*
@@ -344,14 +344,14 @@
 			*##call ( $tocBarMaxItems.add( $topItem ) )#*
 			*##set ( $topInMax = true )#*
 		*##end#*
-		
+
 		*##set ( $tocCount = $tocCount + 1 )#*
-		
+
 		// if level 2 is flattened, traverse for subitems
 		*##if ( $flattenLevel2 )#*
-	
+
 			*##foreach ( $item in $topItem.items )#*
-			
+
 				*##if ( ($tocCount < $tocMax) || ($tocMax < 0) )#*
 					// only add subitems if not after the maximum
 					*##call ( $tocBarItems.add( $item ) )#*
@@ -390,7 +390,7 @@
 #*		*##end#*
 		*##set ( $tocDivider = true )#*
 	*##end#* /foreach $topItem
-	
+
 	*##if ( $tocBarMaxItems.size() > 0 )#*
 		// put the max items into an extra dropdown *###
 		<li class="divider-vertical"></li>
@@ -513,7 +513,7 @@
 			*##else#*
 				*##set ( $sloganPos = "bannerLeft" )#*
 			*##end#*
-			
+
 			*##if ( $id == $sloganPos )##
 					<p class="lead">$config.slogan.getValue()</p>
 #*			*##end#*
@@ -527,7 +527,7 @@
 #**
  * Partitions the body contents into sections with possibly different representations.
  * Available body types, indicated in custom page config `sections` tag:
- * 
+ *
  * 	<sections>
  * 		<body/> - the main body of the page
  * 		<sidebar/> - sidebar (should go after the body)
@@ -632,7 +632,7 @@
 				// reinstate the horizontal rule for continuing body
 *#				<hr />
 #* 			*##end#*
-	
+
 			// set the contents
 			*##foreach ( $subsection in $subsections )#*
 				// if first body section, output with page-header
@@ -646,7 +646,7 @@
 
 			*##set ( $lastBody = true )#*
 		*##end#*
-	
+
 		// increment the section counter (need to advance through the types)
 		*##set ( $sectIndex = $sectIndex + 1 )#*
 	*##end#*
@@ -749,7 +749,7 @@
 	*##else#*
 		*##set ( $carouselCounter = $carouselCounter + 1 )#*
 	*##end#*
-	
+
 	*##set ( $carouselId = "carousel$carouselCounter" )##
 	<div id="$carouselId" class="carousel slide">
 		<div class="carousel-inner">
@@ -759,7 +759,7 @@
 #*		// Extract image (or link with image) from the subsection
 		*##set ( $extract = $htmlTool.extract( $subsection, "a:has(img), img", 1 ) )#*
 		*##if ( $extract.extracted && $extract.extracted.size() > 0 )#*
-			// take just the first extracted image element	*### 
+			// take just the first extracted image element	*###
 				$extract.extracted.get(0)
 #*		*##end#*
 		// the remainder becomes the caption (heading with text)	*###
@@ -822,7 +822,7 @@
 
 	*##if ( $project )#*
 		*##set ( $currentYear = ${currentDate.year} + 1900 )#*
-		
+
 		*##if ( ${project.inceptionYear} && ( ${project.inceptionYear} != ${currentYear.toString()} ) )#*
 			*#${project.inceptionYear}-${currentYear}#*
 		*##else#*
@@ -875,7 +875,7 @@
 	*##else#*
 		*##set ( $currentLink = $relativeLink )#*
 	*##end#*
-	
+
 	*##if ( $item.items && $item.items.size() > 0 )#*
 
 		*##if ( $item.collapse == false )#*
@@ -965,14 +965,14 @@
 #**
  * Outputs bottom navigation columns. The menus can be split into columns to be
  * placed in the bottom navigation. This is done with the `bottomNav` config option:
- * 
+ *
  * 	<bottomNav maxSpan="8"> - maximum span is indicated in the attribute (default =9)
  * 		<column>regex</column> - indicates to add a column with the indicated regex filter
  * 		<column>regex</column> - ...
  * 		<column>regex</column> - ...
  * 	</bottomNav>
  *
- * (The above produces a 3-column navigation with `span2` for each column (because max is 8)). 
+ * (The above produces a 3-column navigation with `span2` for each column (because max is 8)).
  *###
 #macro ( bottomNav )#*
 
@@ -1018,7 +1018,7 @@
 	// mark total span taken by the bottomNav (needed to add other components to the footer)
 	*##set ( $lastNavSpan = $maxNavSpan - ($navSpan * ($menuColumns.size() - 1)) )#*
 	*##set ( $totalNavSpan = $maxNavSpan )#*
-	
+
 	*##set ( $navColIndex = 0 )#*
 	*##foreach ( $menuCol in $menuColumns )#*
 		*##if ( $navColIndex == $menuColumns.size() - 1 )#*
@@ -1044,9 +1044,9 @@
 	*##else#*
 		*##set ( $format = "yyyy-MM-dd" )#*
 	*##end#*
-	
+
 	*#$dateFormat.applyPattern( $format )#*
-	
+
 	*##if ( $publishDate )#*
 		*##set ( $dateValue = $dateFormat.format( $publishDate ) )#*
 	*##elseif ( $config.publishDate )#*
@@ -1054,7 +1054,7 @@
 	*##else#*
 		*##set ( $dateValue = $dateFormat.format( $currentDate ) )#*
 	*##end#*
-	
+
 	// render with internationalization support
 	*#$i18n.getString( "site-renderer", $locale, "template.lastpublished" ): $dateValue##
 #end#* /publishDate
@@ -1137,7 +1137,7 @@
 	*##if( $accountId && $accountId != "" )##
 		<!-- Google Analytics -->
 		<script type="text/javascript">
-		
+
 			var _gaq = _gaq || [];
 			_gaq.push(['_setAccount', '$accountId']);
 			_gaq.push(['_trackPageview']);
@@ -1199,20 +1199,20 @@
 	*##else#*
 		*##set ( $defaultProjectName = $project.artifactId )#*
 	*##end#*
-	
+
 	// resolve date position, or set the default otherwise (bottom)
 	// Note, that currently we do not support "navigation-top" position for either publishDate or version.
 	*##set ( $datePosition = "bottom" )#*
 	*##if ( $decoration.publishDate.position )#*
 		*##set ( $datePosition = $decoration.publishDate.position )#*
 	*##end#*
-	
+
 	// resolve version position, or set the default otherwise (bottom)
 	*##set ( $versionPosition = "bottom" )#*
 	*##if ( $decoration.version.position )#*
 		*##set ( $versionPosition = $decoration.version.position )#*
 	*##end#*
-	 
+
 	*##if ( $decoration.publishDate.position )#*
 		*##set ( $datePosition = $decoration.publishDate.position )#*
 	*##else#*
@@ -1258,13 +1258,13 @@
 		// HTML5-style anchors are enabled by default, so check for false and negate
 		*##set ( $bodyContent = $htmlTool.headingAnchorToId( $bodyContent ) )#*
 	*##end#*
-	
+
 	*##if ( !$config.not( "bootstrapCss" ) )#*
 		// Bootstrap CSS class conversion is enabled by default, so check for false and negate
 		*##set ( $bodyContent = $htmlTool.addClass( $bodyContent, "table.bodyTable", ["table", "table-striped", "table-hover"] ) )#*
 		*##set ( $bodyContent = $htmlTool.fixTableHeads( $bodyContent ) )#*
 	*##end#*
-	
+
 	*##if ( !$config.not( "bootstrapIcons" ) )#*
 		// Bootstrap Icons are enabled by default, so check for false and negate
 		*##depsCollapse ()#*
@@ -1279,21 +1279,21 @@
 										'img[src$=images/icon_info_sml.gif]' : '<i class="icon-info-sign"></i>' } )#*
 		*##set ( $bodyContent = $htmlTool.replaceAll( $bodyContent, $iconReplacements ) )#*
 	*##end#*
-	
+
 	*##if ( $tocTop || $tocSidebar )#*
 		// Ensure IDs on all headings to refer to them in TOC
 		*##set ( $bodyContent = $htmlTool.ensureHeadingIds( $bodyContent, "_" ) )#*
 		*##set ( $tocItems = $htmlTool.headingTree( $bodyContent ) )#*
 	*##end#*
-	
-	
+
+
 	// generate a short title if one does not exist or is specified explicitly
 	// if specified explicitly, use that
 	*##set ( $shortTitleGenerated = false )#*
 	*##if ( !$config.not( "shortTitle" ) && ( !$shortTitle || $shortTitle == ''
 			|| ($config.shortTitle && !$config.isValue("shortTitle", "generate") && !$config.isValue("shortTitle", "true") ) ) )#*
 		// Page title generation is enabled by default, so check for false and negate
-		
+
 		*##if ( $config.shortTitle && !$config.isValue("shortTitle", "generate") && !$config.isValue("shortTitle", "true") )#*
 			// Use explicitly specified title
 			*##set ( $shortTitle = $config.shortTitle.getValue() )#*
@@ -1311,10 +1311,10 @@
 				*##set ( $shortTitleGenerated = true )#*
 			*##end#*
 		*##end#*
-		
+
 
 	*##end#*
-	
+
 	// If title template is provided, use it to generate title.
 	// Also regenerate title if a new short title was generated.
 	*##if ( $config.titleTemplate || $shortTitleGenerated )#*
@@ -1322,10 +1322,10 @@
 		*##if ( $config.titleTemplate )#*
 			*##set ( $titleTemplate = $config.titleTemplate.getValue() )#*
 		*##else#*
-			// default template is "projectName - shortTitle" 
+			// default template is "projectName - shortTitle"
 			*##set ( $titleTemplate = "%1${esc.d}s - %2${esc.d}s" )#*
 		*##end#*
-		
+
 		// the company/project name is retrieved from decoration ( <project name="Foo">)
 		// or from the project itself
 		*##if ( $decoration.name )#*
@@ -1335,11 +1335,11 @@
 		*##else#*
 			*##set ( $titleProjectName = "" )#*
 		*##end#*
-		
+
 		// use String.format() to create new title
 		*##set ( $title = $titleTemplate.format( $titleTemplate, $titleProjectName, $shortTitle ) )#*
 	*##end#*
-	
+
 	*###
 
 	<head>
@@ -1363,7 +1363,7 @@
 	*##else#*
 		*##set ( $protocol = "http:" )#*
 	*##end#*
-	
+
 	// Use config option <absoluteResourceURL>http://mysite.com/</absoluteResourceURL>
 	*##if ( $config.absoluteResourceURL && $config.absoluteResourceURL.getValue() != '' )#*
 		*##currentFileRelativeLink ( $config.absoluteResourceURL.getValue() ) #*
@@ -1378,15 +1378,15 @@
 	*##else#*
 		*##set ( $localResources = false )#*
 	*##end#*
-	
+
 	// for 'site' theme, use local CSS/Javascript. This allows users to use their own Bootstrap configs.
-	// Otherwise, load the default or Bootswatch themes from BootstrapCDN	
+	// Otherwise, load the default or Bootswatch themes from BootstrapCDN
 	*##if ( $localResources || ( $config.theme && "site" == $config.theme.getValue() ) )#*
 		*##set ( $bootstrapCssPath = "$resourcePath/css" )#*
 		*##set ( $bootstrapCssResponsivePath = $bootstrapCssPath )#*
 		*##set ( $bootstrapCssCombined = false )#*
 		*##set ( $bootstrapJsPath = "$resourcePath/js" )#*
-	*##else#*	
+	*##else#*
 		*##set ( $bootstrapVersion = "2.3.2" )#*
 		*##set ( $bootswatchVersion = "2.3.2" )#*
 
@@ -1407,10 +1407,10 @@
 			// since Bootstrap 2.3.2, the CDN hosts a combined version of default Bootstrap
 			*##set ( $bootstrapCssCombined = true )#*
 		*##end#*
-		
-		
+
+
 		*##set ( $bootstrapJsPath = "$protocol//netdna.bootstrapcdn.com/twitter-bootstrap/${bootstrapVersion}/js" )#*
-		
+
 	*##end##
 
 		<link href="$bootstrapCssPath/bootstrap.min.css" rel="stylesheet" />
@@ -1446,15 +1446,15 @@
 		// use a hosted version of highlight.js for syntax highlighting	*###
 		<link href="$protocol//yandex.st/highlightjs/$highlightJsVersion/styles/${highlightJsTheme}.min.css" rel="stylesheet" />
 #*	*##end##
-		
+
 #*	*##if ( !$config.not( "imgLightbox" ) )#*
 		// if not disabled, include lightbox for showing images	*###
 		<link href="$resourcePath/css/lightbox.css" rel="stylesheet" />
 #*	*##end##
-		
+
 		<link href="$resourcePath/css/site.css" rel="stylesheet" />
 		<link href="$resourcePath/css/print.css" rel="stylesheet" media="print" />
-		
+
 		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 		<!--[if lt IE 9]>
 #*	*##if ( $localResources )##
@@ -1506,12 +1506,12 @@
 					<div class="brand">$brandName</div>
 #*		*##end#*
 	*##end#*
-	
+
 *###
 					<div class="nav-collapse collapse" id="top-nav-collapse">
 						<ul class="nav pull-right">
 #*
-	
+
 	*##if ( $decoration.body.links )#*
 		*##links ( $decoration.body.links )
 #*	*##end#*
@@ -1524,7 +1524,7 @@
 		*##else#*
 			*##set ( $filterMenus = $decoration.body.menus )#*
 		*##end#*
-		
+
 		*##topMenu ( $filterMenus )
 #*	*##end#* /menus
 
@@ -1534,13 +1534,13 @@
 				</div>
 			</div>
 		</div>
-		
+
 	<div class="container">
-	
+
 	<!-- Masthead
 	================================================== -->
 #*
-	
+
 	*##if ( ($decoration.bannerLeft.name && $decoration.bannerLeft.name != $project.name || $decoration.bannerLeft.src || $decoration.bannerLeft.href ) || $decoration.bannerRight )#*
 		*##set ( $hasBanner = true )#*
 	*##else#*
@@ -1566,14 +1566,14 @@
 
 
 	// add a 'breadcrumbs' bar for breadcrumbs, version and publish date (left/right) option
-	*##if ( !$config.not( "breadcrumbs" ) 
+	*##if ( !$config.not( "breadcrumbs" )
 			&& (( $decoration.body.breadcrumbs && $decoration.body.breadcrumbs.size() > 0)
 				|| $datePosition == "left" || $versionPosition == "left"
 				|| $datePosition == "right" || $versionPosition == "right") )##
 		<div>
 			<ul class="breadcrumb">
-#*		
-		// left side version/date 
+#*
+		// left side version/date
 		*##set ( $addedBefore = false )#*
 		*##if ( $versionPosition == "left" )##
 				<li class="projectVersion version-date">#version ()</li>
@@ -1586,7 +1586,7 @@
 				<li class="publishDate version-date">#publishDate ()</li>
 #*			*##set ( $addedBefore = true )#*
 		*##end#*
-		
+
 		// breadcrumbs
 		*##if ( !$config.not( "breadcrumbs" ) && $decoration.body.breadcrumbs && $decoration.body.breadcrumbs.size() > 0 )#*
 			*##if ( $addedBefore )##
@@ -1646,7 +1646,7 @@
 #*
 
 	*##if ( $config.sections )#*
-		*##bodySections ( $bodyContent $config.sections ) 
+		*##bodySections ( $bodyContent $config.sections )
 #*	*##else#*
 	// non-sectioned body - just output it all	*###
 	<div class="row">
@@ -1667,7 +1667,7 @@
 	</div>
 
 	</div><!-- /container -->
-	
+
 	<!-- Footer
 	================================================== -->
 	<footer class="well">
@@ -1707,7 +1707,7 @@
 						*#<br/>#*
 				*##end#*
 			*##end#*
-		
+
 			// now add the date
 			*##if ( $datePosition == "navigation-bottom" )#*
 						*#<span class="publishDate">#publishDate ()</span>#*
@@ -1720,7 +1720,7 @@
 			</div>
 		</div>
 	</footer>
-		
+
 	<div class="container subfooter">
 		<div class="row">
 			<div class="span12">
@@ -1750,13 +1750,13 @@
 	<!-- Le javascript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-#*	
+#*
 	*##if ( $localResources )##
 	<script src="$resourcePath/js/jquery.min.js"></script>
 #*	*##else##
 	<script src="$protocol//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 #*	*##end##
-	
+
 	<script src="$bootstrapJsPath/bootstrap.min.js"></script>
 #*
 	*##if ( !$config.not( "imgLightbox" ) )#*
@@ -1780,6 +1780,6 @@
 #*	*##end##
 
 	<script src="$resourcePath/js/reflow-skin.js"></script>
-	
+
 	</body>
 </html>
