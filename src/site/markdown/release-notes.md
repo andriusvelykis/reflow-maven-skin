@@ -6,6 +6,21 @@ The history of Reflow Maven skin releases is documented below. For details of ch
 [github-report]: github-report.html
 
 
+## 1.1.1 / 2014-06-22
+
+### Bug fixes
+
+-   Image previews (lightbox) don't work anymore ([#35][])
+-   Smooth scrolling does not work ([#36][])
+
+See [all GitHub issues for 1.1.1][reflow-issues-111] for further details.
+
+[#35]: http://github.com/andriusvelykis/reflow-maven-skin/issues/35
+[#36]: http://github.com/andriusvelykis/reflow-maven-skin/issues/36
+
+[reflow-issues-111]: http://github.com/andriusvelykis/reflow-maven-skin/issues?milestone=2&amp;state=closed
+
+
 ## 1.1.0 / 2014-02-17
 
 ### Major enhancements
