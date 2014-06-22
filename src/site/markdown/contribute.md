@@ -57,8 +57,6 @@ JavaScript goodies with [jQuery][jquery].
 
 Image previews with [Lightbox2][lightbox2].
 
-Smooth scrolling with [jQuery Smooth Scroll][smooth-scroll] and [jQuery BBQ][bbq].
-
 Code highlighting with [highlight.js][highlight-js].
 
 HTML rewriting with [jsoup][jsoup].
@@ -73,8 +71,6 @@ Inspired by [Maven Fluido Skin][fluido].
 [webfonts]: http://www.google.com/webfonts/
 [jquery]: http://jquery.org
 [lightbox2]: http://lokeshdhakar.com/projects/lightbox2
-[smooth-scroll]: http://github.com/kswedberg/jquery-smooth-scroll
-[bbq]: http://benalman.com/projects/jquery-bbq-plugin
 [highlight-js]: http://softwaremaniacs.org/soft/highlight/en/
 [jsoup]: http://jsoup.org/
 [medialoot]: http://medialoot.com/

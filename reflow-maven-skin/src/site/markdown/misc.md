@@ -52,9 +52,8 @@ default but can be disabled using `<imgLightbox>` flag:
 
 ### Smooth scroll
 
-Reflow skin enables smooth scrolling for in-page navigation (e.g. for table of contents links)
-using [jQuery Smooth Scroll][jquery-sscroll]. Smooth scrolling can be disabled using
-`<smoothScroll>` flag:
+Reflow skin enables smooth scrolling for in-page navigation (e.g. for table of contents links).
+Smooth scrolling can be disabled using `<smoothScroll>` flag:
 
 ```xml
 <smoothScroll>true|false</smoothScroll>
@@ -62,8 +61,6 @@ using [jQuery Smooth Scroll][jquery-sscroll]. Smooth scrolling can be disabled u
 
 -   **true (default)** - smooth scrolling for in-page navigation (requires JavaScript)
 -   **false** - default in-page jumps
-
-[jquery-sscroll]: http://github.com/kswedberg/jquery-smooth-scroll
 
 
 ## Bootstrap
