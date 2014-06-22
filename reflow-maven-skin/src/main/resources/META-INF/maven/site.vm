@@ -1766,9 +1766,7 @@
 
 	*##if ( !$config.not( "smoothScroll" ) )#*
 		// if not disabled, include smooth scrolling *###
-	<script src="$resourcePath/js/jquery.smooth-scroll.min.js"></script>
-	<!-- back button support for smooth scroll -->
-	<script src="$resourcePath/js/jquery.ba-bbq.min.js"></script>
+	<script src="$resourcePath/js/reflow-scroll.js"></script>
 #*	*##end#*
 
 	*##if ( $highlightJs )#*
