@@ -1251,7 +1251,7 @@
 	*##if ( !$config.not( "imgLightbox" ) )#*
 		// lightbox is enabled by default, so check for false and negate
 		// TODO explain more?
-		*##set ( $bodyContent = $htmlTool.setAttr( $bodyContent, "a[href$=jpg], a[href$=JPG], a[href$=jpeg], a[href$=JPEG], a[href$=png], a[href$=gif], a[href$=bmp]:has(img)", "rel", "lightbox[page]" ))#*
+		*##set ( $bodyContent = $htmlTool.setAttr( $bodyContent, "a[href$=jpg], a[href$=JPG], a[href$=jpeg], a[href$=JPEG], a[href$=png], a[href$=gif], a[href$=bmp]:has(img)", "data-lightbox", "page" ))#*
 	*##end#*
 
 	*##if ( !$config.not( "html5Anchor" ) )#*
@@ -1761,7 +1761,7 @@
 #*
 	*##if ( !$config.not( "imgLightbox" ) )#*
 		// if not disabled, include lightbox for showing images	*###
-	<script src="$resourcePath/js/lightbox.js"></script>
+	<script src="$resourcePath/js/lightbox.min.js"></script>
 #*	*##end#*
 
 	*##if ( !$config.not( "smoothScroll" ) )#*
