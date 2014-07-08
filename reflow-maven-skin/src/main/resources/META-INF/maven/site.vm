@@ -451,7 +451,7 @@
 #macro ( listTocItem $item )#*
 
 	*##if ( $item.items.size() > 0 )##
-		<li class="dropdown"><a href="#$item.id" title="$item.text">$item.text <b class="caret"></b></a>
+		<li class="dropdown"><a href="#$item.id" title="$esc.html($item.text)">$esc.html($item.text) <b class="caret"></b></a>
 #*		*##if ( $item.items.size() > 0 )##
 			<ul class="nav nav-list">
 #*			*##foreach ( $subitem in $item.items )#*
@@ -466,7 +466,7 @@
 #*		*##end##
 		</li>
 #*	*##else##
-		<li><a href="#$item.id" title="$item.text">$item.text</a>
+		<li><a href="#$item.id" title="$esc.html($item.text)">$esc.html($item.text)</a>
 #*		*##set ( $addedDivider = false )##
 #*	*##end##
 #end#* /listTocItem
