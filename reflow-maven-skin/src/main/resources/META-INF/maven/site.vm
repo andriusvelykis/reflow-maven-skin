@@ -1434,7 +1434,7 @@
 	*##else#*
 		*##set ( $highlightJs = false )#*
 	*##end#*
-	*##set ( $highlightJsVersion = "7.5" )#*
+	*##set ( $highlightJsVersion = "8.3" )#*
 
 #*	*##if ( $highlightJs )#*
 		// get the configured theme, or use default if not explicitly specified
@@ -1444,7 +1444,7 @@
 			*##set ( $highlightJsTheme = 'default' )#*
 		*##end#*
 		// use a hosted version of highlight.js for syntax highlighting	*###
-		<link href="$protocol//yandex.st/highlightjs/$highlightJsVersion/styles/${highlightJsTheme}.min.css" rel="stylesheet" />
+		<link href="$protocol//cdnjs.cloudflare.com/ajax/libs/highlight.js/$highlightJsVersion/styles/${highlightJsTheme}.min.css" rel="stylesheet" />
 #*	*##end##
 
 #*	*##if ( !$config.not( "imgLightbox" ) )#*
@@ -1771,7 +1771,7 @@
 
 	*##if ( $highlightJs )#*
 		// use a hosted version of highlight.js for syntax highlighting	*###
-	<script src="$protocol//yandex.st/highlightjs/$highlightJsVersion/highlight.min.js"></script>
+	<script src="$protocol//cdnjs.cloudflare.com/ajax/libs/highlight.js/$highlightJsVersion/highlight.min.js"></script>
 #*	*##end#*
 
 	*##if ( $config.endContent )#*
