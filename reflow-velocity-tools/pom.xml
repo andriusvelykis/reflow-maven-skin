@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  
+
   <parent>
     <groupId>lt.velykis.maven.skins</groupId>
     <artifactId>reflow-parent</artifactId>
@@ -28,7 +28,7 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-project</artifactId>
-      <version>2.0.4</version>
+      <version>2.2.1</version>
     </dependency>
     <dependency>
       <!-- jsoup HTML parser library @ http://jsoup.org/ -->
@@ -44,7 +44,7 @@
         <!-- Generate Javadoc for Reflow Tools only (the others do not have Java sources) -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-javadoc-plugin</artifactId>
-        <version>2.9.1</version>
+        <version>2.10.1</version>
         <configuration>
           <javadocDirectory>${project.basedir}/src/javadoc</javadocDirectory>
           <docfilessubdirs>true</docfilessubdirs>
