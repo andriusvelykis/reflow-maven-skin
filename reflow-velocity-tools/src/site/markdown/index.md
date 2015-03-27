@@ -38,7 +38,7 @@ file:
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-site-plugin</artifactId>
-      <version>3.3</version>
+      <version>3.4</version>
       <dependencies>
         ...
         <dependency>
