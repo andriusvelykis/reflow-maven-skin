@@ -6,7 +6,6 @@
     <groupId>lt.velykis.maven.skins</groupId>
     <artifactId>reflow-parent</artifactId>
     <version>1.1.2-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>reflow-maven-skin</artifactId>
@@ -45,9 +44,7 @@
 
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-resources-plugin</artifactId>
-        <version>2.6</version>
         <configuration>
           <!-- Override resource filtering delimiters to avoid filtering Velocity variables,
                which have the same pattern ${replace.me}. Instead, using @replace.me@. -->
