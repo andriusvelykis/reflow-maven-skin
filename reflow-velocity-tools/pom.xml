@@ -5,7 +5,7 @@
   <parent>
     <groupId>lt.velykis.maven.skins</groupId>
     <artifactId>reflow-parent</artifactId>
-    <version>1.1.2-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -37,6 +37,29 @@
       <version>1.7.3</version>
     </dependency>
   </dependencies>
+  
+  <build>
+      <plugins>
+          <!-- https://issues.apache.org/jira/browse/DOXIASITETOOLS-168 tools.xml has to be at META-INF/maven/site-tools.xml -->
+          <plugin>
+              <groupId>com.coderplus.maven.plugins</groupId>
+              <artifactId>copy-rename-maven-plugin</artifactId>
+              <executions>
+                  <execution>
+                      <id>copy-tools-xml</id>
+                      <phase>process-resources</phase>
+                      <goals>
+                          <goal>copy</goal>
+                      </goals>
+                      <configuration>
+                          <sourceFile>src/main/resources/tools.xml</sourceFile>
+                          <destinationFile>${basedir}/target/classes/META-INF/maven/site-tools.xml</destinationFile>
+                      </configuration>
+                  </execution>
+              </executions>
+          </plugin>
+      </plugins>
+  </build>
 
   <reporting>
     <plugins>

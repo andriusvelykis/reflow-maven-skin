@@ -10,7 +10,7 @@
 
   <groupId>lt.velykis.maven.skins</groupId>
   <artifactId>reflow-parent</artifactId>
-  <version>1.1.2-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Reflow Maven Skin Parent</name>
@@ -78,7 +78,7 @@
           <dependency>
             <groupId>lt.velykis.maven.skins</groupId>
             <artifactId>reflow-velocity-tools</artifactId>
-            <version>1.1.2-SNAPSHOT</version>
+            <version>${project.version}</version>
           </dependency>
           <dependency>
             <!-- Reflow skin requires velocity 1.7 -->
@@ -147,6 +147,11 @@
             <source>1.6</source>
             <target>1.6</target>
           </configuration>
+        </plugin>
+        <plugin>
+            <groupId>com.coderplus.maven.plugins</groupId>
+            <artifactId>copy-rename-maven-plugin</artifactId>
+            <version>1.0</version>
         </plugin>
       </plugins>
     </pluginManagement>
