@@ -1466,7 +1466,7 @@
 
 
 #*	*##if ( $decoration.body.head )##
-		#htmlContent ( $decoration.body.head.getChildren() )
+		$render.eval( $decoration.body.head )
 #*	*##end#*
 
 	*##if( $headContent )#*
@@ -1739,7 +1739,7 @@
 
 
 	*##if ( $decoration.body.footer )##
-		#htmlContent ( $decoration.body.footer.getChildren() )
+		$render.eval( $decoration.body.footer )
 #*	*##end#*
 
 *###
