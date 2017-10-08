@@ -1262,7 +1262,6 @@
 	*##if ( !$config.not( "bootstrapCss" ) )#*
 		// Bootstrap CSS class conversion is enabled by default, so check for false and negate
 		*##set ( $bodyContent = $htmlTool.addClass( $bodyContent, "table.bodyTable", ["table", "table-striped", "table-hover"] ) )#*
-		*##set ( $bodyContent = $htmlTool.fixTableHeads( $bodyContent ) )#*
 	*##end#*
 
 	*##if ( !$config.not( "bootstrapIcons" ) )#*
