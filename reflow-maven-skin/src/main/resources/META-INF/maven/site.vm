@@ -1460,7 +1460,7 @@
 #*	*##if ( $localResources )##
 			<script src="$resourcePath/js/html5.js"></script>
 #*	*##else##
-			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
 #*	*##end##
 		<![endif]-->
 
