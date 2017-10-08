@@ -1724,7 +1724,7 @@
 	<div class="container subfooter">
 		<div class="row">
 			<div class="span12">
-				<p class="pull-right"><a href="#">Back to top</a></p>
+				<p class="pull-right"><a href="javascript:scroll(0,0)">Back to top</a></p>
 				<p class="copyright">Copyright &copy;#copyright (). All Rights Reserved.</p>
 #*	*##if ( $datePosition == "bottom" || $versionPosition == "bottom" )##
 				<p class="version-date">#*
