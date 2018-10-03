@@ -1434,7 +1434,7 @@
 	*##else#*
 		*##set ( $highlightJs = false )#*
 	*##end#*
-	*##set ( $highlightJsVersion = "7.5" )#*
+	*##set ( $highlightJsVersion = "8.2" )#*
 
 #*	*##if ( $highlightJs )#*
 		// get the configured theme, or use default if not explicitly specified
